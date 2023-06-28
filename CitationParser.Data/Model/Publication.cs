@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using CitationParser.Core.Model._Base;
 using Microsoft.EntityFrameworkCore;
 
 namespace CitationParser.Data.Model;
@@ -10,12 +9,8 @@ namespace CitationParser.Data.Model;
 [Index("TypeId", Name = "FK_types_publications")]
 [MySqlCharSet("utf8")]
 [MySqlCollation("utf8_general_ci")]
-public partial class Publication
+public class Publication : BaseEntity
 {
-    [Key]
-    [Column("id")]
-    public int Id { get; set; }
-
     [Column("title")]
     [StringLength(300)]
     public string Title { get; set; } = null!;
