@@ -37,7 +37,6 @@
       <Folder Include="Mappers\" />
       <Folder Include="Migrations\" />
       <Folder Include="Model\" />
-      <Folder Include="Services\" />
     </ItemGroup>
 
 </Project>
