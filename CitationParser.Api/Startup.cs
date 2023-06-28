@@ -1,6 +1,5 @@
 using CitationParser.Api.Extensions.Application;
 using CitationParser.Api.Mappers;
-using CitationParser.Data.Services;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Serilog;
@@ -22,7 +21,7 @@ public class Startup
         services.AddBaseModuleDi("DefaultConnection", Configuration);
 
         // Services can be added here
-        services.AddTransient(typeof(UserService), typeof(UserService));
+        // services.AddTransient(typeof(UserService), typeof(UserService));
 
 
         // Auto Mapper Configurations

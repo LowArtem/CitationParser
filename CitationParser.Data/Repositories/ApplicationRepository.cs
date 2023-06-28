@@ -1,5 +1,6 @@
 using CitationParser.Core.Model._Base;
 using CitationParser.Core.Repositories;
+using CitationParser.Data.Context;
 using Microsoft.Extensions.Logging;
 
 namespace CitationParser.Data.Repositories;

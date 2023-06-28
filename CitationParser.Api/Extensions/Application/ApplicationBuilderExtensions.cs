@@ -1,6 +1,7 @@
 using System.Reflection;
 using CitationParser.Api.Middlewares;
 using CitationParser.Data;
+using CitationParser.Data.Context;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.SwaggerUI;
@@ -34,7 +35,7 @@ public static class ApplicationBuilderExtensions
 
         app.UseRouting();
 
-        app.UseJwtAuthentication();
+        // app.UseJwtAuthentication();
 
         #region Middleware
 

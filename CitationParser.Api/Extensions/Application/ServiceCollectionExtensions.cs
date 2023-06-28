@@ -1,16 +1,14 @@
 ﻿using System.ComponentModel;
-using System.Reflection;
 using System.Text.RegularExpressions;
 using CitationParser.Api.Swagger;
 using CitationParser.Core.Configurations;
 using CitationParser.Core.Repositories;
-using CitationParser.Data;
+using CitationParser.Data.Context;
 using CitationParser.Data.Repositories;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
@@ -46,7 +44,7 @@ public static class ServiceCollectionExtensions
         services.AddSwagger();
 
         // Authentication
-        services.AddAppAuthentication();
+        // services.AddAppAuthentication();
 
         // Other services (Email, UserManager, etc.)
         services.AddServices();
@@ -61,7 +59,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddDbContext<ApplicationContext>(options =>
         {
-            options.UseNpgsql(connectionString,
+            options.UseMySql(connectionString, new MySqlServerVersion("8.0.28"), 
                 b => { b.MigrationsAssembly("CitationParser.Data"); });
         });
     }
@@ -181,28 +179,28 @@ public static class ServiceCollectionExtensions
 
             c.OperationFilter<SwaggerDefaultValues>();
 
-            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-            {
-                In = ParameterLocation.Header,
-                Description = "Please insert JWT with Bearer into field",
-                Name = "Authorization",
-                Type = SecuritySchemeType.ApiKey,
-            });
-
-            c.AddSecurityRequirement(new OpenApiSecurityRequirement
-            {
-                {
-                    new OpenApiSecurityScheme
-                    {
-                        Reference = new OpenApiReference
-                        {
-                            Type = ReferenceType.SecurityScheme,
-                            Id = "Bearer"
-                        }
-                    },
-                    Array.Empty<string>()
-                }
-            });
+            // c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            // {
+            //     In = ParameterLocation.Header,
+            //     Description = "Please insert JWT with Bearer into field",
+            //     Name = "Authorization",
+            //     Type = SecuritySchemeType.ApiKey,
+            // });
+            //
+            // c.AddSecurityRequirement(new OpenApiSecurityRequirement
+            // {
+            //     {
+            //         new OpenApiSecurityScheme
+            //         {
+            //             Reference = new OpenApiReference
+            //             {
+            //                 Type = ReferenceType.SecurityScheme,
+            //                 Id = "Bearer"
+            //             }
+            //         },
+            //         Array.Empty<string>()
+            //     }
+            // });
 
             c.OperationFilter<AppendAuthorizeToSummaryOperationFilter>();
         });
