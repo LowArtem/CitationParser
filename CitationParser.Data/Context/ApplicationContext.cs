@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using CitationParser.Data.Model;
+﻿using CitationParser.Data.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace CitationParser.Data.Context;

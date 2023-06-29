@@ -10,13 +10,9 @@ namespace CitationParser.Data.Model;
 [MySqlCollation("utf8_general_ci")]
 public class Editor : BaseEntity
 {
-    [Column("surname")]
+    [Column("name")]
     [StringLength(45)]
-    public string? Surname { get; set; }
-
-    [Column("initials")]
-    [StringLength(45)]
-    public string? Initials { get; set; }
+    public string Name { get; set; }
 
     [ForeignKey("IdEditors")]
     [InverseProperty("IdEditors")]
