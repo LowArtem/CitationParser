@@ -1,4 +1,4 @@
-﻿using CitationParser.Services.Parser;
+﻿using CitationParser.Data.Services.Parser;
 
 namespace CitationParser.Test.Data.Services.Parser;
 

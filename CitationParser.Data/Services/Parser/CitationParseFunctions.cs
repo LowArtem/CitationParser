@@ -1,4 +1,4 @@
-﻿namespace CitationParser.Services.Parser;
+﻿namespace CitationParser.Data.Services.Parser;
 
 public static class CitationParseFunctions
 {
