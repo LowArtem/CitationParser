@@ -1,54 +1,22 @@
 version: "3.9"
 services:
-  postgres:
-    container_name: postgres_container
-    image: postgres:15.0
-    command:
-      - "postgres"
-      - "-c"
-      - "max_connections=50"
-      - "-c"
-      - "shared_buffers=1GB"
-      - "-c"
-      - "effective_cache_size=4GB"
-      - "-c"
-      - "work_mem=16MB"
-      - "-c"
-      - "maintenance_work_mem=512MB"
-      - "-c"
-      - "random_page_cost=1.1"
-      - "-c"
-      - "temp_file_limit=10GB"
-      - "-c"
-      - "log_min_duration_statement=200ms"
-      - "-c"
-      - "idle_in_transaction_session_timeout=10s"
-      - "-c"
-      - "lock_timeout=1s"
-      - "-c"
-      - "statement_timeout=60s"
-      - "-c"
-      - "shared_preload_libraries=pg_stat_statements"
-      - "-c"
-      - "pg_stat_statements.max=10000"
-      - "-c"
-      - "pg_stat_statements.track=all"
+  mysql:
+    container_name: mysql_container
+    image: mysql/mysql-server:8.0
     environment:
-      POSTGRES_DB: five_heads_db
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: root
-      PGDATA: "/var/lib/postgresql/data/pgdata"
+      MYSQL_DATABASE: five_heads_db
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
     volumes:
-      - ./InitDb:/docker-entrypoint-initdb.d
-      - .:/var/lib/postgresql/data
+      - .:/var/lib/mysql
     ports:
-      - "5432:5432"
+      - "3308:3306"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d five_heads_db"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 10s
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 20s
+      retries: 10
     restart: unless-stopped
     networks:
       - app
@@ -69,7 +37,7 @@ services:
     networks:
       - app
     depends_on:
-      - postgres
+      - mysql
 
   logger:
     container_name: seq
