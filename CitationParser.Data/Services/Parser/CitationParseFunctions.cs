@@ -9,9 +9,6 @@ public static class CitationParseFunctions
     {
         return citation.Split("/ ")[0].Trim();
     }
-    //
-    // public static List<Author> GetInitials(string citation)
-    // {
-    //     Regex regex = new Regex("/\s[:alpha:]{1}.");
-    // }
+    
+    
 }
