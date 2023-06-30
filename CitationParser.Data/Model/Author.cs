@@ -10,6 +10,16 @@ namespace CitationParser.Data.Model;
 [MySqlCollation("utf8_general_ci")]
 public class Author : BaseEntity
 {
+    public Author(string name)
+    {
+        Name = name;
+    }
+
+    public Author()
+    {
+        
+    }
+
     [Column("name")]
     [StringLength(45)]
     public string Name { get; set; }
