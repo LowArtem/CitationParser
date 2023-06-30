@@ -32,7 +32,7 @@ public class Publication : BaseEntity
 
     [Column("numberOfPages")]
     [StringLength(45)]
-    public string? NumberOfPages { get; set; }
+    public string? CountOfPages { get; set; }
 
     [Column("pageNumbers")]
     [StringLength(45)]
