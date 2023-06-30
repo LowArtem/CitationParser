@@ -1,4 +1,7 @@
-﻿namespace CitationParser.Data.Services.Parser;
+﻿using System.Text.RegularExpressions;
+using CitationParser.Data.Model;
+
+namespace CitationParser.Services.Parser;
 
 public static class CitationParseFunctions
 {
@@ -6,4 +9,9 @@ public static class CitationParseFunctions
     {
         return citation.Split("/ ")[0].Trim();
     }
+    //
+    // public static List<Author> GetInitials(string citation)
+    // {
+    //     Regex regex = new Regex("/\s[:alpha:]{1}.");
+    // }
 }
