@@ -23,7 +23,7 @@ static public class articleFromForeignCollection
         
         if (editorString[0].Substring(0, 3) == " ed")
         {
-            var editors = Regex.Matches(editorString[0], @"\w{1}\.(\s\w{1}\.)?\s\w+,?");
+            var editors = Regex.Matches(editorString[0], @"[A-ZЁА-Я]{1}\.(\s[A-ZЁА-Я]{1}\.)?\s\w+,?");
 
             List<Editor> editorsList = new List<Editor>();
             for (int i = 0; i < editors.Count; i++)
