@@ -68,12 +68,21 @@ public class OtherPublicationsParser
     
     public static string GetPublishingHouse(string citation)
     {
-        var publishingHouseString = citation.Replace('–', '-').Split(". -")[1].Split(':');
+        var publishingHouseString = citation.Replace('–', '-').Split(". -");
 
-        publishingHouseString = publishingHouseString[publishingHouseString.Length - 1].Split(',');
-
-        if (!int.TryParse(publishingHouseString[0].Trim(), out int n))
+        if (publishingHouseString[1].Contains("Введ."))
         {
+            publishingHouseString = publishingHouseString[2].Split(':');
+        }
+        else
+        {
+            publishingHouseString = publishingHouseString[1].Split(':');
+        }
+        
+        if (publishingHouseString.Length > 1)
+        {
+            publishingHouseString = publishingHouseString[publishingHouseString.Length - 1].Split(',');
+
             return publishingHouseString[0].Trim().Replace("[", string.Empty).Replace("]", string.Empty);
         }
 
