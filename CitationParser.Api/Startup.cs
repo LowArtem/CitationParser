@@ -1,6 +1,8 @@
 using CitationParser.Api.Extensions.Application;
 using CitationParser.Api.Mappers;
 using AutoMapper;
+using CitationParser.Api.Services;
+using CitationParser.Data.Services.WebScraper;
 using Hangfire;
 using Hangfire.MySql;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
@@ -24,6 +26,9 @@ public class Startup
 
         // Services can be added here
         // services.AddTransient(typeof(UserService), typeof(UserService));
+        services.AddTransient<WebScraperService>();
+        services.AddTransient<ParseHtmlService>();
+        services.AddHostedService<TimeHostedService>();
 
 
         // Auto Mapper Configurations
