@@ -1,6 +1,8 @@
 using CitationParser.Api.Extensions.Application;
 using CitationParser.Api.Mappers;
 using AutoMapper;
+using Hangfire;
+using Hangfire.MySql;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Serilog;
 
@@ -29,6 +31,26 @@ public class Startup
 
         var mapper = mapperConfig.CreateMapper();
         services.AddSingleton(mapper);
+
+        #region Hangfire
+
+        // Add Hangfire services
+        services.AddHangfire(configuration => configuration
+            .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+            .UseSimpleAssemblyNameTypeSerializer()
+            .UseRecommendedSerializerSettings()
+            .UseStorage(new MySqlStorage(Configuration.GetConnectionString("HangfireConnection"),
+                new MySqlStorageOptions
+                {
+                    PrepareSchemaIfNecessary = true,
+                    TablesPrefix = "hangfire_"
+                }))
+        );
+
+        // Add the processing server as IHostedService
+        services.AddHangfireServer();
+
+        #endregion
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
