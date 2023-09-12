@@ -18,7 +18,10 @@ public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
     /// Инициализирует новый экземпляр класса <see cref="ConfigureSwaggerOptions"/> class.
     /// </summary>
     /// <param name="provider">The <see cref="IApiVersionDescriptionProvider">provider</see> используемый для создания документов Swagger.</param>
-    public ConfigureSwaggerOptions(IApiVersionDescriptionProvider provider) => this._provider = provider;
+    public ConfigureSwaggerOptions(IApiVersionDescriptionProvider provider)
+    {
+        _provider = provider;
+    }
 
     /// <inheritdoc />
     public void Configure(SwaggerGenOptions options)
@@ -26,15 +29,13 @@ public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
         // добавляем документ swagger для каждой обнаруженной версии API
         // примечание: вы можете пропустить или задокументировать устаревшие версии API по-другому
         foreach (var description in _provider.ApiVersionDescriptions)
-        {
             options.SwaggerDoc(description.GroupName, CreateInfoForApiVersion(description));
-        }
     }
 
     private static OpenApiInfo CreateInfoForApiVersion(ApiVersionDescription description)
     {
         var configuration = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .AddJsonFile("appsettings.json", false, true)
             .Build();
 
         var info = new OpenApiInfo()
@@ -45,10 +46,7 @@ public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
             License = new OpenApiLicense() { Name = "MIT", Url = new Uri("https://opensource.org/licenses/MIT") }
         };
 
-        if (description.IsDeprecated)
-        {
-            info.Description += " This API version has been deprecated.";
-        }
+        if (description.IsDeprecated) info.Description += " This API version has been deprecated.";
 
         return info;
     }

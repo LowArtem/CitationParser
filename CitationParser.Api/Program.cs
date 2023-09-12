@@ -40,16 +40,13 @@ public class Program
     public static IHostBuilder CreateHostBuilder(string[] args)
     {
         return Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(webBuilder =>
-            {
-                webBuilder.UseStartup<Startup>();
-            })
+            .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); })
             .ConfigureAppConfiguration(configuration =>
             {
-                configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                configuration.AddJsonFile("appsettings.json", false, true);
                 configuration.AddJsonFile(
                     $"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json",
-                    optional: true);
+                    true);
             })
             .UseSerilog((ctx, lc) => lc
                 .WriteTo.Console()

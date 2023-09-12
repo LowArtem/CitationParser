@@ -8,11 +8,9 @@ namespace CitationParser.Data.Model;
 [Table("universities")]
 [MySqlCharSet("utf8")]
 [MySqlCollation("utf8_general_ci")]
-public class University : BaseEntity
+public class Company : BaseEntity
 {
-    [Column("name")]
-    [StringLength(200)]
-    public string? Name { get; set; }
+    [Column("name")] [StringLength(200)] public string? Name { get; set; }
 
     [ForeignKey("IdUniversities")]
     [InverseProperty("IdUniversities")]
@@ -20,5 +18,6 @@ public class University : BaseEntity
 
     [ForeignKey("IdUniversities")]
     [InverseProperty("IdUniversities")]
-    public virtual ICollection<ScientificCollection> IdScientificCollections { get; set; } = new List<ScientificCollection>();
+    public virtual ICollection<ScientificCollection> IdScientificCollections { get; set; } =
+        new List<ScientificCollection>();
 }

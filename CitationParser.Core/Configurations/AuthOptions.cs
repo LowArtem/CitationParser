@@ -18,7 +18,7 @@ public static class AuthOptions
     /// <summary>
     /// Ключ для шифрации
     /// </summary>
-    const string KEY = "234k5s^%&*@&$ogh23&GAF43LH3JG6jodagfgzi,GasfhASDFijbfahjbarfvdfgjhl;hSOBhskjf$";
+    private const string KEY = "234k5s^%&*@&$ogh23&GAF43LH3JG6jodagfgzi,GasfhASDFijbfahjbarfvdfgjhl;hSOBhskjf$";
 
     /// <summary>
     /// Время жизни токена в минутах

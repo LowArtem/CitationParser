@@ -10,11 +10,10 @@ namespace CitationParser.Data.Model;
 [MySqlCollation("utf8_general_ci")]
 public class Editor : BaseEntity
 {
-    [Column("name")]
-    [StringLength(45)]
-    public string Name { get; set; }
+    [Column("name")] [StringLength(45)] public string Name { get; set; }
 
     [ForeignKey("IdEditors")]
     [InverseProperty("IdEditors")]
-    public virtual ICollection<ScientificCollection> IdScientificCollections { get; set; } = new List<ScientificCollection>();
+    public virtual ICollection<ScientificCollection> IdScientificCollections { get; set; } =
+        new List<ScientificCollection>();
 }

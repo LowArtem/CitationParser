@@ -10,15 +10,15 @@ public static class ListExtensions
     /// </summary>
     private static Dictionary<string, string> ServicSymbols = new()
     {
-        {@"\", @"\\"},
-        {"\0", @"\\0"},
-        {"\a", @"\\a"},
-        {"\b", @"\\b"},
-        {"\f", @"\\f"},
-        {"\n", @"\\n"},
-        {"\r", @"\\r"},
-        {"\t", @"\\t"},
-        {"\v", @"\\v"},
+        { @"\", @"\\" },
+        { "\0", @"\\0" },
+        { "\a", @"\\a" },
+        { "\b", @"\\b" },
+        { "\f", @"\\f" },
+        { "\n", @"\\n" },
+        { "\r", @"\\r" },
+        { "\t", @"\\t" },
+        { "\v", @"\\v" }
     };
 
     /// <summary>
@@ -66,10 +66,7 @@ public static class ListExtensions
             var s = p?.ToString();
             if (string.IsNullOrWhiteSpace(s)) return s;
 
-            foreach (var item in ServicSymbols)
-            {
-                s = s.Replace(item.Key, item.Value);
-            }
+            foreach (var item in ServicSymbols) s = s.Replace(item.Key, item.Value);
 
             return s;
         }).ToList();

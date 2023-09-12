@@ -19,10 +19,7 @@ public static class StringExtensions
 
         StringBuilder sb = new();
 
-        foreach (var b in hashBytes)
-        {
-            sb.Append(b.ToString("X2"));
-        }
+        foreach (var b in hashBytes) sb.Append(b.ToString("X2"));
 
         return sb.ToString();
     }

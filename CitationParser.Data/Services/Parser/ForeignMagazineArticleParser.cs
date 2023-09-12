@@ -17,7 +17,7 @@ public static class ForeignMagazineArticleParser
      * DOI: 10.13187/bg.2022.1.378. – URL: https://bg.cherkasgu.press/journals_n/1646150680.pdf
      *
      *
-     * 
+     *
      * Peculiar properties of the electron beam dynamics simulation by particle-particle methods
      * taking into account delay effects / С.А. Аликов, А.Г. Шеин // ITM Web of
      * Conferences. - 2019. - Vol. 30 : 29th International Crimean Conference «Microwave & Telecommunication
@@ -25,7 +25,7 @@ public static class ForeignMagazineArticleParser
      * Yermolov. – 9 p. – DOI: https://doi.org/10.1051/itmconf/20193009005.
      *
      *
-     * 
+     *
      * Learning problem generator for introductory programming courses / А.А. Прокудин, О.А. Сычев,
      * М. Денисов // Software Impacts. - 2023. - Vol. 17 (September). – Article
      * 100519. – 4 p. – DOI: https://doi.org/10.1016/j.simpa.2023.100519. – URL:
@@ -68,7 +68,6 @@ public static class ForeignMagazineArticleParser
         number = number.Split(". - ")[2].Trim();
 
         if (number.Contains("ed. by "))
-        {
             return number
                 .Split("ed. by ")[1].Trim()
                 .Split(",")
@@ -81,10 +80,8 @@ public static class ForeignMagazineArticleParser
                         .Trim()
                 })
                 .ToList();
-        }
 
         if (number.Contains("/ eds."))
-        {
             return number
                 .Split("/ eds.")[1].Trim()
                 .Split(",")
@@ -98,7 +95,6 @@ public static class ForeignMagazineArticleParser
                         .Trim()
                 })
                 .ToList();
-        }
 
         return new List<Editor>();
     }
@@ -128,13 +124,6 @@ public static class ForeignMagazineArticleParser
 
         return doi.Contains("DOI:")
             ? doi.Split("DOI:")[1].Split(". - ")[0].Trim().TrimEnd('.')
-            : null;
-    }
-
-    public static string? GetUrl(string citation)
-    {
-        return citation.Contains("URL")
-            ? citation.Split("URL")[1].Trim().TrimStart(':').Trim().TrimEnd('.')
             : null;
     }
 }

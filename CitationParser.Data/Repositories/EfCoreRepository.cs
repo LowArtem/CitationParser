@@ -209,7 +209,7 @@ public class EfCoreRepository<TEntity, TContext> : IEfCoreRepository<TEntity>
         }
         catch (Exception ex)
         {
-            _logger.LogError(message: $"При сохранении изменений произошла ошибка: {ex}");
+            _logger.LogError($"При сохранении изменений произошла ошибка: {ex}");
             throw;
         }
     }
@@ -228,12 +228,9 @@ public class EfCoreRepository<TEntity, TContext> : IEfCoreRepository<TEntity>
 
         var conn = _db.Database.GetDbConnection();
 
-        if (conn.State == ConnectionState.Closed)
-        {
-            conn.Open();
-        }
+        if (conn.State == ConnectionState.Closed) conn.Open();
 
-        return conn.Query<T>(sql, param: param);
+        return conn.Query<T>(sql, param);
     }
 
     /// <inheritdoc />
@@ -244,11 +241,8 @@ public class EfCoreRepository<TEntity, TContext> : IEfCoreRepository<TEntity>
 
         var conn = _db.Database.GetDbConnection();
 
-        if (conn.State == ConnectionState.Closed)
-        {
-            conn.Open();
-        }
+        if (conn.State == ConnectionState.Closed) conn.Open();
 
-        return conn.QueryFirstOrDefault<T>(sql, param: param);
+        return conn.QueryFirstOrDefault<T>(sql, param);
     }
 }

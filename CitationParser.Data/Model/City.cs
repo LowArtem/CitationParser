@@ -10,9 +10,7 @@ namespace CitationParser.Data.Model;
 [MySqlCollation("utf8_general_ci")]
 public class City : BaseEntity
 {
-    [Column("name")]
-    [StringLength(45)]
-    public string? Name { get; set; }
+    [Column("name")] [StringLength(45)] public string? Name { get; set; }
 
     [ForeignKey("IdCities")]
     [InverseProperty("IdCities")]

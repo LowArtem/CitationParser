@@ -12,16 +12,16 @@ public static class PatentDocumentAndCertificateParser
      * нефтепродуктов / С.В. Кудашев, В.Ф. Желтобрюхов, Н.В. Грачева, А.В. Лысенко, О.О. Тужиков,
      * С.Н. Недешева, Е.В. Москвичева; ВолгГТУ. - 2018
      */
-    
-    public static List<University> GetUniversities(string citation)
+
+    public static List<Company> GetCompanies(string citation)
     {
         var universityNames = citation
             .Split(";")[1]
             .Split("-")[0]
             .TrimEnd('.')
             .Split(", ");
-        
-        return universityNames.Select(n => new University { Name = n.Trim().TrimEnd('.') }).ToList();
+
+        return universityNames.Select(n => new Company { Name = n.Trim().TrimEnd('.') }).ToList();
     }
 
     public static string GetYear(string citation)

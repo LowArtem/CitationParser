@@ -34,7 +34,7 @@ public class RequestLoggingMiddleware
 
         try
         {
-            await this._next(context);
+            await _next(context);
         }
         catch (Exception ex)
         {
@@ -45,13 +45,9 @@ public class RequestLoggingMiddleware
 
         // Если не было исключения и запрос отработал нормально
         if (context.Response.StatusCode == 200)
-        {
             _logger.LogInformation($"{req}\nЗапрос успешно завершен");
-        }
         else
-        {
             _logger.LogError($"{req}\n{GetInformationError(context)}");
-        }
     }
 
     /// <summary>
@@ -66,13 +62,9 @@ public class RequestLoggingMiddleware
         _logger.LogInformation(req);
 
         if (ex == null)
-        {
             return $"{req}\nЗапрос завершился с [{context.Response.StatusCode}] кодом ошибки.";
-        }
         else
-        {
             return $"{req}\nЗапрос завершился с исключением. Информация об ошибке:\n{ex}";
-        }
     }
 
     /// <summary>
@@ -84,10 +76,7 @@ public class RequestLoggingMiddleware
     {
         var req = httpContext.Request;
 
-        var _params = req.Query.Select(p =>
-        {
-            return $"   {p.Key} = \"{p.Value}\"";
-        }).Join('\n');
+        var _params = req.Query.Select(p => { return $"   {p.Key} = \"{p.Value}\""; }).Join('\n');
 
         return $"[{req.Method}] {req.Path}\n{_params}";
     }
