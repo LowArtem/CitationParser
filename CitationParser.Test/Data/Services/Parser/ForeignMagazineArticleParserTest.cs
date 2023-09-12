@@ -16,7 +16,7 @@ public class ForeignMagazineArticleParserTest
 
         const string citation3 =
             "Моделирование связанных процессов формирования остаточных напряжений в металлическом сплаве с учетом трансформации структуры при импульсном термосиловом поверхностном упрочнении (Modeling of the coupled processes of residual stress formation in a metallic alloy taking into account structure transformation due to pulse thermo-force surface hardening) / В.П. Багмутов, Д.С. Денисевич, И.Н. Захаров, М.Д. Романенко, В.В. Баринов // Вычислительная механика сплошных сред (Computational Continuum Mechanics). - 2022. - Т. 15, № 4. - C. 449-465. - DOI: 10.7242/1999-6691/2022.15.4.35. – URL: https://journal.permsc.ru/index.php/ccm/article/view/CCMv15n4a7/2008";
-
+        
         const string expected1 = "Vol. 17, issue 1";
         const string expected2 =
             "Vol. 30 : 29th International Crimean Conference «Microwave & Telecommunication Technology» (CriMiCo’2019) (Sevastopol, Russia, September 8-14, 2019)";
@@ -90,7 +90,7 @@ public class ForeignMagazineArticleParserTest
 
         const string citation4 =
             "Моделирование связанных процессов формирования остаточных напряжений в металлическом сплаве с учетом трансформации структуры при импульсном термосиловом поверхностном упрочнении (Modeling of the coupled processes of residual stress formation in a metallic alloy taking into account structure transformation due to pulse thermo-force surface hardening) / В.П. Багмутов, Д.С. Денисевич, И.Н. Захаров, М.Д. Романенко, В.В. Баринов // Вычислительная механика сплошных сред (Computational Continuum Mechanics). - 2022. - Т. 15, № 4. - C. 449-465. - DOI: 10.7242/1999-6691/2022.15.4.35. – URL: https://journal.permsc.ru/index.php/ccm/article/view/CCMv15n4a7/2008";
-
+        
         const string expected1 = "378-385";
         const string expected2 = "9";
         const string expected3 = "26-36";
@@ -121,7 +121,7 @@ public class ForeignMagazineArticleParserTest
 
         const string citation4 =
             "Моделирование связанных процессов формирования остаточных напряжений в металлическом сплаве с учетом трансформации структуры при импульсном термосиловом поверхностном упрочнении (Modeling of the coupled processes of residual stress formation in a metallic alloy taking into account structure transformation due to pulse thermo-force surface hardening) / В.П. Багмутов, Д.С. Денисевич, И.Н. Захаров, М.Д. Романенко, В.В. Баринов // Вычислительная механика сплошных сред (Computational Continuum Mechanics). - 2022. - Т. 15, № 4. - C. 449-465. - DOI: 10.7242/1999-6691/2022.15.4.35. – URL: https://journal.permsc.ru/index.php/ccm/article/view/CCMv15n4a7/2008";
-
+        
         const string expected1 = "10.13187/bg.2022.1.378";
         const string expected2 = "https://doi.org/10.1051/itmconf/20193009005";
         const string expected3 = "10.7242/1999-6691/2022.15.4.35";
@@ -135,5 +135,29 @@ public class ForeignMagazineArticleParserTest
         Assert.Equal(expected2, result2);
         Assert.Null(result3);
         Assert.Equal(expected3, result4);
+    }
+
+    [Fact]
+    public void GetUrl_SimpleTest()
+    {
+        const string citation1 =
+            "Content of Secondary Education in the Russian Empire in the second half of the 19th century (the Example of Ust-Medveditsky Women's Secondary School of the Don Cossack Host) (Содержание гимназического образования в Российской империи второй половины XIX века (на примере Усть-Медведицкой женской гимназии области Войска Донского)) / А.А. Соловьев, А.В. Захаров, Н.Л. Виноградова, Л.С. Соловьева // Bylye Gody (Былые годы) : электрон. журнал. - 2022. - Vol. 17, issue 1. – P. 378-385. – DOI: 10.13187/bg.2022.1.378. – URL: https://bg.cherkasgu.press/journals_n/1646150680.pdf";
+
+        const string citation2 =
+            "Peculiar properties of the electron beam dynamics simulation by particle-particle methods taking into account delay effects / С.А. Аликов, А.Г. Шеин // ITM Web of Conferences. - 2019. - Vol. 30 : 29th International Crimean Conference «Microwave & Telecommunication Technology» (CriMiCo’2019) (Sevastopol, Russia, September 8-14, 2019) / ed. by P. Yermolov. – 9 p. – DOI: https://doi.org/10.1051/itmconf/20193009005.";
+
+        const string citation3 =
+            "Моделирование связанных процессов формирования остаточных напряжений в металлическом сплаве с учетом трансформации структуры при импульсном термосиловом поверхностном упрочнении (Modeling of the coupled processes of residual stress formation in a metallic alloy taking into account structure transformation due to pulse thermo-force surface hardening) / В.П. Багмутов, Д.С. Денисевич, И.Н. Захаров, М.Д. Романенко, В.В. Баринов // Вычислительная механика сплошных сред (Computational Continuum Mechanics). - 2022. - Т. 15, № 4. - C. 449-465. - DOI: 10.7242/1999-6691/2022.15.4.35. – URL: https://journal.permsc.ru/index.php/ccm/article/view/CCMv15n4a7/2008";
+        
+        const string expected1 = "https://bg.cherkasgu.press/journals_n/1646150680.pdf";
+        const string expected2 = "https://journal.permsc.ru/index.php/ccm/article/view/CCMv15n4a7/2008";
+
+        var result1 = ForeignMagazineArticleParser.GetUrl(citation1);
+        var result2 = ForeignMagazineArticleParser.GetUrl(citation2);
+        var result3 = ForeignMagazineArticleParser.GetUrl(citation3);
+
+        Assert.Equal(expected1, result1);
+        Assert.Null(result2);
+        Assert.Equal(expected2, result3);
     }
 }
