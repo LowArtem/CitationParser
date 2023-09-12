@@ -31,12 +31,28 @@ public class ReportAbstractsParser
      * XII всесоюзной конференции по когерентной и нелинейной оптике (Москва, 26-29 авг. 1985 г.). Ч. II : Секции
      * X-XIX. - М., 1985. - C. 496-497.
      *
-     * 
+     *
      *
      * Расчёт акустической мощности , излучаемой пьезокеромическим электроакустическим
      * преобразователем / Н.В. Клочко, А.Ф. Гейер, С.В. Медников // XVII региональная конференция молодых
      * исследователей Волгоградской области, Волгоград, 6-9 нояб. 2012 г. : тез. докл. / ВолгГТУ [и др.]. -
      * Волгоград, 2013. - C. 230-232.
+     *
+     *
+     *
+     * Приложение для анализа видеофайлов для оценки поведения грызунов (крыс и мышей) в лабиринтах,
+     * используемых в лабораторных исследованиях : [описание плаката] / С.В. Кравченко, Ю.А. Орлова, А.В. Алексеев,
+     * И.Л. Гринин, Д.С. Матюшечкин // Параллельные вычислительные технологии – XV : международная конференция
+     * ПаВТ'2021 (г. Волгоград, 30 марта – 1 апреля 2021 г.) : короткие статьи и описания плакатов / РАН,
+     * Суперкомпьютерный консорциум университетов России, РФФИ. - Челябинск, 2021. - C. 282. – URL :http://omega.sp.susu.ru/pavt2021/proceedings.pdf.
+     *
+     *
+     *
+     * Автоматизация ранжирования списка товаров в Интернет-магазине / Н.В. Чернов,
+     * А.Э. Шкарупа // России – творческую молодёжь : тез. докл. IX регион. науч.-практ. студенч.
+     * конф., посвящ. 100-летию со дня рожд. Героя Советского Союза Маресьева Алексея Петровича (г. Камышин,
+     * 27-28 апр. 2016 г.). В 2 т. Т. 1 / ВолгГТУ, КТИ (филиал) ВолгГТУ. - Волгоград, 2016. - C. 187.
+     *
      */
 
     public static string GetTitleOfSource(string citation)
@@ -46,51 +62,68 @@ public class ReportAbstractsParser
 
     public static List<Editor> GetEditors(string citation)
     {
-        var editorString = citation.Split(" // ")[1]
-            .Split(" / ")[1]
-            .Split(';')[0].Trim();
-
-        var answer = new List<Editor>();
-
-        if (editorString.Contains("ред"))
+        try
         {
-            var regex = new Regex(@"\[.*?\]");
-            var regex2 = new Regex(@"\(.*?\)");
-            editorString = regex.Replace(editorString, "");
-            editorString = regex2.Replace(editorString, "");
+            var editorString = citation.Split(" // ")[1]
+                .Split(" / ")[1]
+                .Split(';')[0].Trim();
 
-            if (editorString.Contains("под ред."))
+            var answer = new List<Editor>();
+
+            if (editorString.Contains("ред"))
             {
-                editorString = editorString.Split(".", 2)[1].Trim();
-            }
-            else
-            {
-                editorString = editorString.Split(":")[1].Trim();
+                var regex = new Regex(@"\[.*?\]");
+                var regex2 = new Regex(@"\(.*?\)");
+                editorString = regex.Replace(editorString, "");
+                editorString = regex2.Replace(editorString, "");
+
+                if (editorString.Contains("под ред."))
+                    editorString = editorString.Split(".", 2)[1].Trim();
+                else
+                    editorString = editorString.Split(":")[1].Trim();
+
+                var editors = editorString
+                    .Split(", ");
+
+                answer.AddRange(editors.Select(e => new Editor { Name = e.Trim(' ', '.', ',') }));
             }
 
-            var editors = editorString
-                .Split(", ");
-
-            answer.AddRange(editors.Select(e => new Editor { Name = e.Trim() }));
+            return answer;
         }
-
-        return answer;
+        catch (Exception e)
+        {
+            return new List<Editor>();
+        }
     }
-    //
-    // public static University? GetCompany(string citation)
+
+    public static List<Company> GetCompanies(string citation)
+    {
+        try
+        {
+            citation = citation.Replace("—", "-");
+            citation = citation.Replace("–", "-");
+            citation = citation.Replace("−", "-");
+            citation = citation.Replace("-", "-");
+
+            var companies = GetEditors(citation).Count != 0
+                ? citation.Split(" ; ")[1].Split(" - ")[0].Split(", ")
+                : citation.Split(" // ")[1].Split("/")[1].Split(". -")[0].Split(", ");
+
+            return companies.Select(c => new Company { Name = c.Trim(' ', '.', ',') }).ToList();
+        }
+        catch (Exception e)
+        {
+            return new List<Company>();
+        }
+    }
+
+    // public static string GetCity(string citation)
     // {
-    //     if (GetEditors(citation).Count != 0)
-    //     {
-    //         citation = citation.Replace("—", "-");
-    //         citation = citation.Replace("–", "-");
-    //         citation = citation.Replace("−", "-");
-    //         citation = citation.Replace("-", "-");
-    //         
-    //         var companies = citation.Split(" ; ")[1].Split(" - ")[0]
-    //     }
-    //     else
-    //     {
-    //         
-    //     }
+    //     
+    // }
+    //
+    // public static string? GetYear(string citation)
+    // {
+    //     
     // }
 }
