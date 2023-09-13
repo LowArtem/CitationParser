@@ -214,6 +214,18 @@ public class StudyGuideWithStampParserTest
     }
     
     [Fact]
+    public void GetInformationAboutPublication_secondTest()
+    {
+        var citation = "Doing Business: учеб. пособ.(гриф) . Рек. УМО РАЕ по классическому университетскому и техническому образованию / И.В. Алещанова, Т.В. Сорокина, М.В. Мищенко; КТИ (филиал) ВолгГТУ. - 2-е изд. - Волгоград, 2009. - 95 с.";
+
+        var expected = "2-е изд";
+
+        var result = StudyGuideWithStampParser.GetInformationAboutPublication(citation);
+        
+        Assert.Equal(expected, result);
+    }
+    
+    [Fact]
     public void GetInformationAboutPublication_PublicationAndStorageTest()
     {
         var citation = "Методы математической физики (с компьютерными вычислениями и анимацией): учеб. пособ.(гриф) . Рек. Федеральным агентством по образованию Российской Федерации / Г.Т. Тарабрин. - 4-е изд. ; 1 электрон. опт. диск (CD-ROM). - Ливны (Орловская обл.), 2011 с";

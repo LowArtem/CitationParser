@@ -133,13 +133,13 @@ public class StudyGuideWithStampParser
         for (int i = 0; i < complexNumberString.Length; i++)
         {
             
-            if (complexNumberString[i].Contains("изд.") || complexNumberString[i].Contains("Изд."))
+            if (complexNumberString[i].Contains("изд") || complexNumberString[i].Contains("Изд"))
             {
                 if (complexNumberString[i].Contains("диск"))
                 {
                     var dataStorageAndPublication = complexNumberString[i].Split(";");
 
-                    if (dataStorageAndPublication[0].Contains("изд.") || complexNumberString[i].Contains("Изд."))
+                    if (dataStorageAndPublication[0].Contains("изд") || complexNumberString[i].Contains("Изд"))
                     {
                         return dataStorageAndPublication[0].Trim().Replace("[", string.Empty).Replace("]", string.Empty);
                     }
