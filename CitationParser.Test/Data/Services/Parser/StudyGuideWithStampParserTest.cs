@@ -13,7 +13,7 @@ public class StudyGuideWithStampParserTest
         List<Editor> editors = new List<Editor>();
         editors.Add(new Editor(){Name = "Ю. Я. Комарова"});
 
-        var result = MonographParser.GetEditor(citation);
+        var result = StudyGuideWithStampParser.GetEditor(citation);
         
         Assert.Equal(editors.Count, result.Count);
         for (int i = 0; i < editors.Count; i++)
