@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 using CitationParser.Data.Model;
+using MoreLinq.Extensions;
 
 namespace CitationParser.Data.Services.Parser;
 
@@ -117,19 +118,25 @@ public class ReportAbstractsParser
         }
     }
 
-    public static string GetCity(string citation)
+    public static List<City> GetCity(string citation)
     {
         citation = citation.Replace("—", "-");
         citation = citation.Replace("–", "-");
         citation = citation.Replace("−", "-");
         citation = citation.Replace("-", "-");
 
-        return citation.Split(". - ")[1].Split(", ")[0];
+        var cities = citation.Split(". - ")[1].Split(", ")[0].Split(";");
         
+        return cities.Select(c => new City { Name = c.Trim(' ', '.', ',') }).ToList();
     }
-    //
-    // public static string? GetYear(string citation)
-    // {
-    //     
-    // }
+    
+    public static string? GetYear(string citation)
+    {
+        citation = citation.Replace("—", "-");
+        citation = citation.Replace("–", "-");
+        citation = citation.Replace("−", "-");
+        citation = citation.Replace("-", "-");
+
+        return citation.Split(". - ")[1].Split(", ")[1];
+    }
 }
