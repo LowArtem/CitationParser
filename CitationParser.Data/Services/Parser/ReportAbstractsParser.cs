@@ -158,10 +158,23 @@ public class ReportAbstractsParser
         return null;
     }
 
-    // public static string GetPages(string citation)
-    // {
-    //     
-    // }
+    public static string GetPages(string citation)
+    {
+        citation = citation.Replace("—", "-");
+        citation = citation.Replace("–", "-");
+        citation = citation.Replace("−", "-");
+        citation = citation.Replace("-", "-");
+
+        var splitCitation = citation.Split(". - ");
+
+        foreach (var str in splitCitation)
+        {
+            if (Regex.IsMatch(str, @"[СP]\.\s?\d+"))
+                return str.Trim();
+        }
+
+        return null;
+    }
     //
     // public static string GetVolume(string citation)
     // {
