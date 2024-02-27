@@ -2,6 +2,7 @@ using System.Reflection;
 using AutoMapper;
 using CitationParser.Api.Extensions.Application;
 using CitationParser.Api.Mappers;
+using CitationParser.Data.Context;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Serilog;
 
@@ -26,3 +27,7 @@ app.MigrateDatabase(app.Logger);
 app.UseBaseServices(app.Environment, app.Services.GetRequiredService<IApiVersionDescriptionProvider>());
 
 app.UseSerilogRequestLogging();
+
+app.MapGet("/", (ApplicationContext db) => db.Authors.ToList());
+
+app.Run();
