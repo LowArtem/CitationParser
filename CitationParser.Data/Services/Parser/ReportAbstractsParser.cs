@@ -117,10 +117,16 @@ public class ReportAbstractsParser
         }
     }
 
-    // public static string GetCity(string citation)
-    // {
-    //     
-    // }
+    public static string GetCity(string citation)
+    {
+        citation = citation.Replace("—", "-");
+        citation = citation.Replace("–", "-");
+        citation = citation.Replace("−", "-");
+        citation = citation.Replace("-", "-");
+
+        return citation.Split(". - ")[1].Split(", ")[0];
+        
+    }
     //
     // public static string? GetYear(string citation)
     // {
