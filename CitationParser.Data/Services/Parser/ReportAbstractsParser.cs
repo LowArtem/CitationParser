@@ -169,7 +169,7 @@ public class ReportAbstractsParser
 
         foreach (var str in splitCitation)
         {
-            if (Regex.IsMatch(str, @"[СP]\.\s?\d+"))
+            if (Regex.IsMatch(str.Trim(), @"^[СP]\.\s?\d+"))
                 return str.Trim();
         }
 
@@ -187,15 +187,25 @@ public class ReportAbstractsParser
 
         foreach (var str in splitCitation)
         {
-            if (Regex.IsMatch(str, @"(Vol|Т)\.\s?\w+"))
+            if (Regex.IsMatch(str.Trim(), @"^(Vol|Т)\.\s?\w+"))
                 return str.Trim();
         }
 
         return null;
     }
-    //
-    // public static string GetLanguage(string citation)
-    // {
-    //     
-    // }
+    
+    public static string GetLanguage(string citation)
+    {
+        citation = citation.Replace("—", "-");
+        citation = citation.Replace("–", "-");
+        citation = citation.Replace("−", "-");
+        citation = citation.Replace("-", "-");
+
+        var splitCitation = citation.Split(". - ");
+
+        if (Regex.IsMatch(splitCitation[splitCitation.Length - 1].Trim(), @"^\w+\.$"))
+            return splitCitation[splitCitation.Length - 1].Trim();
+
+        return null;
+    }
 }
