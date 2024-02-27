@@ -137,6 +137,39 @@ public class ReportAbstractsParser
         citation = citation.Replace("−", "-");
         citation = citation.Replace("-", "-");
 
-        return citation.Split(". - ")[1].Split(", ")[1];
+        return citation.Split(". - ")[1].Split(", ")[1].Trim();
     }
+
+    public static string GetUrl(string citation)
+    {
+        citation = citation.Replace("—", "-");
+        citation = citation.Replace("–", "-");
+        citation = citation.Replace("−", "-");
+        citation = citation.Replace("-", "-");
+
+        var splitCitation = citation.Split(". - ");
+
+        foreach (var str in splitCitation)
+        {
+            if (str.Contains("URL"))
+                return str.Trim();
+        }
+
+        return null;
+    }
+
+    // public static string GetPages(string citation)
+    // {
+    //     
+    // }
+    //
+    // public static string GetVolume(string citation)
+    // {
+    //     
+    // }
+    //
+    // public static string GetLanguage(string citation)
+    // {
+    //     
+    // }
 }
