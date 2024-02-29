@@ -240,4 +240,60 @@ public class ReportAbstractParserTest
 
         Assert.Equal(expected, pages);
     }
+    
+    [Fact]
+    public void GetVolume_SimpleTest()
+    {
+        const string citation = """
+                                 А.М. Структура ИПС параметров измерительных преобразователей / А.М. Сухоруков, Д.Н. Шилин, С.Р. Калмыкова // Автоматизация поискового конструирования и подготовка инженерных кадров: Тез. докл. IV Всесоюзн. науч. конф.,8-10сент.1987г. - Волгоград, 1987. - Т.2. - C. 30.
+                                """;
+
+        var volume = ReportAbstractsParser.GetVolume(citation);
+
+        var expected = "Т.2";
+
+        Assert.Equal(expected, volume);
+    }
+    
+    [Fact]
+    public void GetVolume_WithTitleTest()
+    {
+        const string citation = """
+                                 Численный метод нахождения оптимального управления движением связанных систем тел / А.С. Горобцов, С.К. Карцов // XIII Всероссийский съезд по фундаментальным проблемам теоретической и прикладной механики (г. Санкт-Петербург, 21-25 августа 2023 г.) : сб. тез. В 4 т. / Санкт-Петербургский политехнический университет Петра Великого [и др.]. - Санкт-Петербург, 2023. - Т. 1. Общая и прикладная механика. - C. 388-389.
+                                """;
+
+        var volume = ReportAbstractsParser.GetVolume(citation);
+
+        var expected = "Т. 1. Общая и прикладная механика";
+
+        Assert.Equal(expected, volume);
+    }
+    
+    [Fact]
+    public void GetVolume_EnglishTest()
+    {
+        const string citation = """
+                                 Ontological business-process reengineering of communication statement / В.А. Камаев, М.В. Набока, Д.А. Чистов // Congress on intelligent systems and information technologies (AIS-IT`09), Divnomorskoe, Russia, September, 3-10 : proc. / Южный федеральный ун-т [и др.]. - М., 2009. - Vol. 4. - C. 103.
+                                """;
+
+        var volume = ReportAbstractsParser.GetVolume(citation);
+
+        var expected = "Vol. 4";
+
+        Assert.Equal(expected, volume);
+    }
+    
+    [Fact]
+    public void GetVolume_WithNumberTest()
+    {
+        const string citation = """
+                                 Features of the sorption of light atoms on single wall carbon nanotubes / И.В. Запороцкова, Н.Г. Лебедев, А.О. Литинский, Л.А. Чернозатонский // Aerosols: [Тез.]. - Toscow, 1998. - Vol.4с, N5. - C. P.144.
+                                """;
+
+        var volume = ReportAbstractsParser.GetVolume(citation);
+
+        var expected = "Vol.4с";
+
+        Assert.Equal(expected, volume);
+    }
 }

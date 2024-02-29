@@ -188,7 +188,7 @@ public class ReportAbstractsParser
         foreach (var str in splitCitation)
         {
             if (Regex.IsMatch(str.Trim(), @"^(Vol|Т)\.\s?\w+"))
-                return str.Trim();
+                return str.Split(",")[0].Trim();
         }
 
         return null;
