@@ -169,7 +169,7 @@ public class ReportAbstractsParser
 
         foreach (var str in splitCitation)
         {
-            if (Regex.IsMatch(str.Trim(), @"^[СP]\.\s?\d+"))
+            if (Regex.IsMatch(str.Trim(), @"^[СPРC]\.\s?\d+"))
                 return str.Trim();
         }
 

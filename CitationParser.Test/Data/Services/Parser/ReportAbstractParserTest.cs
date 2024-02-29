@@ -198,4 +198,46 @@ public class ReportAbstractParserTest
 
         Assert.Null(url);
     }
+    
+    [Fact]
+    public void GetPages_SimpleTest()
+    {
+        const string citation = """
+                                 Последствия санкций для российских банков / А.А. Сложеникина, К.А. Шабалкина, Ю.Г. Оноприенко // XXVIII Межвузовская научно–практическая конференция молодых ученых и студентов г. Волжского (г. Волжский, 29 мая – 2 июня 2023 г.) : материалы конф. / отв. за вып.: Г. М. Бутов ; ВПИ (филиал) ФГБОУ ВО ВолгГТУ [и др.]. - Волжский, 2023. - C. 341-342. – URL: https://volpi.ru/science/science_conference.
+                                """;
+
+        var pages = ReportAbstractsParser.GetPages(citation);
+
+        var expected = "C. 341-342";
+
+        Assert.Equal(expected, pages);
+    }
+    
+    [Fact]
+    public void GetPages_OnePageTest()
+    {
+        const string citation = """
+                                Подход к расчету экологического следа городских жителей / К.С. Айрапетян, А.С. Маковкин // Конкурс научно-исследовательских работ студентов Волгоградского государственного технического университета (г. Волгоград, 24-28 апреля 2023 г.) : тез. докл. / редкол.: С. В. Кузьмин (отв. ред.) [и др.] ; ВолгГТУ, Отдел координации научных исследований молодых ученых УНиИ, Общество молодых ученых. - Волгоград, 2023. - C. 467.
+                                """;
+
+        var pages = ReportAbstractsParser.GetPages(citation);
+
+        var expected = "C. 467.";
+
+        Assert.Equal(expected, pages);
+    }
+    
+    [Fact]
+    public void GetPages_EnglishTest()
+    {
+        const string citation = """
+                                 VAR-method based AI-system for predicting financial risk in realeconomy of Russia in conditions of modern digital transformation / Н.И. Ломакин, M. Safonova, M. Maramygin, А.В. Катаев, Yu. Sigidov, N. Maliy // III International Scientific and Practical Conference «Digital Economy and Finances» (St. Petersburg, March 19-20, 2020) : Book of Abstracts / St. Petersburg University of Management Technologies and Economics [et al.]. - Saint Petersburg, 2020. - P. 37-38.
+                                """;
+
+        var pages = ReportAbstractsParser.GetPages(citation);
+
+        var expected = "P. 37-38.";
+
+        Assert.Equal(expected, pages);
+    }
 }
