@@ -187,8 +187,29 @@ public class ReportAbstractsParser
 
         foreach (var str in splitCitation)
         {
-            if (Regex.IsMatch(str.Trim(), @"^(Vol|Т)\.\s?\w+"))
+            if (Regex.IsMatch(str.Trim(), @"^(Vol|Т|Ч)\.\s?\w+"))
                 return str.Split(",")[0].Trim();
+        }
+
+        return null;
+    }
+    
+    public static string GetNumber(string citation)
+    {
+        citation = citation.Replace("—", "-");
+        citation = citation.Replace("–", "-");
+        citation = citation.Replace("−", "-");
+        citation = citation.Replace("-", "-");
+
+        var splitCitation = citation.Split(". - ");
+
+        foreach (var str in splitCitation)
+        {
+            if (Regex.IsMatch(str.Trim(), @"[№N]\s?\n+$"))
+            {
+                var numberStr = str.Split(",");
+                return numberStr[-1].Trim();
+            }
         }
 
         return null;
@@ -203,8 +224,8 @@ public class ReportAbstractsParser
 
         var splitCitation = citation.Split(". - ");
 
-        if (Regex.IsMatch(splitCitation[splitCitation.Length - 1].Trim(), @"^\w+\.$"))
-            return splitCitation[splitCitation.Length - 1].Trim();
+        if (Regex.IsMatch(splitCitation[-1].Trim(), @"^\w+\.$"))
+            return splitCitation[-1].Trim();
 
         return null;
     }
