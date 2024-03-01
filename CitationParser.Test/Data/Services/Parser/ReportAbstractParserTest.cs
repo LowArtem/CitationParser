@@ -296,4 +296,46 @@ public class ReportAbstractParserTest
 
         Assert.Equal(expected, volume);
     }
+    
+    [Fact]
+    public void GetNumber_SimpleTest()
+    {
+        const string citation = """
+                                 Динамика трансмембранного транспорта ионов при воздействии СВЧ-излучения / М.П. Никулина, Р.Н. Никулин // Новое слово в науке: перспективы развития : сб. матер. VI междунар. науч.-практ. конф. (г. Чебоксары, 20 нояб. 2015 г.) / редкол.: О.Н. Широков [и др.] ; Чувашский гос. ун-т им. И.Н. Ульянова, Центр научного сотрудничества «Интерактив Плюс» [и др.]. - Чебоксары, 2015. - № 4. - C. 14-15.
+                                """;
+
+        var number = ReportAbstractsParser.GetNumber(citation);
+
+        var expected = "№ 4";
+
+        Assert.Equal(expected, number);
+    }
+    
+    [Fact]
+    public void GetNumber_WithVolumeTest()
+    {
+        const string citation = """
+                                 Hydrides of walled carbon nanotubes / Л.А. Чернозатонский, Н.Г. Лебедев, А.О. Литинский, И.В. Запороцкова // Aerosols : [тез.]. - Moscow, 1998. - Vol. 4с, № 5. - C. 150.
+                                """;
+
+        var number = ReportAbstractsParser.GetNumber(citation);
+
+        var expected = "№ 5";
+
+        Assert.Equal(expected, number);
+    }
+    
+    [Fact]
+    public void GetNumber_NTest()
+    {
+        const string citation = """
+                                 Методика автоматизированного выбора рациональных технических решений / Г.Л. Шкурина // Изв. ТРТУ. Тем. вып. "Интеллектуальные САПР": Мат. Всерос. н.-т. конф. с участ. зарубеж. предст. / Таганрог. гос. радиотехн. ун-т. - Таганрог, 1997. - N3. - C. 213.
+                                """;
+
+        var number = ReportAbstractsParser.GetNumber(citation);
+
+        var expected = "N3";
+
+        Assert.Equal(expected, number);
+    }
 }

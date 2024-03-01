@@ -205,10 +205,10 @@ public class ReportAbstractsParser
 
         foreach (var str in splitCitation)
         {
-            if (Regex.IsMatch(str.Trim(), @"[№N]\s?\n+$"))
+            if (Regex.IsMatch(str.Trim(), @"[№N]\s?\d+$"))
             {
                 var numberStr = str.Split(",");
-                return numberStr[-1].Trim();
+                return numberStr[numberStr.Length - 1].Trim();
             }
         }
 
@@ -224,8 +224,8 @@ public class ReportAbstractsParser
 
         var splitCitation = citation.Split(". - ");
 
-        if (Regex.IsMatch(splitCitation[-1].Trim(), @"^\w+\.$"))
-            return splitCitation[-1].Trim();
+        if (Regex.IsMatch(splitCitation[splitCitation.Length - 1].Trim(), @"^\w+\.$"))
+            return splitCitation[splitCitation.Length - 1].Trim();
 
         return null;
     }
