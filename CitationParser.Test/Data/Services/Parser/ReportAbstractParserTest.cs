@@ -338,4 +338,30 @@ public class ReportAbstractParserTest
 
         Assert.Equal(expected, number);
     }
+    
+    [Fact]
+    public void GetLanguage_SimpleTest()
+    {
+        const string citation = """
+                                 Stages of development of expert system for providing physical and information security of supervisory control and data acquisition systems / П.В. Ботвинкин, В.А. Камаев // Congress on Intelligent Systems and Information Technologies IS-IT`14 (Divnomorskoe, Russia, 2014, September, 2-9) : proceedings. In 4 vol. Vol. 4 / Russian Association of Artificial Intelligence, Southern Federal University. - Moscow, 2014. - C. 69. - Англ.
+                                """;
+
+        var lang = ReportAbstractsParser.GetLanguage(citation);
+
+        var expected = "Англ.";
+
+        Assert.Equal(expected, lang);
+    }
+    
+    [Fact]
+    public void GetLanguage_NullTest()
+    {
+        const string citation = """
+                                 Экспертный анализ в системе поддержки принятия решений / Ю.Д. Киреева, Н.П. Садовникова // XIX региональная конференция молодых исследователей Волгоградской области (г. Волгоград, 11-14 нояб. 2014 г.) : тез. докл. / редкол.: А.В. Навроцкий (отв. ред.) [и др.] ; ВолгГТУ. - Волгоград, 2015. - C. 202.
+                                """;
+
+        var lang = ReportAbstractsParser.GetLanguage(citation);
+
+        Assert.Null(lang);
+    }
 }
