@@ -23,13 +23,9 @@ public static class ApplicationBuilderExtensions
         IApiVersionDescriptionProvider provider)
     {
         if (env.IsDevelopment())
-        {
             app.UseDeveloperExceptionPage();
-        }
         else
-        {
             app.UseExceptionHandler("/Error");
-        }
 
         app.UseStaticFiles();
 
@@ -55,8 +51,8 @@ public static class ApplicationBuilderExtensions
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllerRoute(
-                name: "default",
-                pattern: "{controller:slugify}/{action:slugify}/{id?}");
+                "default",
+                "{controller:slugify}/{action:slugify}/{id?}");
         });
     }
 
@@ -102,11 +98,9 @@ public static class ApplicationBuilderExtensions
             options =>
             {
                 foreach (var description in provider.ApiVersionDescriptions)
-                {
                     options.SwaggerEndpoint(
                         $"{prefixApi}/swagger/{description.GroupName}/swagger.json",
                         description.GroupName.ToUpperInvariant());
-                }
 
                 options.DocExpansion(DocExpansion.None);
             });

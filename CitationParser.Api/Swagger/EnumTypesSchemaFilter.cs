@@ -15,10 +15,7 @@ public class EnumTypesSchemaFilter : ISchemaFilter
     /// <inheritdoc />
     public EnumTypesSchemaFilter(string xmlPath)
     {
-        if (File.Exists(xmlPath))
-        {
-            _xmlComments = XDocument.Load(xmlPath);
-        }
+        if (File.Exists(xmlPath)) _xmlComments = XDocument.Load(xmlPath);
     }
 
     /// <inheritdoc />
@@ -38,7 +35,8 @@ public class EnumTypesSchemaFilter : ISchemaFilter
                 var fullEnumMemberName = $"F:{fullTypeName}.{enumMemberName}";
 
                 var enumMemberComments = _xmlComments.Descendants("member")
-                    .FirstOrDefault(m => m.Attribute("name")!.Value.Equals(fullEnumMemberName, StringComparison.OrdinalIgnoreCase));
+                    .FirstOrDefault(m =>
+                        m.Attribute("name")!.Value.Equals(fullEnumMemberName, StringComparison.OrdinalIgnoreCase));
                 if (enumMemberComments == null) continue;
 
                 var summary = enumMemberComments.Descendants("summary").FirstOrDefault();

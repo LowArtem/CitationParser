@@ -26,31 +26,25 @@ public partial class ApplicationContext : DbContext
 
     public virtual DbSet<TypesOfPublication> TypesOfPublications { get; set; }
 
-    public virtual DbSet<University> Universities { get; set; }
+    public virtual DbSet<Company> Universities { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseMySql("server=localhost;database=vstu_library;uid=root;pwd=root", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.28-mysql"));
+    {
+        optionsBuilder.UseMySql("server=localhost;database=vstu_library;uid=root;pwd=root",
+            ServerVersion.Parse("8.0.28-mysql"));
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder
-            .UseCollation("utf8mb4_0900_ai_ci") 
+            .UseCollation("utf8mb4_0900_ai_ci")
             .HasCharSet("utf8mb4");
 
-        modelBuilder.Entity<Author>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<Author>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
-        modelBuilder.Entity<City>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<City>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
-        modelBuilder.Entity<Editor>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<Editor>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
         modelBuilder.Entity<Publication>(entity =>
         {
@@ -113,7 +107,7 @@ public partial class ApplicationContext : DbContext
             entity.HasMany(d => d.IdUniversities).WithMany(p => p.IdPublications)
                 .UsingEntity<Dictionary<string, object>>(
                     "PublicationsToUniversity",
-                    r => r.HasOne<University>().WithMany()
+                    r => r.HasOne<Company>().WithMany()
                         .HasForeignKey("IdUniversities")
                         .OnDelete(DeleteBehavior.ClientSetNull)
                         .HasConstraintName("FK_universities_to_publications"),
@@ -168,7 +162,7 @@ public partial class ApplicationContext : DbContext
             entity.HasMany(d => d.IdUniversities).WithMany(p => p.IdScientificCollections)
                 .UsingEntity<Dictionary<string, object>>(
                     "ScientificCollectionsToUniversity",
-                    r => r.HasOne<University>().WithMany()
+                    r => r.HasOne<Company>().WithMany()
                         .HasForeignKey("IdUniversities")
                         .OnDelete(DeleteBehavior.ClientSetNull)
                         .HasConstraintName("FK_scientific_collections_to_universities_universities"),
@@ -185,21 +179,16 @@ public partial class ApplicationContext : DbContext
                             .ToTable("scientific_collections_to_universities")
                             .HasCharSet("utf8")
                             .UseCollation("utf8_general_ci");
-                        j.HasIndex(new[] { "IdUniversities" }, "FK_scientific_collections_to_universities_universities");
+                        j.HasIndex(new[] { "IdUniversities" },
+                            "FK_scientific_collections_to_universities_universities");
                         j.IndexerProperty<int>("IdScientificCollections").HasColumnName("id_scientific_collections");
                         j.IndexerProperty<int>("IdUniversities").HasColumnName("id_universities");
                     });
         });
 
-        modelBuilder.Entity<TypesOfPublication>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<TypesOfPublication>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
-        modelBuilder.Entity<University>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-        });
+        modelBuilder.Entity<Company>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
         OnModelCreatingPartial(modelBuilder);
     }

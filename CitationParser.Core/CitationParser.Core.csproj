@@ -7,9 +7,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Api\" />
-      <Folder Include="Dto\" />
-      <Folder Include="Helpers\" />
+        <Folder Include="Api\"/>
+        <Folder Include="Dto\"/>
+        <Folder Include="Helpers\"/>
     </ItemGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -21,8 +21,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="AutoMapper" Version="12.0.1" />
-      <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.29.0" />
+        <PackageReference Include="AutoMapper" Version="12.0.1"/>
+        <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.29.0"/>
     </ItemGroup>
 
 </Project>
