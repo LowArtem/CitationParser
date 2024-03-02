@@ -15,4 +15,6 @@ public class City : BaseEntity
     [ForeignKey("IdCities")]
     [InverseProperty("IdCities")]
     public virtual ICollection<Publication> IdPublications { get; set; } = new List<Publication>();
+    
+    public string? Country { get; set; }
 }

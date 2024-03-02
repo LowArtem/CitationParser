@@ -19,7 +19,7 @@ public static class ApplicationBuilderExtensions
     /// <param name="app"></param>
     /// <param name="provider"></param>
     /// <param name="env"></param>
-    public static void UseBaseServices(this IApplicationBuilder app, IWebHostEnvironment env,
+    public static void UseBaseServices(this WebApplication app, IWebHostEnvironment env,
         IApiVersionDescriptionProvider provider)
     {
         if (env.IsDevelopment())
@@ -48,26 +48,23 @@ public static class ApplicationBuilderExtensions
             builder.AllowAnyHeader();
         });
 
-        app.UseEndpoints(endpoints =>
-        {
-            endpoints.MapControllerRoute(
-                "default",
-                "{controller:slugify}/{action:slugify}/{id?}");
-        });
+        app.MapControllerRoute(
+            name: "default",
+            pattern: "{controller:slugify}/{action:slugify}/{id?}");
     }
 
     /// <summary>
     /// Применение миграций БД
     /// </summary>
     /// <param name="app"></param>
-    public static void MigrateDatabase(this IApplicationBuilder app,
+    public static void MigrateDatabase(this WebApplication app,
         ILogger logger)
     {
         logger.LogInformation("Начало миграций");
 
         try
         {
-            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>()!.CreateScope())
+            using (var serviceScope = app.Services.GetService<IServiceScopeFactory>()!.CreateScope())
             {
                 serviceScope.ServiceProvider.GetRequiredService<ApplicationContext>().Database.Migrate();
             }

@@ -1,55 +1,61 @@
 using System.Reflection;
+using AutoMapper;
+using CitationParser.Api.Extensions.Application;
+using CitationParser.Api.Mappers;
+using CitationParser.Data.Context;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Serilog;
+using Hangfire;
+using Hangfire.MySql;
+using CitationParser.Api.Services;
+using CitationParser.Data.Services.WebScraper;
 
-namespace CitationParser.Api;
+var builder = WebApplication.CreateBuilder();
 
-public class Program
-{
-    /// <summary>
-    /// Точка входа
-    /// </summary>
-    /// <param name="args"></param>
-    public static void Main(string[] args)
-    {
-        // Создание хоста
-        CreateHost(args);
-    }
+builder.Services.AddBaseModuleDi("DefaultConnection", builder.Configuration);
 
-    /// <summary>
-    /// Создание хоста
-    /// </summary>
-    /// <param name="args"></param>
-    private static void CreateHost(string[] args)
-    {
-        try
+// Auto Mapper Configurations
+var mapperConfig = new MapperConfiguration(mc => { mc.AddProfile(new MappingProfile()); });
+
+var mapper = mapperConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
+
+builder.Services.AddTransient<WebScraperService>();
+builder.Services.AddTransient<ParseHtmlService>();
+builder.Services.AddHostedService<TimeHostedService>();
+
+#region Hangfire
+
+// Add Hangfire services
+builder.Services.AddHangfire(configuration => configuration
+    .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+    .UseSimpleAssemblyNameTypeSerializer()
+    .UseRecommendedSerializerSettings()
+    .UseStorage(new MySqlStorage(Configuration.GetConnectionString("HangfireConnection"),
+        new MySqlStorageOptions
         {
-            CreateHostBuilder(args).Build().Run();
-        }
-        catch (Exception ex)
-        {
-            Log.Fatal($"Failed to start {Assembly.GetExecutingAssembly().GetName().Name}", ex);
-            throw;
-        }
-    }
+            PrepareSchemaIfNecessary = true,
+            TablesPrefix = "hangfire_"
+        }))
+);
 
-    /// <summary>
-    /// Конфиг хоста
-    /// </summary>
-    /// <param name="args"></param>
-    /// <returns></returns>
-    public static IHostBuilder CreateHostBuilder(string[] args)
-    {
-        return Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); })
-            .ConfigureAppConfiguration(configuration =>
-            {
-                configuration.AddJsonFile("appsettings.json", false, true);
-                configuration.AddJsonFile(
-                    $"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json",
-                    true);
-            })
-            .UseSerilog((ctx, lc) => lc
-                .WriteTo.Console()
-                .ReadFrom.Configuration(ctx.Configuration));
-    }
-}
+// Add the processing server as IHostedService
+builder.Services.AddHangfireServer();
+
+#endregion
+
+builder.Host.UseSerilog((ctx, lc) =>lc
+    .WriteTo.Console()
+    .ReadFrom.Configuration(ctx.Configuration));
+
+var app = builder.Build();
+
+app.MigrateDatabase(app.Logger);
+
+app.UseBaseServices(app.Environment, app.Services.GetRequiredService<IApiVersionDescriptionProvider>());
+
+app.UseSerilogRequestLogging();
+
+app.MapGet("/", (ApplicationContext db) => db.Authors.ToList());
+
+app.Run();
