@@ -33,7 +33,7 @@ public class TextbookParserTest
     }
     
     [Fact]
-    public void GetEditor_PublicationsContainsUniversityTest()
+    public void GetEditor_PublicationsContainsCompanyTest()
     {
         var citation = " История оружия. Очерки развития артиллерии: учебник . Доп. УМО вузов РФ по университетскому политехническому образованию / О.Г. Агошков, А.Ю. Александров, В.В. Ветров, В.А. Власов, В.А. Девяткин, Н.В. Ежов, В.Ф. Захаренко, В.Г. Кучеров, Н.А. Макаровец, Г.М. Споршев, Н.Е. Стариков, Л.А. Устинов, Н.В. Федотова, С.Е. Червонцев, В.Г. Черный; под ред. В.Г. Кучерова ; ВолгГТУ. - Волгоград, 2015. - 271 с.";
         
@@ -76,10 +76,10 @@ public class TextbookParserTest
     {
         var citation = " История оружия. Очерки развития артиллерии: учебник . Доп. УМО вузов РФ по университетскому политехническому образованию / О.Г. Агошков, А.Ю. Александров, В.В. Ветров, В.А. Власов, В.А. Девяткин, Н.В. Ежов, В.Ф. Захаренко, В.Г. Кучеров, Н.А. Макаровец, Г.М. Споршев, Н.Е. Стариков, Л.А. Устинов, Н.В. Федотова, С.Е. Червонцев, В.Г. Черный; под ред. В.Г. Кучерова ; ВолгГТУ. - Волгоград, 2015. - 271 с.";
 
-        List<University> universities = new List<University>();
-        universities.Add(new University(){Name = "ВолгГТУ"});
+        List<Company> universities = new List<Company>();
+        universities.Add(new Company(){Name = "ВолгГТУ"});
 
-        var result = TextbookParser.GetUniversity(citation);
+        var result = TextbookParser.GetCompany(citation);
 
         Assert.Equal(universities.Count, result.Count);
         for (int i = 0; i < universities.Count; i++)

@@ -149,30 +149,30 @@ public class OtherPublicationsParser
         return null;
     }
 
-    public static List<University> GetUniversity(string citation)
+    public static List<Company> GetCompany(string citation)
     {
-        var universityString = citation.Replace('–', '-').Split("//");
+        var companyString = citation.Replace('–', '-').Split("//");
         
-        if (universityString.Length > 1)
+        if (companyString.Length > 1)
         {
-            universityString = universityString[1].Split(". -")[0].Split('/');
+            companyString = companyString[1].Split(". -")[0].Split('/');
         }
         else
         {
-            universityString = universityString[0].Split(". -")[0].Split('/');
+            companyString = companyString[0].Split(". -")[0].Split('/');
         }
 
-        universityString = universityString[universityString.Length - 1].Split(';');
+        companyString = companyString[companyString.Length - 1].Split(';');
         
-        universityString = universityString[universityString.Length - 1].Split(',');
+        companyString = companyString[companyString.Length - 1].Split(',');
         
-        List<University> universitiesList = new List<University>();
+        List<Company> universitiesList = new List<Company>();
 
-        for (int i = 0; i < universityString.Length; i++)
+        for (int i = 0; i < companyString.Length; i++)
         {
-            if (!universityString[i].Contains("сост.:"))
+            if (!companyString[i].Contains("сост.:"))
             {
-                universitiesList.Add(new University() { Name = universityString[i].Trim() });
+                universitiesList.Add(new Company() { Name = companyString[i].Trim() });
             }
         }
         

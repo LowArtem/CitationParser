@@ -32,19 +32,19 @@ public class ArticleFromRussianCollectionParser
         return null;
     }
     
-    public static List<University> GetUniversityScientificCollection(string citation)
+    public static List<Company> GetCompanyScientificCollection(string citation)
     {
-        var universityString = citation.Replace('–', '-').Split("//")[1].Split(". -")[0].Split('/');
+        var companyString = citation.Replace('–', '-').Split("//")[1].Split(". -")[0].Split('/');
 
-        universityString = universityString[universityString.Length - 1].Split(';');
+        companyString = companyString[companyString.Length - 1].Split(';');
         
-        universityString = universityString[universityString.Length - 1].Split(',');
+        companyString = companyString[companyString.Length - 1].Split(',');
         
-        List<University> universitiesList = new List<University>();
+        List<Company> universitiesList = new List<Company>();
 
-        for (int i = 0; i < universityString.Length; i++)
+        for (int i = 0; i < companyString.Length; i++)
         {
-            universitiesList.Add(new University() { Name = universityString[i].Trim() });
+            universitiesList.Add(new Company() { Name = companyString[i].Trim() });
         }
         
         return universitiesList;

@@ -33,7 +33,7 @@ public class MonographParserTest
     }
     
     [Fact]
-    public void GetEditor_PublicationsContainsUniversityTest()
+    public void GetEditor_PublicationsContainsCompanyTest()
     {
         var citation = "Фторполимерные материалы: монография / Н.А. Адаменко, Е.Н. Больбасов, В.М. Бузник, С.Ю. Вавилова, С.В. Гнеденков, В.И. Дяченко, И.В. Зибарева, Л.Н. Игнатьева, С.М. Игумнов, А.В. Казуров, Д.П. Кирюхин, Г.А. Кичигина, Т.Ю. Кумеева, П.П. Кущ, Д.В. Машталяр, О.А. Мельник, В.Г. Назаров, Л.Н. Никитин, А.А. Охлопкова, Н.П. Пророкова, Е.Ю. Сафронова, С.А. Серов, С.Л. Синебрюхов, С.А. Слепцова, В.И. Соколов, В.П. Столяров, С.И. Твердохлебов, С.А. Хатипов, А.К. Цветников, Е.Ю. Шиц, А.Б. Ярославцев; отв. ред.: В. М. Бузник ; Ин-т химии растворов им. Г. А. Крестова РАН, Национальный исследовательский Томский гос. ун-т, ФГУП «Всероссийский НИИ авиационных материалов», Консорциум «Фторполимерные материалы и нанотехнологии». - Томск, 2017. - 596 с";
 
@@ -73,10 +73,10 @@ public class MonographParserTest
     {
         var citation = "Повышение надежности и эффективности рельсошлифовальных инструментов на бакелитовой связке. Теория шлифования. Физико-химические основы: монография / В.М. Шумячер, С.А. Крюков, И.Ю. Орлов; ВПИ (филиал) ФГБОУ ВО ВолгГТУ. - Волгоград, 2021. - 161 с.";
 
-        List<University> universities = new List<University>();
-        universities.Add(new University(){Name = "ВПИ (филиал) ФГБОУ ВО ВолгГТУ"});
+        List<Company> universities = new List<Company>();
+        universities.Add(new Company(){Name = "ВПИ (филиал) ФГБОУ ВО ВолгГТУ"});
 
-        var result = MonographParser.GetUniversity(citation);
+        var result = MonographParser.GetCompany(citation);
 
         Assert.Equal(universities.Count, result.Count);
         for (int i = 0; i < universities.Count; i++)
@@ -90,13 +90,13 @@ public class MonographParserTest
     {
         var citation = "Фторполимерные материалы: монография / Н.А. Адаменко, Е.Н. Больбасов, В.М. Бузник, С.Ю. Вавилова, С.В. Гнеденков, В.И. Дяченко, И.В. Зибарева, Л.Н. Игнатьева, С.М. Игумнов, А.В. Казуров, Д.П. Кирюхин, Г.А. Кичигина, Т.Ю. Кумеева, П.П. Кущ, Д.В. Машталяр, О.А. Мельник, В.Г. Назаров, Л.Н. Никитин, А.А. Охлопкова, Н.П. Пророкова, Е.Ю. Сафронова, С.А. Серов, С.Л. Синебрюхов, С.А. Слепцова, В.И. Соколов, В.П. Столяров, С.И. Твердохлебов, С.А. Хатипов, А.К. Цветников, Е.Ю. Шиц, А.Б. Ярославцев; отв. ред.: В. М. Бузник ; Ин-т химии растворов им. Г. А. Крестова РАН, Национальный исследовательский Томский гос. ун-т, ФГУП «Всероссийский НИИ авиационных материалов», Консорциум «Фторполимерные материалы и нанотехнологии». - Томск, 2017. - 596 с";
 
-        List<University> universities = new List<University>();
-        universities.Add(new University(){Name = "Ин-т химии растворов им. Г. А. Крестова РАН"});
-        universities.Add(new University(){Name = "Национальный исследовательский Томский гос. ун-т"});
-        universities.Add(new University(){Name = "ФГУП «Всероссийский НИИ авиационных материалов»"});
-        universities.Add(new University(){Name = "Консорциум «Фторполимерные материалы и нанотехнологии»"});
+        List<Company> universities = new List<Company>();
+        universities.Add(new Company(){Name = "Ин-т химии растворов им. Г. А. Крестова РАН"});
+        universities.Add(new Company(){Name = "Национальный исследовательский Томский гос. ун-т"});
+        universities.Add(new Company(){Name = "ФГУП «Всероссийский НИИ авиационных материалов»"});
+        universities.Add(new Company(){Name = "Консорциум «Фторполимерные материалы и нанотехнологии»"});
 
-        var result = MonographParser.GetUniversity(citation);
+        var result = MonographParser.GetCompany(citation);
 
         Assert.Equal(universities.Count, result.Count);
         for (int i = 0; i < universities.Count; i++)

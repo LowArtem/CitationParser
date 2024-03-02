@@ -42,14 +42,14 @@ public class DepositedManuscriptParserTest
     }
     
     [Fact]
-    public void GetUniversity_SimpleTest()
+    public void GetCompany_SimpleTest()
     {
         var citation = "Ударное взаимодействие поршневого кольца и стенок канавки поршня: Депонированная рукопись/ В.М. Славуцкий, Х.А. Балхавдаров, А.П. Семерня; ВолгПИ. - Волгоград, 1988. - 6 c. - Деп. в Депонированная рукопись 1988-11-29, № 1090.";
 
-        List<University> expected = new List<University>();
-        expected.Add(new University() {Name = "ВолгПИ"});
+        List<Company> expected = new List<Company>();
+        expected.Add(new Company() {Name = "ВолгПИ"});
         
-        List<University> result = DepositedManuscriptParser.GetUniversity(citation);
+        List<Company> result = DepositedManuscriptParser.GetCompany(citation);
         
         Assert.Equal(expected[0].Name, result[0].Name);
     }
@@ -59,11 +59,11 @@ public class DepositedManuscriptParserTest
     {
         var citation = "Ломакин, Н.И. Пути повышения качества и сокращения потерь овощной продукции: Депонированная рукопись/ Н.И. Ломакин; ТСХА, Госагропром СССР // Труды научной конференции молодых учёных, 9-12 июня 1987 г. - М., 1987. - 131141 c. - Деп. в Депонированная рукопись 1988-02-22, № 101/12";
 
-        List<University> expected = new List<University>();
-        expected.Add(new University() {Name = "ТСХА"});
-        expected.Add(new University() {Name = "Госагропром СССР"});
+        List<Company> expected = new List<Company>();
+        expected.Add(new Company() {Name = "ТСХА"});
+        expected.Add(new Company() {Name = "Госагропром СССР"});
 
-        List<University> result = DepositedManuscriptParser.GetUniversity(citation);
+        List<Company> result = DepositedManuscriptParser.GetCompany(citation);
         
         Assert.Equal(expected[0].Name, result[0].Name);
         Assert.Equal(expected[1].Name, result[1].Name);

@@ -35,7 +35,7 @@ public class ArticleFromRussianCollectionTest
     }
     
     [Fact]
-    public void GetEditor_PublicationsContainsUniversityTest()
+    public void GetEditor_PublicationsContainsCompanyTest()
     {
         var citation = "Анализ проблемных кредитов в банковском секторе / Е.И. Семина, И.А. Чеховская // Менеджмент и финансы производственных систем : сб. науч.-практ. ст. Всерос. (национальной) науч.-практ. конф. (г. Волгоград, 12 декабря 2022 г.) / отв. ред.: И. А. Езангина, И. А. Чеховская ; редкол.: С. П. Сазонов [и др.] ; Волгоградский гос. технический университет, Волгоградский институт управления – филиал РАНХиГС при Президенте РФ, Волгоградский филиал РЭУ им. Плеханова [и др.]. - Курск, 2023. - C. 209-214";
 
@@ -58,10 +58,10 @@ public class ArticleFromRussianCollectionTest
     {
         var citation = "ESG и энергоэффективность в FinTech-отраслях: нужны ли новые подходы? / О.М. Коробейникова, Л.И. Стефанович // Энергетика и цифровизация: теория и практика трансформации : материалы II Междунар. науч.-практ. конф. (г. Волгоград, 25 ноября 2022 г.) / под общ. ред. Р. Ю. Скокова ; Волгоградский ЦНТИ – филиал ФГБУ «Российское энергетическое агентство» Министерства энергетики РФ. - Волгоград, 2023. - C. 84-90";
 
-        List<University> universities = new List<University>();
-        universities.Add(new University(){Name = "Волгоградский ЦНТИ - филиал ФГБУ «Российское энергетическое агентство» Министерства энергетики РФ"});
+        List<Company> universities = new List<Company>();
+        universities.Add(new Company(){Name = "Волгоградский ЦНТИ - филиал ФГБУ «Российское энергетическое агентство» Министерства энергетики РФ"});
 
-        var result = ArticleFromRussianCollectionParser.GetUniversityScientificCollection(citation);
+        var result = ArticleFromRussianCollectionParser.GetCompanyScientificCollection(citation);
 
         Assert.Equal(universities.Count, result.Count);
         for (int i = 0; i < universities.Count; i++)
@@ -75,11 +75,11 @@ public class ArticleFromRussianCollectionTest
     {
         var citation = " Актуальность вариантного проектирования в технологии информационного моделирования архитектурно-строительных объектов / М.Ф. Шарипов // Развитие городского строительства и хозяйства в трудах молодых ученых : сб. тр. науч.-практ. конф., 25-28 апреля 2023 г., Волгоград / М-во науки и высш. образования Рос. Федерации, Волгогр. гос. техн. ун-т. - Волгоград, 2023. - C. 26-34. - 1 электрон.-опт. диск (CD-R)";
 
-        List<University> universities = new List<University>();
-        universities.Add(new University(){Name = "М-во науки и высш. образования Рос. Федерации"});
-        universities.Add(new University(){Name = "Волгогр. гос. техн. ун-т"});
+        List<Company> universities = new List<Company>();
+        universities.Add(new Company(){Name = "М-во науки и высш. образования Рос. Федерации"});
+        universities.Add(new Company(){Name = "Волгогр. гос. техн. ун-т"});
 
-        var result = ArticleFromRussianCollectionParser.GetUniversityScientificCollection(citation);
+        var result = ArticleFromRussianCollectionParser.GetCompanyScientificCollection(citation);
 
         Assert.Equal(universities.Count, result.Count);
         for (int i = 0; i < universities.Count; i++)

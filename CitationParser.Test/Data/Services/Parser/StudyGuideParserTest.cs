@@ -33,7 +33,7 @@ public class StudyGuideParserTest
     }
     
     [Fact]
-    public void GetEditor_PublicationsContainsUniversityTest()
+    public void GetEditor_PublicationsContainsCompanyTest()
     {
         var citation = "Надежность машин (теория и практика): учеб. пособие / С.А. Крюков, В.А. Граблин, Н.В. Байдакова; под ред. В. М. Шумячера ; ВПИ (филиал) ФГБОУ ВО ВолгГТУ. - Волжский, 2022 с.";
 
@@ -76,10 +76,10 @@ public class StudyGuideParserTest
     {
         var citation = "Введение в направление: учеб. пособие / Е.Ю. Силаева, Е.Л. Еремина; ВПИ (филиал) ВолгГТУ. - Волжский, 2019 с.";
 
-        List<University> universities = new List<University>();
-        universities.Add(new University(){Name = "ВПИ (филиал) ВолгГТУ"});
+        List<Company> universities = new List<Company>();
+        universities.Add(new Company(){Name = "ВПИ (филиал) ВолгГТУ"});
 
-        var result = StudyGuideParser.GetUniversity(citation);
+        var result = StudyGuideParser.GetCompany(citation);
 
         Assert.Equal(universities.Count, result.Count);
         for (int i = 0; i < universities.Count; i++)
@@ -93,10 +93,10 @@ public class StudyGuideParserTest
     {
         var citation = "Компьютерная графика : конспект лекций для студентов направлений 230100.62 «Информатика и вычислительная техника» и 231000.62 «Программная инженерия» [Электронный ресурс]: учеб. пособие / О.Ф. Абрамова; ВПИ (филиал) ВолгГТУ // Учебные пособия : сб. Серия «Естественнонаучные и технические дисциплины». Вып. 3. - 1 электрон. опт. диск (CD-ROM) ; формат pdf. - Волжский, 2012. - 165 с";
 
-        List<University> universities = new List<University>();
-        universities.Add(new University(){Name = "ВПИ (филиал) ВолгГТУ"});
+        List<Company> universities = new List<Company>();
+        universities.Add(new Company(){Name = "ВПИ (филиал) ВолгГТУ"});
 
-        var result = StudyGuideParser.GetUniversity(citation);
+        var result = StudyGuideParser.GetCompany(citation);
 
         Assert.Equal(universities.Count, result.Count);
         for (int i = 0; i < universities.Count; i++)

@@ -33,7 +33,7 @@ public class StudyGuideWithStampParserTest
     }
     
     [Fact]
-    public void GetEditor_PublicationsContainsUniversityTest()
+    public void GetEditor_PublicationsContainsCompanyTest()
     {
         var citation = "Озеленение и благоустройство придомовых территорий многоквартирного дома. Технико-экономическое обоснование проектных решений и разработка сметной документации: учеб. пособ.(гриф) / О.В. Максимчук, Н.В. Иванова, А.С. Соловьева; под ред. Максимчук О.В.; Волгогр. гос. техн. ун-т. - Волгоград, 2021. - 146 с";
 
@@ -73,10 +73,10 @@ public class StudyGuideWithStampParserTest
     {
         var citation = "Организация расчётов с бюджетом и внебюджетными фондами: учеб. пособ.(гриф) . Доп. УМО Совета директоров профессиональных образовательных организаций Волгоградской области / Г.А. Машенцева, З.А. Костина; КТИ (филиал) ВолгГТУ. - Волгоград, 2016. - 103 с.";
 
-        List<University> universities = new List<University>();
-        universities.Add(new University(){Name = "КТИ (филиал) ВолгГТУ"});
+        List<Company> universities = new List<Company>();
+        universities.Add(new Company(){Name = "КТИ (филиал) ВолгГТУ"});
 
-        var result = StudyGuideWithStampParser.GetUniversity(citation);
+        var result = StudyGuideWithStampParser.GetCompany(citation);
 
         Assert.Equal(universities.Count, result.Count);
         for (int i = 0; i < universities.Count; i++)
@@ -90,10 +90,10 @@ public class StudyGuideWithStampParserTest
     {
         var citation = "Металлорежущие станки. Лабораторный практикум: учеб. пособ.(гриф) . Доп. УМО вузов по образованию в области автоматизированного машиностроения (УМО АМ) / Н.И. Никифоров, Я.Н. Отений, А.М. Лаврентьев, А.Г. Схиртладзе; [ВолгГТУ]. - Волгоград ; Старый Оскол, 2018. - 175 с";
 
-        List<University> universities = new List<University>();
-        universities.Add(new University(){Name = "ВолгГТУ"});
+        List<Company> universities = new List<Company>();
+        universities.Add(new Company(){Name = "ВолгГТУ"});
 
-        var result = StudyGuideWithStampParser.GetUniversity(citation);
+        var result = StudyGuideWithStampParser.GetCompany(citation);
 
         Assert.Equal(universities.Count, result.Count);
         for (int i = 0; i < universities.Count; i++)

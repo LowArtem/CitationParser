@@ -5,32 +5,32 @@ namespace CitationParser.Services.Parser;
 
 static public class DepositedManuscriptParser
 {
-    public static List<University> GetUniversity(string citation)
+    public static List<Company> GetCompany(string citation)
     {
-        String universityString = "";
-        universityString = citation.Split(';')[1].Split(". -")[0];
+        String companyString = "";
+        companyString = citation.Split(';')[1].Split(". -")[0];
 
-        if (universityString.Contains("http"))
+        if (companyString.Contains("http"))
         {
             return null;
         }
 
-        if (universityString.IndexOf('/') == 1)
+        if (companyString.IndexOf('/') == 1)
         {
-            universityString = universityString.Split('/')[2];
+            companyString = companyString.Split('/')[2];
         }
         
-        if (universityString.Contains("//"))
+        if (companyString.Contains("//"))
         {
-            universityString = universityString.Split("//")[0];
+            companyString = companyString.Split("//")[0];
         }
         
-        var universities = universityString.Split(',');
-        var universitiesList = new List<University>();
+        var universities = companyString.Split(',');
+        var universitiesList = new List<Company>();
 
         for (int i = 0; i < universities.Length; i++)
         {
-            universitiesList.Add(new University() {Name = universities[i].Trim()});
+            universitiesList.Add(new Company() {Name = universities[i].Trim()});
         }
 
         return universitiesList;

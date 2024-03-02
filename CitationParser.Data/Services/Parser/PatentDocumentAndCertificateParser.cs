@@ -15,13 +15,13 @@ public static class PatentDocumentAndCertificateParser
 
     public static List<Company> GetCompanies(string citation)
     {
-        var universityNames = citation
+        var companyNames = citation
             .Split(";")[1]
             .Split("-")[0]
             .TrimEnd('.')
             .Split(", ");
 
-        return universityNames.Select(n => new Company { Name = n.Trim().TrimEnd('.') }).ToList();
+        return companyNames.Select(n => new Company { Name = n.Trim().TrimEnd('.') }).ToList();
     }
 
     public static string GetYear(string citation)

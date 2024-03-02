@@ -80,7 +80,7 @@ public class ArticleFromForeignCollectionTest
     [Fact]
     public void GetPublishingHouse_SimpleTest()
     {
-        var citation = "Development of creating computer programs method for multivariate optimization of functional meat product recipes / А.С. Мирошник, М.И. Сложенкина, И.Ф. Горлов, Д.А. Мосолова, A.L. Ishevskyi // IOP Conference Series: Earth and Environmental Science. Vol. 548 : III International Scientific Conference: AGRITECH-III-2020: Agribusiness, Environmental Engineering and Biotechnologies (Krasnoyarsk, Russia, 18-20 June 2020). Conference «Innovative Development of Agrarian-and-Food Technologies» (Volgograd, Russia) / Krasnoyarsk Regional Union of Scientific and Engineering Associations, Krasnoyarsk Science and Technology City Hall, Volgograd State Technical University, Volga region research Institute of manufacture and processing of meat-and-milk production [et al.]. – [IOP Publishing], 2020. – 6 p. – URL : https://iopscience.iop.org/article/10.1088/1755-1315/548/8/082081/pdf";
+        var citation = "Development of creating computer programs method for multivariate optimization of functional meat product recipes / А.С. Мирошник, М.И. Сложенкина, И.Ф. Горлов, Д.А. Мосолова, A.L. Ishevskyi // IOP Conference Series: Earth and Environmental Science. Vol. 548 : III International Scientific Conference: AGRITECH-III-2020: Agribusiness, Environmental Engineering and Biotechnologies (Krasnoyarsk, Russia, 18-20 June 2020). Conference «Innovative Development of Agrarian-and-Food Technologies» (Volgograd, Russia) / Krasnoyarsk Regional Union of Scientific and Engineering Associations, Krasnoyarsk Science and Technology City Hall, Volgograd State Technical Company, Volga region research Institute of manufacture and processing of meat-and-milk production [et al.]. – [IOP Publishing], 2020. – 6 p. – URL : https://iopscience.iop.org/article/10.1088/1755-1315/548/8/082081/pdf";
 
         var expected = "IOP Publishing";
 
@@ -130,11 +130,11 @@ public class ArticleFromForeignCollectionTest
     {
         var citation = "Analysis of Existing Diagnostic Methods for the Linear Insulator Risk-Based Maintenance / О.О. Ахмедова, Д. Титов, К.В. Волхов // 2023 International Conference on Industrial Engineering, Applications and Manufacturing (ICIEAM) (Sochi, Russian Federation,15-19 May 2023) : Proceedings / Moscow Polytechnic University, Kazan State Power Engineering University. – [Publisher: IEEE (Institute of Electrical and Electronics Engineers)], 2023. – P. 52-57. – DOI: 10.1109/ICIEAM57311.2023.10139251. – URL: https://ieeexplore.ieee.org/document/10139251";
 
-        List<University> universities = new List<University>();
-        universities.Add(new University(){Name = "Moscow Polytechnic University"});
-        universities.Add(new University(){Name = "Kazan State Power Engineering University"});
+        List<Company> universities = new List<Company>();
+        universities.Add(new Company(){Name = "Moscow Polytechnic Company"});
+        universities.Add(new Company(){Name = "Kazan State Power Engineering University"});
 
-        var result = articleFromForeignCollection.GetUniversityScientificCollection(citation);
+        var result = articleFromForeignCollection.GetCompanyScientificCollection(citation);
 
         Assert.Equal(universities.Count, result.Count);
         for (int i = 0; i < universities.Count; i++)
@@ -233,7 +233,7 @@ public class ArticleFromForeignCollectionTest
     }
     
     [Fact]
-    public void GetEditor_PublicationsContainsUniversityTest()
+    public void GetEditor_PublicationsContainsCompanyTest()
     {
         var citation = "Studying the Process of Honing with Preliminary Cryogenic Treatment of Products from Low-Carbon Steels / Нкеуа Д.А. Ивон, О.А. Курсин, А.А. Жданов, М.Ю. Полянчикова, А. Соловьев // Proceedings of the 8th International Conference on Industrial Engineering. ICIE 2022 (May 16-20, 2022 ; virtual conference) / eds.: A. A. Radionov, V. R. Gasiyarov ; Moscow Polytechnic University, Tula State University, Volgograd State Technical University. – Cham (Switzerland) : Springer Nature Switzerland AG, 2023. – P. 944-954. – DOI: https://doi.org/10.1007/978-3-031-14125-6_92. – (Book ser. Lecture Notes in Mechanical Engineering – LNME).";
 

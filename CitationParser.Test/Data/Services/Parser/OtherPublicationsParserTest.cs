@@ -189,10 +189,10 @@ public class OtherPublicationsParserTest
     {
         var citation = "Blockchain and the institutional complexity: post-institutionalism vs. neoinstitutionalism / Д.П. Фролов // MPRA: Munich Personal RePEc Archive : [on-line publications] / Munich University Library. – Munich (Germany), 2019. – Paper No. 95963 (posted 13 September, 2019). – 18 p. – URL : https://mpra.ub.uni-muenchen.de/95963/1/MPRA_paper_95963.pdf";
 
-        List<University> universities = new List<University>();
-        universities.Add(new University(){Name = "Munich University Library"});
+        List<Company> universities = new List<Company>();
+        universities.Add(new Company(){Name = "Munich University Library"});
 
-        var result = OtherPublicationsParser.GetUniversity(citation);
+        var result = OtherPublicationsParser.GetCompany(citation);
 
         Assert.Equal(universities.Count, result.Count);
         for (int i = 0; i < universities.Count; i++)

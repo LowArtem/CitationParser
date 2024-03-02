@@ -10,10 +10,10 @@ public class EducationalAndMethodicalComplexTest
     {
         var citation = "Детали машин и основы конструирования [Электронный ресурс] : электрон. учеб.-метод. комплекс / М.М. Матлин, С.Ю. Кислов, И.М. Шандыбина ; ВолгГТУ. – Волгоград, 2011. – 1 электрон. опт. диск (CD-ROM). – № ГР 0321100012. – Рег. свид. № 21083 от 13 января 2011 г. / ФГУП НТЦ «Информрегистр»";
 
-        List<University> universities = new List<University>();
-        universities.Add(new University(){Name = "ВолгГТУ"});
+        List<Company> universities = new List<Company>();
+        universities.Add(new Company(){Name = "ВолгГТУ"});
 
-        var result = EducationalAndMethodicalComplexParser.GetUniversity(citation);
+        var result = EducationalAndMethodicalComplexParser.GetCompany(citation);
 
         Assert.Equal(universities.Count, result.Count);
         for (int i = 0; i < universities.Count; i++)
@@ -23,15 +23,15 @@ public class EducationalAndMethodicalComplexTest
     }
     
     [Fact]
-    public void GetUniversities_TwoUniversityTest()
+    public void GetUniversities_TwoCompanyTest()
     {
         var citation = "Профессиональная межкультурная коммуникация: английский язык : учебно-методический комплекс (Рек. УМО по образованию в области лингвистики в качестве УМК) / Т.Н. Астафурова ; ФГБОУ ВПО «Волгоградский гос. ун-т», Ин-т дополнительного образования. – 3-е изд., доп. – Волгоград : Изд-во ВолГУ, 2011. – 200 с. – [Усл.-печ. л. 11,6 ; тираж 100]";
 
-        List<University> universities = new List<University>();
-        universities.Add(new University(){Name = "ФГБОУ ВПО «Волгоградский гос. ун-т»"});
-        universities.Add(new University(){Name = "Ин-т дополнительного образования"});
+        List<Company> universities = new List<Company>();
+        universities.Add(new Company(){Name = "ФГБОУ ВПО «Волгоградский гос. ун-т»"});
+        universities.Add(new Company(){Name = "Ин-т дополнительного образования"});
         
-        var result = EducationalAndMethodicalComplexParser.GetUniversity(citation);
+        var result = EducationalAndMethodicalComplexParser.GetCompany(citation);
 
         Assert.Equal(universities.Count, result.Count);
         for (int i = 0; i < universities.Count; i++)

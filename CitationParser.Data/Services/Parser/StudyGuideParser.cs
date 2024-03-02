@@ -32,21 +32,21 @@ public class StudyGuideParser
         return null;
     }
 
-    public static List<University> GetUniversity(string citation)
+    public static List<Company> GetCompany(string citation)
     {
-        var universityString = citation.Replace('–', '-').Split(". -")[0].Split('/');
+        var companyString = citation.Replace('–', '-').Split(". -")[0].Split('/');
         
-        universityString = universityString[1].Split(';');
+        companyString = companyString[1].Split(';');
 
-        if (!universityString[universityString.Length - 1].Contains("ред."))
+        if (!companyString[companyString.Length - 1].Contains("ред."))
         {
-            universityString = universityString[universityString.Length - 1].Split(',');
+            companyString = companyString[companyString.Length - 1].Split(',');
 
-            List<University> universitiesList = new List<University>();
+            List<Company> universitiesList = new List<Company>();
 
-            for (int i = 0; i < universityString.Length; i++)
+            for (int i = 0; i < companyString.Length; i++)
             {
-                universitiesList.Add(new University() { Name = universityString[i].Trim().Replace("[", string.Empty).Replace("]", string.Empty) });
+                universitiesList.Add(new Company() { Name = companyString[i].Trim().Replace("[", string.Empty).Replace("]", string.Empty) });
             }
 
             return universitiesList;
