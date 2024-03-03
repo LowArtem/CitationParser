@@ -78,6 +78,13 @@ public class Publication : BaseEntity
     [Column("informationAboutPublication")]
     [StringLength(45)]
     public string? InformationAboutPublication { get; set; }
+    
+    [Column("dateIntroduction")]
+    public DateOnly? dateIntroduction { get; set; }
+    
+    [Column("language")]
+    [StringLength(45)]
+    public string? language { get; set; }
 
     [Column("type_id")] public int TypeId { get; set; }
 
@@ -96,4 +103,14 @@ public class Publication : BaseEntity
     [ForeignKey("IdPublications")]
     [InverseProperty("IdPublications")]
     public virtual ICollection<Company> IdUniversities { get; set; } = new List<Company>();
+    
+    [ForeignKey("IdPublication")]
+    [InverseProperty("IdPublication")]
+    public virtual ICollection<Editor> IdEditors { get; set; } = new List<Editor>();
+    
+    [Column("scientificCollection_id")] public int ScientificCollectionId { get; set; }
+
+    [ForeignKey("IdPublication")]
+    [InverseProperty("IdPublication")]
+    public virtual ScientificCollection ScientificColl { get; set; } = null!;
 }

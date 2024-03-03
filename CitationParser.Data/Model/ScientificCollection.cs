@@ -24,11 +24,6 @@ public class ScientificCollection : BaseEntity
 
     [Column("volumeNumber")] public int? VolumeNumber { get; set; }
 
-    [ForeignKey("IdScientificCollections")]
     [InverseProperty("IdScientificCollections")]
-    public virtual ICollection<Editor> IdEditors { get; set; } = new List<Editor>();
-
-    [ForeignKey("IdScientificCollections")]
-    [InverseProperty("IdScientificCollections")]
-    public virtual ICollection<Company> IdUniversities { get; set; } = new List<Company>();
+    public virtual ICollection<Publication> Publications { get; set; } = new List<Publication>();
 }

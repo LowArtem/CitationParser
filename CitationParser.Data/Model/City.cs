@@ -12,9 +12,9 @@ public class City : BaseEntity
 {
     [Column("name")] [StringLength(45)] public string? Name { get; set; }
 
+    [Column("country")] [StringLength(100)] public string? Country { get; set; }
+
     [ForeignKey("IdCities")]
     [InverseProperty("IdCities")]
     public virtual ICollection<Publication> IdPublications { get; set; } = new List<Publication>();
-    
-    public string? Country { get; set; }
 }

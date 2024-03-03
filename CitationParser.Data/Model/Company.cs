@@ -15,9 +15,4 @@ public class Company : BaseEntity
     [ForeignKey("IdUniversities")]
     [InverseProperty("IdUniversities")]
     public virtual ICollection<Publication> IdPublications { get; set; } = new List<Publication>();
-
-    [ForeignKey("IdUniversities")]
-    [InverseProperty("IdUniversities")]
-    public virtual ICollection<ScientificCollection> IdScientificCollections { get; set; } =
-        new List<ScientificCollection>();
 }

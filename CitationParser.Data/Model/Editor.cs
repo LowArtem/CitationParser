@@ -14,6 +14,6 @@ public class Editor : BaseEntity
 
     [ForeignKey("IdEditors")]
     [InverseProperty("IdEditors")]
-    public virtual ICollection<ScientificCollection> IdScientificCollections { get; set; } =
-        new List<ScientificCollection>();
+    public virtual ICollection<Publication> IdPublications { get; set; } =
+        new List<Publication>();
 }
