@@ -12,18 +12,7 @@ public class ScientificCollection : BaseEntity
 {
     [Column("title")] [StringLength(300)] public string? Title { get; set; }
 
-    [Column("id_city")] public int IdCity { get; set; }
-
-    [Column("country")] [StringLength(45)] public string? Country { get; set; }
-
-    [Column("start_date")] public DateOnly? StartDate { get; set; }
-
-    [Column("finish_date")] public DateOnly? FinishDate { get; set; }
-
-    [Column("numberOfVolumes")] public int? NumberOfVolumes { get; set; }
-
-    [Column("volumeNumber")] public int? VolumeNumber { get; set; }
-
-    [InverseProperty("IdScientificCollections")]
-    public virtual ICollection<Publication> Publications { get; set; } = new List<Publication>();
+    [ForeignKey("IdScientificCollection")]
+    [InverseProperty("IdScientificCollection")]
+    public virtual ICollection<Publication> IdPublications { get; set; } = new List<Publication>();
 }

@@ -80,7 +80,8 @@ public class Publication : BaseEntity
     public string? InformationAboutPublication { get; set; }
     
     [Column("dateIntroduction")]
-    public DateOnly? dateIntroduction { get; set; }
+    [StringLength(100)]
+    public string? dateIntroduction { get; set; }
     
     [Column("language")]
     [StringLength(45)]
@@ -107,10 +108,8 @@ public class Publication : BaseEntity
     [ForeignKey("IdPublication")]
     [InverseProperty("IdPublication")]
     public virtual ICollection<Editor> IdEditors { get; set; } = new List<Editor>();
-    
-    [Column("scientificCollection_id")] public int ScientificCollectionId { get; set; }
 
     [ForeignKey("IdPublication")]
     [InverseProperty("IdPublication")]
-    public virtual ScientificCollection ScientificColl { get; set; } = null!;
+    public virtual ICollection<ScientificCollection> IdScientificCollection { get; set; } = new List<ScientificCollection>();
 }

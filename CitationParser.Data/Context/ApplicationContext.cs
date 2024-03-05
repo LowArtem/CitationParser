@@ -128,63 +128,33 @@ public partial class ApplicationContext : DbContext
                         j.IndexerProperty<int>("IdPublications").HasColumnName("id_Publications");
                         j.IndexerProperty<int>("IdUniversities").HasColumnName("id_Universities");
                     });
-        });
-
-        modelBuilder.Entity<ScientificCollection>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-
-            entity.HasMany(d => d.IdEditors).WithMany(p => p.IdScientificCollections)
+            entity.HasMany(d => d.IdScientificCollection).WithMany(p => p.IdPublications)
                 .UsingEntity<Dictionary<string, object>>(
-                    "ScientificCollectionsToEditor",
-                    r => r.HasOne<Editor>().WithMany()
-                        .HasForeignKey("IdEditors")
+                    "PublicationsToScientificCollection",
+                    r => r.HasOne<ScientificCollection>().WithMany()
+                        .HasForeignKey("IdScientificCollection")
                         .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK_scientific_collections_to_editors_editors"),
-                    l => l.HasOne<ScientificCollection>().WithMany()
-                        .HasForeignKey("IdScientificCollections")
+                        .HasConstraintName("FK_scientific_collections_to_publications"),
+                    l => l.HasOne<Publication>().WithMany()
+                        .HasForeignKey("IdPublications")
                         .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK_scientific_collections_to_editros_scientific_collections"),
+                        .HasConstraintName("FK_publications_to_scientific_collections"),
                     j =>
                     {
-                        j.HasKey("IdScientificCollections", "IdEditors")
+                        j.HasKey("IdPublications", "IdScientificCollection")
                             .HasName("PRIMARY")
                             .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
                         j
-                            .ToTable("scientific_collections_to_editors")
+                            .ToTable("FK_publications_to_scientific_collections")
                             .HasCharSet("utf8")
                             .UseCollation("utf8_general_ci");
-                        j.HasIndex(new[] { "IdEditors" }, "FK_scientific_collections_to_editors_editors");
-                        j.IndexerProperty<int>("IdScientificCollections").HasColumnName("id_scientific_collections");
-                        j.IndexerProperty<int>("IdEditors").HasColumnName("id_editors");
-                    });
-
-            entity.HasMany(d => d.IdUniversities).WithMany(p => p.IdScientificCollections)
-                .UsingEntity<Dictionary<string, object>>(
-                    "ScientificCollectionsToUniversity",
-                    r => r.HasOne<Company>().WithMany()
-                        .HasForeignKey("IdUniversities")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK_scientific_collections_to_universities_universities"),
-                    l => l.HasOne<ScientificCollection>().WithMany()
-                        .HasForeignKey("IdScientificCollections")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("FK_scientific_collections_to_universities_scientific_collections"),
-                    j =>
-                    {
-                        j.HasKey("IdScientificCollections", "IdUniversities")
-                            .HasName("PRIMARY")
-                            .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
-                        j
-                            .ToTable("scientific_collections_to_universities")
-                            .HasCharSet("utf8")
-                            .UseCollation("utf8_general_ci");
-                        j.HasIndex(new[] { "IdUniversities" },
-                            "FK_scientific_collections_to_universities_universities");
-                        j.IndexerProperty<int>("IdScientificCollections").HasColumnName("id_scientific_collections");
-                        j.IndexerProperty<int>("IdUniversities").HasColumnName("id_universities");
+                        j.HasIndex(new[] { "IdScientificCollection" }, "FK_scientific_collections_to_publications");
+                        j.IndexerProperty<int>("IdPublications").HasColumnName("id_Publications");
+                        j.IndexerProperty<int>("IdIdScientificCollection").HasColumnName("id_IdScientificCollection");
                     });
         });
+
+        modelBuilder.Entity<ScientificCollection>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
         modelBuilder.Entity<TypesOfPublication>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
