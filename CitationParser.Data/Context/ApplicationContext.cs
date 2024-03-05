@@ -7,6 +7,7 @@ public partial class ApplicationContext : DbContext
 {
     public ApplicationContext()
     {
+        Database.EnsureCreated();
     }
 
     public ApplicationContext(DbContextOptions<ApplicationContext> options)
@@ -128,6 +129,7 @@ public partial class ApplicationContext : DbContext
                         j.IndexerProperty<int>("IdPublications").HasColumnName("id_Publications");
                         j.IndexerProperty<int>("IdUniversities").HasColumnName("id_Universities");
                     });
+            
             entity.HasMany(d => d.IdScientificCollection).WithMany(p => p.IdPublications)
                 .UsingEntity<Dictionary<string, object>>(
                     "PublicationsToScientificCollection",
@@ -150,7 +152,32 @@ public partial class ApplicationContext : DbContext
                             .UseCollation("utf8_general_ci");
                         j.HasIndex(new[] { "IdScientificCollection" }, "FK_scientific_collections_to_publications");
                         j.IndexerProperty<int>("IdPublications").HasColumnName("id_Publications");
-                        j.IndexerProperty<int>("IdIdScientificCollection").HasColumnName("id_IdScientificCollection");
+                        j.IndexerProperty<int>("IdScientificCollection").HasColumnName("id_ScientificCollection");
+                    });
+            
+            entity.HasMany(d => d.IdEditors).WithMany(p => p.IdPublications)
+                .UsingEntity<Dictionary<string, object>>(
+                    "PublicationsToEditor",
+                    r => r.HasOne<Editor>().WithMany()
+                        .HasForeignKey("IdEditor")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK_editor_to_publications"),
+                    l => l.HasOne<Publication>().WithMany()
+                        .HasForeignKey("IdPublications")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK_publications_to_editors"),
+                    j =>
+                    {
+                        j.HasKey("IdPublications", "IdEditors")
+                            .HasName("PRIMARY")
+                            .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+                        j
+                            .ToTable("FK_publications_to_editors")
+                            .HasCharSet("utf8")
+                            .UseCollation("utf8_general_ci");
+                        j.HasIndex(new[] { "IdEditor" }, "FK_scientific_editors");
+                        j.IndexerProperty<int>("IdPublications").HasColumnName("id_Publications");
+                        j.IndexerProperty<int>("IdEditor").HasColumnName("id_Editor");
                     });
         });
 
