@@ -5,7 +5,7 @@ using CitationParser.Data.Model;
 namespace CitationParser.Data.Services.Parser;
 
 [SuppressMessage("ReSharper", "CommentTypo")]
-public static class ForeignMagazineArticleParser
+public static class MagazineArticleParser
 {
     /*
      * Content of Secondary Education in the Russian Empire in the second half of the 19th century

@@ -3,7 +3,7 @@ using CitationParser.Data.Services.Parser;
 
 namespace CitationParser.Test.Data.Services.Parser;
 
-public class ForeignMagazineArticleParserTest
+public class MagazineArticleParserTest
 {
     [Fact]
     public void GetNumber_SimpleTest()
@@ -22,9 +22,9 @@ public class ForeignMagazineArticleParserTest
             "Vol. 30 : 29th International Crimean Conference «Microwave & Telecommunication Technology» (CriMiCo’2019) (Sevastopol, Russia, September 8-14, 2019)";
         const string expected3 = "Т. 15, № 4";
 
-        var result1 = ForeignMagazineArticleParser.GetNumber(citation1);
-        var result2 = ForeignMagazineArticleParser.GetNumber(citation2);
-        var result3 = ForeignMagazineArticleParser.GetNumber(citation3);
+        var result1 = MagazineArticleParser.GetNumber(citation1);
+        var result2 = MagazineArticleParser.GetNumber(citation2);
+        var result3 = MagazineArticleParser.GetNumber(citation3);
 
         Assert.Equal(expected1, result1);
         Assert.Equal(expected2, result2);
@@ -67,9 +67,9 @@ public class ForeignMagazineArticleParserTest
             }
         };
 
-        var result1 = ForeignMagazineArticleParser.GetEditors(citation1);
-        var result2 = ForeignMagazineArticleParser.GetEditors(citation2);
-        var result3 = ForeignMagazineArticleParser.GetEditors(citation3);
+        var result1 = MagazineArticleParser.GetEditors(citation1);
+        var result2 = MagazineArticleParser.GetEditors(citation2);
+        var result3 = MagazineArticleParser.GetEditors(citation3);
 
         Assert.Empty(result1);
         Assert.Equal(expected2.Select(e => e.Name), result2.Select(r => r.Name));
@@ -96,10 +96,10 @@ public class ForeignMagazineArticleParserTest
         const string expected3 = "26-36";
         const string expected4 = "449-465";
 
-        var result1 = ForeignMagazineArticleParser.GetPages(citation1);
-        var result2 = ForeignMagazineArticleParser.GetPages(citation2);
-        var result3 = ForeignMagazineArticleParser.GetPages(citation3);
-        var result4 = ForeignMagazineArticleParser.GetPages(citation4);
+        var result1 = MagazineArticleParser.GetPages(citation1);
+        var result2 = MagazineArticleParser.GetPages(citation2);
+        var result3 = MagazineArticleParser.GetPages(citation3);
+        var result4 = MagazineArticleParser.GetPages(citation4);
 
         Assert.Equal(expected1, result1);
         Assert.Equal(expected2, result2);
@@ -126,10 +126,10 @@ public class ForeignMagazineArticleParserTest
         const string expected2 = "https://doi.org/10.1051/itmconf/20193009005";
         const string expected3 = "10.7242/1999-6691/2022.15.4.35";
 
-        var result1 = ForeignMagazineArticleParser.GetDoi(citation1);
-        var result2 = ForeignMagazineArticleParser.GetDoi(citation2);
-        var result3 = ForeignMagazineArticleParser.GetDoi(citation3);
-        var result4 = ForeignMagazineArticleParser.GetDoi(citation4);
+        var result1 = MagazineArticleParser.GetDoi(citation1);
+        var result2 = MagazineArticleParser.GetDoi(citation2);
+        var result3 = MagazineArticleParser.GetDoi(citation3);
+        var result4 = MagazineArticleParser.GetDoi(citation4);
 
         Assert.Equal(expected1, result1);
         Assert.Equal(expected2, result2);
@@ -152,9 +152,9 @@ public class ForeignMagazineArticleParserTest
         const string expected1 = "https://bg.cherkasgu.press/journals_n/1646150680.pdf";
         const string expected2 = "https://journal.permsc.ru/index.php/ccm/article/view/CCMv15n4a7/2008";
 
-        var result1 = ForeignMagazineArticleParser.GetUrl(citation1);
-        var result2 = ForeignMagazineArticleParser.GetUrl(citation2);
-        var result3 = ForeignMagazineArticleParser.GetUrl(citation3);
+        var result1 = MagazineArticleParser.GetUrl(citation1);
+        var result2 = MagazineArticleParser.GetUrl(citation2);
+        var result3 = MagazineArticleParser.GetUrl(citation3);
 
         Assert.Equal(expected1, result1);
         Assert.Null(result2);
