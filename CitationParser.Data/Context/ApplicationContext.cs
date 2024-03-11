@@ -184,6 +184,25 @@ public partial class ApplicationContext : DbContext
         modelBuilder.Entity<ScientificCollection>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
         modelBuilder.Entity<TypesOfPublication>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
+        
+        modelBuilder.Entity<TypesOfPublication>().HasData(
+            new TypesOfPublication() {Name = "DepositedManuscript"},
+            new TypesOfPublication() {Name = "Certificate"},
+            new TypesOfPublication() {Name = "Monograph"},
+            new TypesOfPublication() {Name = "Other"},
+            new TypesOfPublication() {Name = "Patent"},
+            new TypesOfPublication() {Name = "Textbook"},
+            new TypesOfPublication() {Name = "ReportAbstracts"},
+            new TypesOfPublication() {Name = "StudyGuide"},
+            new TypesOfPublication() {Name = "StudyGuideWithStamp"},
+            new TypesOfPublication() {Name = "VstuMagazines"},
+            new TypesOfPublication() {Name = "VstuNews"},
+            new TypesOfPublication() {Name = "EducationalMethodicalComplex"},
+            new TypesOfPublication() {Name = "ForeignCollectionArticle"},
+            new TypesOfPublication() {Name = "ForeignMagazineArticle"},
+            new TypesOfPublication() {Name = "RussianCollectionArticle"},
+            new TypesOfPublication() {Name = "RussianMagazineArticle"}
+        );
 
         modelBuilder.Entity<Company>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
