@@ -7,7 +7,7 @@ using MoreLinq.Extensions;
 
 namespace CitationParser.Services.Parser;
 
-static public class articleFromForeignCollection
+static public class ArticleFromForeignCollection
 {
     public static ScientificCollection GetTitleScientificCollection(string citation)
     {

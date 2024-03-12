@@ -12,7 +12,7 @@ public class ArticleFromForeignCollectionTest
 
         var expected = "IOP Conference Series: Earth and Environmental Science. Vol. 548 : III International Scientific Conference: AGRITECH-III-2020: Agribusiness, Environmental Engineering and Biotechnologies (Krasnoyarsk, Russia, 18-20 June 2020). Conference «Innovative Development of Agrarian-and-Food Technologies» (Volgograd, Russia)";
 
-        var result = articleFromForeignCollection.GetTitleScientificCollection(citation).Title;
+        var result = ArticleFromForeignCollection.GetTitleScientificCollection(citation).Title;
         
         Assert.Equal(expected, result);
     }
@@ -24,7 +24,7 @@ public class ArticleFromForeignCollectionTest
 
         var expected = "2020";
 
-        var result = articleFromForeignCollection.GetYearScientificCollection(citation);
+        var result = ArticleFromForeignCollection.GetYearScientificCollection(citation);
         
         Assert.Equal(expected, result);
     }
@@ -36,7 +36,7 @@ public class ArticleFromForeignCollectionTest
 
         var expected = "P. 831-839";
 
-        var result = articleFromForeignCollection.GetPagesNumbersScientificCollection(citation);
+        var result = ArticleFromForeignCollection.GetPagesNumbersScientificCollection(citation);
         
         Assert.Equal(expected, result);
     }
@@ -48,7 +48,7 @@ public class ArticleFromForeignCollectionTest
 
         var expected = "С. 103-105";
 
-        var result = articleFromForeignCollection.GetPagesNumbersScientificCollection(citation);
+        var result = ArticleFromForeignCollection.GetPagesNumbersScientificCollection(citation);
         
         Assert.Equal(expected, result);
     }
@@ -60,7 +60,7 @@ public class ArticleFromForeignCollectionTest
 
         var expected = "P. 1361";
 
-        var result = articleFromForeignCollection.GetPagesNumbersScientificCollection(citation);
+        var result = ArticleFromForeignCollection.GetPagesNumbersScientificCollection(citation);
         
         Assert.Equal(expected, result);
     }
@@ -72,7 +72,7 @@ public class ArticleFromForeignCollectionTest
 
         var expected = "6 p";
 
-        var result = articleFromForeignCollection.GetCountPagesScientificCollection(citation);
+        var result = ArticleFromForeignCollection.GetCountPagesScientificCollection(citation);
         
         Assert.Equal(expected, result);
     }
@@ -84,7 +84,7 @@ public class ArticleFromForeignCollectionTest
 
         var expected = "IOP Publishing";
 
-        var result = articleFromForeignCollection.GetPublishingHouseScientificCollection(citation);
+        var result = ArticleFromForeignCollection.GetPublishingHouseScientificCollection(citation);
         
         Assert.Equal(expected, result);
     }
@@ -96,7 +96,7 @@ public class ArticleFromForeignCollectionTest
 
         var expected = "AIP Publishing";
 
-        var result = articleFromForeignCollection.GetPublishingHouseScientificCollection(citation);
+        var result = ArticleFromForeignCollection.GetPublishingHouseScientificCollection(citation);
         
         Assert.Equal(expected, result);
     }
@@ -108,7 +108,7 @@ public class ArticleFromForeignCollectionTest
 
         var expected = "DOI: https://doi.org/10.1063/5.0111991.";
 
-        var result = articleFromForeignCollection.GetDOIScientificCollection(citation);
+        var result = ArticleFromForeignCollection.GetDOIScientificCollection(citation);
         
         Assert.Equal(expected, result);
     }
@@ -120,7 +120,7 @@ public class ArticleFromForeignCollectionTest
 
         var expected = "URL: https://ieeexplore.ieee.org/document/10139251";
 
-        var result = articleFromForeignCollection.GetURLScientificCollection(citation);
+        var result = ArticleFromForeignCollection.GetURLScientificCollection(citation);
         
         Assert.Equal(expected, result);
     }
@@ -134,7 +134,7 @@ public class ArticleFromForeignCollectionTest
         universities.Add(new Company(){Name = "Moscow Polytechnic Company"});
         universities.Add(new Company(){Name = "Kazan State Power Engineering University"});
 
-        var result = articleFromForeignCollection.GetCompanyScientificCollection(citation);
+        var result = ArticleFromForeignCollection.GetCompanyScientificCollection(citation);
 
         Assert.Equal(universities.Count, result.Count);
         for (int i = 0; i < universities.Count; i++)
@@ -151,7 +151,7 @@ public class ArticleFromForeignCollectionTest
         List<City> cities = new List<City>();
         cities.Add(new City() {Name = "Cham", Country = "Switzerland"});
 
-        var result = articleFromForeignCollection.GetCitiesScientificCollection(citation);
+        var result = ArticleFromForeignCollection.GetCitiesScientificCollection(citation);
 
         Assert.Equal(cities.Count, result.Count);
         for (int i = 0; i < cities.Count; i++)
@@ -168,7 +168,7 @@ public class ArticleFromForeignCollectionTest
 
         List<City> cities = new List<City>();
 
-        var result = articleFromForeignCollection.GetCitiesScientificCollection(citation);
+        var result = ArticleFromForeignCollection.GetCitiesScientificCollection(citation);
 
         Assert.Equal(cities.Count, result.Count);
         for (int i = 0; i < cities.Count; i++)
@@ -186,7 +186,7 @@ public class ArticleFromForeignCollectionTest
         List<City> cities = new List<City>();
         cities.Add(new City(){Name = "Витебск"});
 
-        var result = articleFromForeignCollection.GetCitiesScientificCollection(citation);
+        var result = ArticleFromForeignCollection.GetCitiesScientificCollection(citation);
 
         Assert.Equal(cities.Count, result.Count);
         for (int i = 0; i < cities.Count; i++)
@@ -205,7 +205,7 @@ public class ArticleFromForeignCollectionTest
         cities.Add(new City(){Name = "Leiden", Country = "Netherlands"});
         cities.Add(new City() {Name = "Boston", Country = "USA"});
 
-        var result = articleFromForeignCollection.GetCitiesScientificCollection(citation);
+        var result = ArticleFromForeignCollection.GetCitiesScientificCollection(citation);
 
         Assert.Equal(cities.Count, result.Count);
         for (int i = 0; i < cities.Count; i++)
@@ -223,7 +223,7 @@ public class ArticleFromForeignCollectionTest
         List<Editor> editors = new List<Editor>();
         editors.Add(new Editor(){Name = "E. G. Popkova"});
 
-        var result = articleFromForeignCollection.GetEditorScientificCollection(citation);
+        var result = ArticleFromForeignCollection.GetEditorScientificCollection(citation);
 
         Assert.Equal(editors.Count, result.Count);
         for (int i = 0; i < editors.Count; i++)
@@ -241,7 +241,7 @@ public class ArticleFromForeignCollectionTest
         editors.Add(new Editor(){Name = "A. A. Radionov"});
         editors.Add(new Editor(){Name = "V. R. Gasiyarov"});
 
-        var result = articleFromForeignCollection.GetEditorScientificCollection(citation);
+        var result = ArticleFromForeignCollection.GetEditorScientificCollection(citation);
 
         Assert.Equal(editors.Count, result.Count);
         for (int i = 0; i < editors.Count; i++)
@@ -257,7 +257,7 @@ public class ArticleFromForeignCollectionTest
 
         var expected = "Article 020001";
 
-        var result = articleFromForeignCollection.GetArticleNumberScientificCollection(citation);
+        var result = ArticleFromForeignCollection.GetArticleNumberScientificCollection(citation);
         
         Assert.Equal(expected, result);
     }
