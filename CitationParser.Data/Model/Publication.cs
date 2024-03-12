@@ -65,7 +65,7 @@ public class Publication : BaseEntity
     [StringLength(100)]
     public string? RegistrationNumber { get; set; }
 
-    [Column("dateOfRegistration")] public DateOnly? DateOfRegistration { get; set; }
+    [Column("dateOfRegistration")] public string? DateOfRegistration { get; set; }
 
     [Column("placeOfRegistration")]
     [StringLength(100)]
@@ -73,7 +73,7 @@ public class Publication : BaseEntity
 
     [Column("numberOfVolumes")] public int? NumberOfVolumes { get; set; }
 
-    [Column("volumeNumber")] public int? VolumeNumber { get; set; }
+    [Column("volumeNumber")] public string? VolumeNumber { get; set; }
 
     [Column("informationAboutPublication")]
     [StringLength(45)]
@@ -81,11 +81,11 @@ public class Publication : BaseEntity
     
     [Column("dateIntroduction")]
     [StringLength(100)]
-    public string? dateIntroduction { get; set; }
+    public string? DateIntroduction { get; set; }
     
     [Column("language")]
     [StringLength(45)]
-    public string? language { get; set; }
+    public string? Language { get; set; }
 
     [Column("type_id")] public int TypeId { get; set; }
 
