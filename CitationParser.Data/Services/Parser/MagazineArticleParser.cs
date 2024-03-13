@@ -34,7 +34,7 @@ public static class MagazineArticleParser
 
     public static string GetTitleOfSource(string citation)
     {
-        return citation.Split(" // ")[1].Split(" - ")[0].Trim();
+        return citation.Split(" // ")[1].Split(". - ")[0].Trim();
     }
 
     public static string GetPublicationYear(string citation)
@@ -44,17 +44,66 @@ public static class MagazineArticleParser
 
     public static string GetNumber(string citation)
     {
-        var number = citation.Split(" // ")[1];
-        number = number.Replace("—", "-");
-        number = number.Replace("–", "-");
-        number = number.Replace("−", "-");
-        number = number.Replace("-", "-");
+        citation = citation.Replace("—", "-");
+        citation = citation.Replace("–", "-");
+        citation = citation.Replace("−", "-");
+        citation = citation.Replace("-", "-");
 
-        number = number.Split(". - ")[2].Trim();
+        var splitCitation = citation.Split(". - ");
 
-        return number.Contains("/ ed")
-            ? number.Split("/ ed")[0].Trim()
-            : number;
+        foreach (var str in splitCitation)
+        {
+            if (Regex.IsMatch(str.Trim(), @"(№|N|issue|No)\.?\s?\w+$"))
+            {
+                var numberStr = str.Split(",");
+                return numberStr[numberStr.Length - 1].Trim();
+            }
+        }
+
+        return null;
+    }
+    
+    public static List<Company> GetCompanies(string citation)
+    {
+        try
+        {
+            citation = citation.Replace("—", "-");
+            citation = citation.Replace("–", "-");
+            citation = citation.Replace("−", "-");
+            citation = citation.Replace("-", "-");
+
+            var companies = citation.Split("//")[1].Split(". - ")[2].Split(";")[1].Split(",");
+
+            return companies.Select(c => new Company { Name = c.Trim(' ', '.', ',') }).ToList();
+        }
+        catch (Exception e)
+        {
+            return new List<Company>();
+        }
+    }
+    
+    public static string GetVolume(string citation)
+    {
+        citation = citation.Replace("—", "-");
+        citation = citation.Replace("–", "-");
+        citation = citation.Replace("−", "-");
+        citation = citation.Replace("-", "-");
+
+        var splitCitation = citation.Split(". - ");
+
+        foreach (var str in splitCitation)
+        {
+            if (Regex.IsMatch(str.Trim(), @"^(Vol|Т|Ч)\.\s?\w+"))
+            {
+                var numberStr = str;
+                if(str.Contains(":"))
+                    numberStr = numberStr.Split(":")[0];
+                var strList = numberStr.Split(",");
+                return strList[0].Trim();
+            }
+        }
+
+        return null;
     }
 
     public static List<Editor> GetEditors(string citation)
@@ -103,7 +152,7 @@ public static class MagazineArticleParser
         return new List<Editor>();
     }
 
-    public static string GetPages(string citation)
+    public static string GetPageNumbers(string citation)
     {
         var pages = citation.Split(" // ")[1];
         pages = pages.Replace("—", "-");
@@ -111,10 +160,34 @@ public static class MagazineArticleParser
         pages = pages.Replace("−", "-");
         pages = pages.Replace("-", "-");
 
-        pages = pages.Split(". - ")[3];
-        pages = Regex.Replace(pages, "[^0-9-]", "");
+        var splitCitation = pages.Split(". - ");
+        
+        foreach (var str in splitCitation)
+        {
+            if (Regex.IsMatch(str.Trim(), @"^[СPРC]\.\s?\d+"))
+                return str.Trim();
+        }
+        
+        return null;
+    }
+    
+    public static string GetCountOfPages(string citation)
+    {
+        var pages = citation.Split(" // ")[1];
+        pages = pages.Replace("—", "-");
+        pages = pages.Replace("–", "-");
+        pages = pages.Replace("−", "-");
+        pages = pages.Replace("-", "-");
 
-        return pages.Trim();
+        var splitCitation = pages.Split(". - ");
+        
+        foreach (var str in splitCitation)
+        {
+            if (Regex.IsMatch(str.Trim(), @"^\d+\s?[сcpр]\.?"))
+                return str.Trim();
+        }
+        
+        return null;
     }
 
     public static string? GetDoi(string citation)
@@ -136,5 +209,25 @@ public static class MagazineArticleParser
         return citation.Contains("URL")
             ? citation.Split("URL")[1].Trim().TrimStart(':').Trim().TrimEnd('.')
             : null;
+    }
+
+    public static string? GetArticleNumber(string citation)
+    {
+        citation = citation.Replace("—", "-");
+        citation = citation.Replace("–", "-");
+        citation = citation.Replace("−", "-");
+        citation = citation.Replace("-", "-");
+
+        var splitCitation = citation.Split(". - ");
+
+        foreach (var str in splitCitation)
+        {
+            if (Regex.IsMatch(str.Trim(), @"Article\s?\d*"))
+            {
+                return str.Trim();
+            }
+        }
+
+        return null;
     }
 }
