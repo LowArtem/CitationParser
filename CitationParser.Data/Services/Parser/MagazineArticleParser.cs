@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 using CitationParser.Data.Model;
+using MoreLinq.Extensions;
 
 namespace CitationParser.Data.Services.Parser;
 
@@ -226,6 +227,87 @@ public static class MagazineArticleParser
             {
                 return str.Trim();
             }
+        }
+
+        return null;
+    }
+    
+    public static List<Editor> GetEditorsFromRussianMagazine(string citation)
+    {
+        var number = citation.Replace("—", "-");
+        number = number.Replace("–", "-");
+        number = number.Replace("−", "-");
+        number = number.Replace("-", "-");
+
+        var list = number.Split(". - ");
+
+        if (list[2].Contains(" ред. "))
+        {
+            list = list[2].Split("/");
+            
+        }
+        else
+        {
+            list = list[0].Split("/");
+        }
+        
+        number = list[list.Length - 1];
+        if (!number.Contains(" ред. "))
+        {
+            return new List<Editor>();
+        }
+
+        number = Regex.Replace(number, @"[Пп]од(\s(науч|общ)\.)?\sред\.", "");
+        list = number.Split(",");
+        var result = new List<Editor>();
+        foreach (string editor in list)
+        {
+            if (editor.Split(" и ").Length > 1)
+            {
+                foreach (var ed in editor.Split(" и "))
+                    result.Add(new Editor(){Name = ed.Trim()});
+            }
+            else
+                result.Add(new Editor(){Name = editor.Trim()});
+        }
+
+        return result;
+    }
+    
+    public static List<City> GetCities(string citation)
+    {
+        citation = citation.Replace("—", "-");
+        citation = citation.Replace("–", "-");
+        citation = citation.Replace("−", "-");
+        citation = citation.Replace("-", "-");
+
+        var cities = citation.Split(". - ")[1].Split(", ")[0].Split(":")[0].Split(";");
+        
+        return cities.Select(c => new City { Name = c.Trim(' ', '.', ',') }).ToList();
+    }
+    
+    public static string? GetPublishingHouse(string citation)
+    {
+        var publishingHouseString = citation.Replace('–', '-').Split(". -");
+
+        if (publishingHouseString.Length > 1 && publishingHouseString[1].Contains("изд."))
+        {
+            publishingHouseString = publishingHouseString[2].Split(':');
+        }
+        else if (publishingHouseString.Length > 1)
+        {
+            publishingHouseString = publishingHouseString[1].Split(':');
+        }
+        else
+        {
+            return null;
+        }
+        
+        if (publishingHouseString.Length > 1)
+        {
+            publishingHouseString = publishingHouseString[publishingHouseString.Length - 1].Split(',');
+
+            return publishingHouseString[0].Trim().Replace("[", string.Empty).Replace("]", string.Empty);
         }
 
         return null;
