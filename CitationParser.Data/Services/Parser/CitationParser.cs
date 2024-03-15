@@ -49,11 +49,11 @@ public class CitationParser
             case PublicationTypeEnum.ForeignCollectionArticle:
                 return ForeignCollectionArticleParse(publication);
             case PublicationTypeEnum.ForeignMagazineArticle:
-                return null;
+                return ForeignMagazineArticleParse(publication);
             case PublicationTypeEnum.RussianCollectionArticle:
                 return RussianCollectionArticleParse(publication);
             case PublicationTypeEnum.RussianMagazineArticle: 
-                return null;
+                return RussianMagazineArticleParse(publication);
         }
 
         return null;
@@ -402,6 +402,63 @@ public class CitationParser
         using (ApplicationContext db = new ApplicationContext())
         {
             var type = db.TypesOfPublications.Where(t => t.Name == "RussianCollectionArticle").ToArray();
+            
+            p.Type = type[0];
+            return p;
+        }
+    }
+    
+    private Publication ForeignMagazineArticleParse(string publication)
+    {
+        Publication p = new Publication()
+        {
+            Title = CitationParseFunctions.GetName(publication),
+            IdAuthors = CitationParseFunctions.GetAuthors(publication),
+            IdUniversities = MagazineArticleParser.GetCompanies(publication),
+            Year = MagazineArticleParser.GetPublicationYear(publication),
+            CountOfPages = MagazineArticleParser.GetCountOfPages(publication),
+            ArticleNumber = MagazineArticleParser.GetArticleNumber(publication),
+            PageNumbers = MagazineArticleParser.GetPageNumbers(publication),
+            Url = MagazineArticleParser.GetUrl(publication),
+            Doi = MagazineArticleParser.GetDoi(publication),
+            IdEditors = MagazineArticleParser.GetEditors(publication),
+            VolumeNumber = MagazineArticleParser.GetVolume(publication),
+            Number = MagazineArticleParser.GetNumber(publication),
+            TitleOfSource = MagazineArticleParser.GetTitleOfSource(publication)
+        };
+
+        using (ApplicationContext db = new ApplicationContext())
+        {
+            var type = db.TypesOfPublications.Where(t => t.Name == "ForeignMagazineArticle").ToArray();
+            
+            p.Type = type[0];
+            return p;
+        }
+    }
+    
+    private Publication RussianMagazineArticleParse(string publication)
+    {
+        Publication p = new Publication()
+        {
+            Title = CitationParseFunctions.GetName(publication),
+            IdAuthors = CitationParseFunctions.GetAuthors(publication),
+            PublishingHouse = MagazineArticleParser.GetPublishingHouse(publication),
+            Year = MagazineArticleParser.GetPublicationYear(publication),
+            CountOfPages = MagazineArticleParser.GetCountOfPages(publication),
+            ArticleNumber = MagazineArticleParser.GetArticleNumber(publication),
+            PageNumbers = MagazineArticleParser.GetPageNumbers(publication),
+            IdCities = MagazineArticleParser.GetCities(publication),
+            Url = MagazineArticleParser.GetUrl(publication),
+            Doi = MagazineArticleParser.GetDoi(publication),
+            IdEditors = MagazineArticleParser.GetEditorsFromRussianMagazine(publication),
+            VolumeNumber = MagazineArticleParser.GetVolume(publication),
+            Number = MagazineArticleParser.GetNumber(publication),
+            TitleOfSource = MagazineArticleParser.GetTitleOfSource(publication)
+        };
+
+        using (ApplicationContext db = new ApplicationContext())
+        {
+            var type = db.TypesOfPublications.Where(t => t.Name == "RussianMagazineArticle").ToArray();
             
             p.Type = type[0];
             return p;
