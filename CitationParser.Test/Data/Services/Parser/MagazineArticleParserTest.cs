@@ -310,6 +310,32 @@ public class MagazineArticleParserTest
     }
     
     [Fact]
+    public void GetTitleOfSource_SimpleTest()
+    {
+        const string citation =
+            " Investigation of thermal processes in the gap during explosion welding / С.В. Хаустов, V.V. Pai, В.И. Лысак, С.В. Кузьмин // International Journal of Heat and Mass Transfer. - 2023. - Vol. 209. - Article 124166. - 8 p. - DOI: https://doi.org/10.1016/j.ijheatmasstransfer.2023.124166. - URL: https://www.sciencedirect.com/science/article/abs/pii/S0017931023003198.";
+
+        const string expected = "International Journal of Heat and Mass Transfer";
+
+        var result = MagazineArticleParser.GetTitleOfSource(citation);
+
+        Assert.Equal(expected, result);
+    }
+    
+    [Fact]
+    public void GetTitleOfSource_RussianTest()
+    {
+        const string citation =
+            "Обоснование мероприятий по модернизации транспортной системы на основе обследования пассажиропотоков / С.В. Волченко // Вестник Волгоградского государственного архитектурно-строительного университета. Сер.: Строительство и архитектура. – Волгоград : Изд-во ВолгГАСУ, 2008. – Вып. 12 (31). - С. 54-57. - 2008.";
+
+        const string expected = "Вестник Волгоградского государственного архитектурно-строительного университета. Сер.: Строительство и архитектура";
+
+        var result = MagazineArticleParser.GetTitleOfSource(citation);
+
+        Assert.Equal(expected, result);
+    }
+    
+    [Fact]
     public void GetCompanies_SimpleTest()
     {
         const string citation =

@@ -35,11 +35,21 @@ public static class MagazineArticleParser
 
     public static string GetTitleOfSource(string citation)
     {
+        citation = citation.Replace("—", "-");
+        citation = citation.Replace("–", "-");
+        citation = citation.Replace("−", "-");
+        citation = citation.Replace("-", "-");
+        
         return citation.Split(" // ")[1].Split(". - ")[0].Trim();
     }
 
     public static string GetPublicationYear(string citation)
     {
+        citation = citation.Replace("—", "-");
+        citation = citation.Replace("–", "-");
+        citation = citation.Replace("−", "-");
+        citation = citation.Replace("-", "-");
+        
         return citation.Split(" // ")[1].Split(" - ")[1].Split('.')[0].Trim();
     }
 
