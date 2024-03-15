@@ -18,48 +18,62 @@ public class CitationParser
     /// <param name="type">тип публикации</param>
     /// <param name="publication">публикация</param>
     /// <returns></returns>
-    public Publication PublicationParse(PublicationTypeEnum type, string publication)
+    public void PublicationParse(PublicationTypeEnum type, string publication)
     {
         switch (type)
         {
             case PublicationTypeEnum.DepositedManuscripts:
-                return DepositedManuscriptsParse(publication);
+                DepositedManuscriptsParse(publication);
+                break;
             case PublicationTypeEnum.Certificate:
-                return CertificateParse(publication);
+                CertificateParse(publication);
+                break;
             case PublicationTypeEnum.Monograph:
-                return MonographParse(publication);
+                MonographParse(publication);
+                break;
             case PublicationTypeEnum.Other:
-                return OtherParse(publication);
+                OtherParse(publication);
+                break;
             case PublicationTypeEnum.Patent:
-                return PatentParse(publication);
+                PatentParse(publication);
+                break;
             case PublicationTypeEnum.Textbook:
-                return TextbookParse(publication);
+                TextbookParse(publication);
+                break;
             case PublicationTypeEnum.ReportAbstracts:
-                return ReportAbstractsParse(publication);
+                ReportAbstractsParse(publication);
+                break;
             case PublicationTypeEnum.StudyGuide1:
-                return StudyGuideParse(publication);
+                StudyGuideParse(publication);
+                break;
             case PublicationTypeEnum.StudyGuide2:
-                return StudyGuideWithStampParse(publication);
+                StudyGuideWithStampParse(publication);
+                break;
             case PublicationTypeEnum.VstuMagazines:
-                return VstuMagazinesParse(publication);
+                VstuMagazinesParse(publication);
+                break;
             case PublicationTypeEnum.VstuNews:
-                return VstuNewsParse(publication);
+                VstuNewsParse(publication);
+                break;
             case PublicationTypeEnum.EducationalMethodicalComplex:
-                return EducationalMethodicalComplexParse(publication);
+                EducationalMethodicalComplexParse(publication);
+                break;
             case PublicationTypeEnum.ForeignCollectionArticle:
-                return ForeignCollectionArticleParse(publication);
+                ForeignCollectionArticleParse(publication);
+                break;
             case PublicationTypeEnum.ForeignMagazineArticle:
-                return ForeignMagazineArticleParse(publication);
+                ForeignMagazineArticleParse(publication);
+                break;
             case PublicationTypeEnum.RussianCollectionArticle:
-                return RussianCollectionArticleParse(publication);
+                RussianCollectionArticleParse(publication);
+                break;
             case PublicationTypeEnum.RussianMagazineArticle: 
-                return RussianMagazineArticleParse(publication);
+                RussianMagazineArticleParse(publication);
+                break;
         }
-
-        return null;
     }
 
-    private Publication DepositedManuscriptsParse(string publication)
+    private void DepositedManuscriptsParse(string publication)
     {
         Publication p = new Publication()
         {
@@ -73,16 +87,10 @@ public class CitationParser
             Information = DepositedManuscriptParser.GetInformation(publication)
         };
 
-        using (ApplicationContext db = new ApplicationContext())
-        {
-            var type = db.TypesOfPublications.Where(t => t.Name == "DepositedManuscript").ToArray();
-            
-            p.Type = type[0];
-            return p;
-        }
+        AddPublicationToDb(p, "DepositedManuscript");
     }
     
-    private Publication CertificateParse(string publication)
+    private void CertificateParse(string publication)
     {
         Publication p = new Publication()
         {
@@ -92,16 +100,10 @@ public class CitationParser
             Year = PatentDocumentAndCertificateParser.GetYear(publication),
         };
 
-        using (ApplicationContext db = new ApplicationContext())
-        {
-            var type = db.TypesOfPublications.Where(t => t.Name == "Certificate").ToArray();
-            
-            p.Type = type[0];
-            return p;
-        }
+        AddPublicationToDb(p, "Certificate");
     }
     
-    private Publication MonographParse(string publication)
+    private void MonographParse(string publication)
     {
         Publication p = new Publication()
         {
@@ -116,16 +118,10 @@ public class CitationParser
             IdEditors = MonographParser.GetEditor(publication)
         };
 
-        using (ApplicationContext db = new ApplicationContext())
-        {
-            var type = db.TypesOfPublications.Where(t => t.Name == "Monograph").ToArray();
-            
-            p.Type = type[0];
-            return p;
-        }
+        AddPublicationToDb(p, "Monograph");
     }
     
-    private Publication OtherParse(string publication)
+    private void OtherParse(string publication)
     {
         Publication p = new Publication()
         {
@@ -143,16 +139,10 @@ public class CitationParser
             Url = OtherPublicationsParser.GetURL(publication)
         };
 
-        using (ApplicationContext db = new ApplicationContext())
-        {
-            var type = db.TypesOfPublications.Where(t => t.Name == "Other").ToArray();
-            
-            p.Type = type[0];
-            return p;
-        }
+        AddPublicationToDb(p, "Other");
     }
     
-    private Publication PatentParse(string publication)
+    private void PatentParse(string publication)
     {
         Publication p = new Publication()
         {
@@ -162,16 +152,10 @@ public class CitationParser
             Year = PatentDocumentAndCertificateParser.GetYear(publication),
         };
 
-        using (ApplicationContext db = new ApplicationContext())
-        {
-            var type = db.TypesOfPublications.Where(t => t.Name == "Patent").ToArray();
-            
-            p.Type = type[0];
-            return p;
-        }
+        AddPublicationToDb(p, "Patent");
     }
     
-    private Publication TextbookParse(string publication)
+    private void TextbookParse(string publication)
     {
         Publication p = new Publication()
         {
@@ -186,16 +170,10 @@ public class CitationParser
             InformationAboutPublication = TextbookParser.GetInformationAboutPublication(publication)
         };
 
-        using (ApplicationContext db = new ApplicationContext())
-        {
-            var type = db.TypesOfPublications.Where(t => t.Name == "Textbook").ToArray();
-            
-            p.Type = type[0];
-            return p;
-        }
+        AddPublicationToDb(p, "Textbook");
     }
     
-    private Publication ReportAbstractsParse(string publication)
+    private void ReportAbstractsParse(string publication)
     {
         Publication p = new Publication()
         {
@@ -213,16 +191,10 @@ public class CitationParser
             TitleOfSource = ReportAbstractsParser.GetTitleOfSource(publication)
         };
 
-        using (ApplicationContext db = new ApplicationContext())
-        {
-            var type = db.TypesOfPublications.Where(t => t.Name == "ReportAbstracts").ToArray();
-            
-            p.Type = type[0];
-            return p;
-        }
+        AddPublicationToDb(p, "ReportAbstracts");
     }
     
-    private Publication StudyGuideParse(string publication)
+    private void StudyGuideParse(string publication)
     {
         Publication p = new Publication()
         {
@@ -239,16 +211,10 @@ public class CitationParser
             Url = StudyGuideParser.GetURL(publication)
         };
 
-        using (ApplicationContext db = new ApplicationContext())
-        {
-            var type = db.TypesOfPublications.Where(t => t.Name == "StudyGuide").ToArray();
-            
-            p.Type = type[0];
-            return p;
-        }
+        AddPublicationToDb(p, "StudyGuide");
     }
     
-    private Publication StudyGuideWithStampParse(string publication)
+    private void StudyGuideWithStampParse(string publication)
     {
         Publication p = new Publication()
         {
@@ -263,16 +229,10 @@ public class CitationParser
             DataStorage = StudyGuideWithStampParser.GetDataStorage(publication)
         };
 
-        using (ApplicationContext db = new ApplicationContext())
-        {
-            var type = db.TypesOfPublications.Where(t => t.Name == "StudyGuideWithStamp").ToArray();
-            
-            p.Type = type[0];
-            return p;
-        }
+        AddPublicationToDb(p, "StudyGuideWithStamp");
     }
     
-    private Publication VstuMagazinesParse(string publication)
+    private void VstuMagazinesParse(string publication)
     {
         Publication p = new Publication()
         {
@@ -285,16 +245,10 @@ public class CitationParser
             TitleOfSource = VstuJournalParser.GetSourceName(publication)
         };
 
-        using (ApplicationContext db = new ApplicationContext())
-        {
-            var type = db.TypesOfPublications.Where(t => t.Name == "VstuMagazines").ToArray();
-            
-            p.Type = type[0];
-            return p;
-        }
+        AddPublicationToDb(p, "VstuMagazines");
     }
     
-    private Publication VstuNewsParse(string publication)
+    private void VstuNewsParse(string publication)
     {
         Publication p = new Publication()
         {
@@ -307,16 +261,10 @@ public class CitationParser
             TitleOfSource = VstuJournalParser.GetSourceName(publication)
         };
 
-        using (ApplicationContext db = new ApplicationContext())
-        {
-            var type = db.TypesOfPublications.Where(t => t.Name == "VstuNews").ToArray();
-            
-            p.Type = type[0];
-            return p;
-        }
+        AddPublicationToDb(p, "VstuNews");
     }
     
-    private Publication EducationalMethodicalComplexParse(string publication)
+    private void EducationalMethodicalComplexParse(string publication)
     {
         Publication p = new Publication()
         {
@@ -336,16 +284,10 @@ public class CitationParser
             RegistrationNumber = EducationalAndMethodicalComplexParser.GetRegistrationNumber(publication)
         };
 
-        using (ApplicationContext db = new ApplicationContext())
-        {
-            var type = db.TypesOfPublications.Where(t => t.Name == "EducationalMethodicalComplex").ToArray();
-            
-            p.Type = type[0];
-            return p;
-        }
+        AddPublicationToDb(p, "EducationalMethodicalComplex");
     }
     
-    private Publication ForeignCollectionArticleParse(string publication)
+    private void ForeignCollectionArticleParse(string publication)
     {
         Publication p = new Publication()
         {
@@ -367,16 +309,10 @@ public class CitationParser
             }
         };
 
-        using (ApplicationContext db = new ApplicationContext())
-        {
-            var type = db.TypesOfPublications.Where(t => t.Name == "ForeignCollectionArticle").ToArray();
-            
-            p.Type = type[0];
-            return p;
-        }
+        AddPublicationToDb(p, "ForeignCollectionArticle");
     }
     
-    private Publication RussianCollectionArticleParse(string publication)
+    private void RussianCollectionArticleParse(string publication)
     {
         Publication p = new Publication()
         {
@@ -399,16 +335,10 @@ public class CitationParser
             VolumeNumber = ArticleFromRussianCollectionParser.GetVolumeNumbersScientificCollection(publication)
         };
 
-        using (ApplicationContext db = new ApplicationContext())
-        {
-            var type = db.TypesOfPublications.Where(t => t.Name == "RussianCollectionArticle").ToArray();
-            
-            p.Type = type[0];
-            return p;
-        }
+        AddPublicationToDb(p, "RussianCollectionArticle");
     }
     
-    private Publication ForeignMagazineArticleParse(string publication)
+    private void ForeignMagazineArticleParse(string publication)
     {
         Publication p = new Publication()
         {
@@ -427,16 +357,10 @@ public class CitationParser
             TitleOfSource = MagazineArticleParser.GetTitleOfSource(publication)
         };
 
-        using (ApplicationContext db = new ApplicationContext())
-        {
-            var type = db.TypesOfPublications.Where(t => t.Name == "ForeignMagazineArticle").ToArray();
-            
-            p.Type = type[0];
-            return p;
-        }
+        AddPublicationToDb(p, "ForeignMagazineArticle");
     }
     
-    private Publication RussianMagazineArticleParse(string publication)
+    private void RussianMagazineArticleParse(string publication)
     {
         Publication p = new Publication()
         {
@@ -456,12 +380,24 @@ public class CitationParser
             TitleOfSource = MagazineArticleParser.GetTitleOfSource(publication)
         };
 
+        AddPublicationToDb(p, "RussianMagazineArticle");
+          
+    }
+
+    private void AddPublicationToDb(Publication p, string typeStr)
+    {
         using (ApplicationContext db = new ApplicationContext())
         {
-            var type = db.TypesOfPublications.Where(t => t.Name == "RussianMagazineArticle").ToArray();
+            var type = db.TypesOfPublications.Where(t => t.Name == typeStr).ToArray();
             
             p.Type = type[0];
-            return p;
+            
+            db.Authors.AddRange(p.IdAuthors);
+            db.Cities.AddRange(p.IdCities);
+            db.Editors.AddRange(p.IdEditors);
+            db.Universities.AddRange(p.IdUniversities);
+            db.ScientificCollections.AddRange(p.IdScientificCollection);
+            db.Publications.Add(p);
         }
     }
 }
