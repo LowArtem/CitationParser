@@ -20,6 +20,7 @@ var mapperConfig = new MapperConfiguration(mc => { mc.AddProfile(new MappingProf
 var mapper = mapperConfig.CreateMapper();
 builder.Services.AddSingleton(mapper);
 
+builder.Services.AddTransient<CitationParser.Data.Services.Parser.CitationParser>();
 builder.Services.AddTransient<WebScraperService>();
 builder.Services.AddTransient<ParseHtmlService>();
 builder.Services.AddHostedService<TimeHostedService>();
