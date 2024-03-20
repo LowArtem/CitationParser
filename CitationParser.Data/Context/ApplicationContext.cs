@@ -7,6 +7,7 @@ public partial class ApplicationContext : DbContext
 {
     public ApplicationContext()
     {
+        Database.EnsureDeleted();
         Database.EnsureCreated();
     }
 
@@ -186,22 +187,22 @@ public partial class ApplicationContext : DbContext
         modelBuilder.Entity<TypesOfPublication>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
         
         modelBuilder.Entity<TypesOfPublication>().HasData(
-            new TypesOfPublication() {Name = "DepositedManuscript"},
-            new TypesOfPublication() {Name = "Certificate"},
-            new TypesOfPublication() {Name = "Monograph"},
-            new TypesOfPublication() {Name = "Other"},
-            new TypesOfPublication() {Name = "Patent"},
-            new TypesOfPublication() {Name = "Textbook"},
-            new TypesOfPublication() {Name = "ReportAbstracts"},
-            new TypesOfPublication() {Name = "StudyGuide"},
-            new TypesOfPublication() {Name = "StudyGuideWithStamp"},
-            new TypesOfPublication() {Name = "VstuMagazines"},
-            new TypesOfPublication() {Name = "VstuNews"},
-            new TypesOfPublication() {Name = "EducationalMethodicalComplex"},
-            new TypesOfPublication() {Name = "ForeignCollectionArticle"},
-            new TypesOfPublication() {Name = "ForeignMagazineArticle"},
-            new TypesOfPublication() {Name = "RussianCollectionArticle"},
-            new TypesOfPublication() {Name = "RussianMagazineArticle"}
+            new TypesOfPublication() {Id = 1, Name = "DepositedManuscript"},
+            new TypesOfPublication() {Id = 2, Name = "Certificate"},
+            new TypesOfPublication() {Id = 3, Name = "Monograph"},
+            new TypesOfPublication() {Id = 4, Name = "Other"},
+            new TypesOfPublication() {Id = 5, Name = "Patent"},
+            new TypesOfPublication() {Id = 6, Name = "Textbook"},
+            new TypesOfPublication() {Id = 7, Name = "ReportAbstracts"},
+            new TypesOfPublication() {Id = 8, Name = "StudyGuide"},
+            new TypesOfPublication() {Id = 9, Name = "StudyGuideWithStamp"},
+            new TypesOfPublication() {Id = 10, Name = "VstuMagazines"},
+            new TypesOfPublication() {Id = 11, Name = "VstuNews"},
+            new TypesOfPublication() {Id = 12, Name = "EducationalMethodicalComplex"},
+            new TypesOfPublication() {Id = 13, Name = "ForeignCollectionArticle"},
+            new TypesOfPublication() {Id = 14, Name = "ForeignMagazineArticle"},
+            new TypesOfPublication() {Id = 15, Name = "RussianCollectionArticle"},
+            new TypesOfPublication() {Id = 16, Name = "RussianMagazineArticle"}
         );
 
         modelBuilder.Entity<Company>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
