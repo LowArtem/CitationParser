@@ -41,6 +41,33 @@ public partial class ApplicationContext : DbContext
         modelBuilder
             .UseCollation("utf8mb4_0900_ai_ci")
             .HasCharSet("utf8mb4");
+        
+        modelBuilder.Entity<TypesOfPublication>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+            entity.HasData(
+                new TypesOfPublication() {Id = 1, Name = "DepositedManuscript"},
+                new TypesOfPublication() {Id = 2, Name = "Certificate"},
+                new TypesOfPublication() {Id = 3, Name = "Monograph"},
+                new TypesOfPublication() {Id = 4, Name = "Other"},
+                new TypesOfPublication() {Id = 5, Name = "Patent"},
+                new TypesOfPublication() {Id = 6, Name = "Textbook"},
+                new TypesOfPublication() {Id = 7, Name = "ReportAbstracts"},
+                new TypesOfPublication() {Id = 8, Name = "StudyGuide"},
+                new TypesOfPublication() {Id = 9, Name = "StudyGuideWithStamp"},
+                new TypesOfPublication() {Id = 10, Name = "VstuMagazines"},
+                new TypesOfPublication() {Id = 11, Name = "VstuNews"},
+                new TypesOfPublication() {Id = 12, Name = "EducationalMethodicalComplex"},
+                new TypesOfPublication() {Id = 13, Name = "ForeignCollectionArticle"},
+                new TypesOfPublication() {Id = 14, Name = "ForeignMagazineArticle"},
+                new TypesOfPublication() {Id = 15, Name = "RussianCollectionArticle"},
+                new TypesOfPublication() {Id = 16, Name = "RussianMagazineArticle"}
+            );
+        });
+        
+        modelBuilder.Entity<ScientificCollection>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
+
+        modelBuilder.Entity<Company>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
         modelBuilder.Entity<Author>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
@@ -148,7 +175,7 @@ public partial class ApplicationContext : DbContext
                             .HasName("PRIMARY")
                             .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
                         j
-                            .ToTable("FK_publications_to_scientific_collections")
+                            .ToTable("publications_to_scientific_collections")
                             .HasCharSet("utf8")
                             .UseCollation("utf8_general_ci");
                         j.HasIndex(new[] { "IdScientificCollection" }, "FK_scientific_collections_to_publications");
@@ -173,39 +200,14 @@ public partial class ApplicationContext : DbContext
                             .HasName("PRIMARY")
                             .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
                         j
-                            .ToTable("FK_publications_to_editors")
+                            .ToTable("publications_to_editors")
                             .HasCharSet("utf8")
                             .UseCollation("utf8_general_ci");
-                        j.HasIndex(new[] { "IdEditor" }, "FK_scientific_editors");
+                        j.HasIndex(new[] { "IdEditor" }, "FK_editor_to_publications");
                         j.IndexerProperty<int>("IdPublications").HasColumnName("id_Publications");
                         j.IndexerProperty<int>("IdEditor").HasColumnName("id_Editor");
                     });
         });
-
-        modelBuilder.Entity<ScientificCollection>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
-
-        modelBuilder.Entity<TypesOfPublication>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
-        
-        modelBuilder.Entity<TypesOfPublication>().HasData(
-            new TypesOfPublication() {Id = 1, Name = "DepositedManuscript"},
-            new TypesOfPublication() {Id = 2, Name = "Certificate"},
-            new TypesOfPublication() {Id = 3, Name = "Monograph"},
-            new TypesOfPublication() {Id = 4, Name = "Other"},
-            new TypesOfPublication() {Id = 5, Name = "Patent"},
-            new TypesOfPublication() {Id = 6, Name = "Textbook"},
-            new TypesOfPublication() {Id = 7, Name = "ReportAbstracts"},
-            new TypesOfPublication() {Id = 8, Name = "StudyGuide"},
-            new TypesOfPublication() {Id = 9, Name = "StudyGuideWithStamp"},
-            new TypesOfPublication() {Id = 10, Name = "VstuMagazines"},
-            new TypesOfPublication() {Id = 11, Name = "VstuNews"},
-            new TypesOfPublication() {Id = 12, Name = "EducationalMethodicalComplex"},
-            new TypesOfPublication() {Id = 13, Name = "ForeignCollectionArticle"},
-            new TypesOfPublication() {Id = 14, Name = "ForeignMagazineArticle"},
-            new TypesOfPublication() {Id = 15, Name = "RussianCollectionArticle"},
-            new TypesOfPublication() {Id = 16, Name = "RussianMagazineArticle"}
-        );
-
-        modelBuilder.Entity<Company>(entity => { entity.HasKey(e => e.Id).HasName("PRIMARY"); });
 
         OnModelCreatingPartial(modelBuilder);
     }
