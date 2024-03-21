@@ -64,9 +64,9 @@ public static class ApplicationBuilderExtensions
 
         try
         {
-            using (var serviceScope = app.Services.GetService<IServiceScopeFactory>()!.CreateScope())
+            using (ApplicationContext db = new ApplicationContext())
             {
-                serviceScope.ServiceProvider.GetRequiredService<ApplicationContext>().Database.Migrate();
+                db.Database.Migrate();
             }
 
             logger.LogInformation("Миграции успешно завершены");
