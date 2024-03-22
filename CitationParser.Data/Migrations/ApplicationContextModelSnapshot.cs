@@ -32,6 +32,8 @@ namespace CitationParser.Data.Migrations
 
                     b.HasKey("IdAuthors", "IdPublications");
 
+                    b.HasIndex("IdPublications");
+
                     b.ToTable("AuthorPublication");
                 });
 
@@ -366,128 +368,128 @@ namespace CitationParser.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreate = new DateTime(2024, 3, 21, 16, 10, 16, 333, DateTimeKind.Utc).AddTicks(1035),
-                            DateUpdate = new DateTime(2024, 3, 21, 16, 10, 16, 333, DateTimeKind.Utc).AddTicks(1035),
+                            DateCreate = new DateTime(2024, 3, 22, 15, 51, 38, 277, DateTimeKind.Utc).AddTicks(9040),
+                            DateUpdate = new DateTime(2024, 3, 22, 15, 51, 38, 277, DateTimeKind.Utc).AddTicks(9040),
                             IsDelete = false,
                             Name = "DepositedManuscript"
                         },
                         new
                         {
                             Id = 2,
-                            DateCreate = new DateTime(2024, 3, 21, 16, 10, 16, 333, DateTimeKind.Utc).AddTicks(1042),
-                            DateUpdate = new DateTime(2024, 3, 21, 16, 10, 16, 333, DateTimeKind.Utc).AddTicks(1042),
+                            DateCreate = new DateTime(2024, 3, 22, 15, 51, 38, 277, DateTimeKind.Utc).AddTicks(9047),
+                            DateUpdate = new DateTime(2024, 3, 22, 15, 51, 38, 277, DateTimeKind.Utc).AddTicks(9047),
                             IsDelete = false,
                             Name = "Certificate"
                         },
                         new
                         {
                             Id = 3,
-                            DateCreate = new DateTime(2024, 3, 21, 16, 10, 16, 333, DateTimeKind.Utc).AddTicks(1044),
-                            DateUpdate = new DateTime(2024, 3, 21, 16, 10, 16, 333, DateTimeKind.Utc).AddTicks(1044),
+                            DateCreate = new DateTime(2024, 3, 22, 15, 51, 38, 277, DateTimeKind.Utc).AddTicks(9049),
+                            DateUpdate = new DateTime(2024, 3, 22, 15, 51, 38, 277, DateTimeKind.Utc).AddTicks(9049),
                             IsDelete = false,
                             Name = "Monograph"
                         },
                         new
                         {
                             Id = 4,
-                            DateCreate = new DateTime(2024, 3, 21, 16, 10, 16, 333, DateTimeKind.Utc).AddTicks(1046),
-                            DateUpdate = new DateTime(2024, 3, 21, 16, 10, 16, 333, DateTimeKind.Utc).AddTicks(1046),
+                            DateCreate = new DateTime(2024, 3, 22, 15, 51, 38, 277, DateTimeKind.Utc).AddTicks(9051),
+                            DateUpdate = new DateTime(2024, 3, 22, 15, 51, 38, 277, DateTimeKind.Utc).AddTicks(9051),
                             IsDelete = false,
                             Name = "Other"
                         },
                         new
                         {
                             Id = 5,
-                            DateCreate = new DateTime(2024, 3, 21, 16, 10, 16, 333, DateTimeKind.Utc).AddTicks(1048),
-                            DateUpdate = new DateTime(2024, 3, 21, 16, 10, 16, 333, DateTimeKind.Utc).AddTicks(1048),
+                            DateCreate = new DateTime(2024, 3, 22, 15, 51, 38, 277, DateTimeKind.Utc).AddTicks(9053),
+                            DateUpdate = new DateTime(2024, 3, 22, 15, 51, 38, 277, DateTimeKind.Utc).AddTicks(9053),
                             IsDelete = false,
                             Name = "Patent"
                         },
                         new
                         {
                             Id = 6,
-                            DateCreate = new DateTime(2024, 3, 21, 16, 10, 16, 333, DateTimeKind.Utc).AddTicks(1050),
-                            DateUpdate = new DateTime(2024, 3, 21, 16, 10, 16, 333, DateTimeKind.Utc).AddTicks(1050),
+                            DateCreate = new DateTime(2024, 3, 22, 15, 51, 38, 277, DateTimeKind.Utc).AddTicks(9055),
+                            DateUpdate = new DateTime(2024, 3, 22, 15, 51, 38, 277, DateTimeKind.Utc).AddTicks(9055),
                             IsDelete = false,
                             Name = "Textbook"
                         },
                         new
                         {
                             Id = 7,
-                            DateCreate = new DateTime(2024, 3, 21, 16, 10, 16, 333, DateTimeKind.Utc).AddTicks(1052),
-                            DateUpdate = new DateTime(2024, 3, 21, 16, 10, 16, 333, DateTimeKind.Utc).AddTicks(1052),
+                            DateCreate = new DateTime(2024, 3, 22, 15, 51, 38, 277, DateTimeKind.Utc).AddTicks(9057),
+                            DateUpdate = new DateTime(2024, 3, 22, 15, 51, 38, 277, DateTimeKind.Utc).AddTicks(9057),
                             IsDelete = false,
                             Name = "ReportAbstracts"
                         },
                         new
                         {
                             Id = 8,
-                            DateCreate = new DateTime(2024, 3, 21, 16, 10, 16, 333, DateTimeKind.Utc).AddTicks(1054),
-                            DateUpdate = new DateTime(2024, 3, 21, 16, 10, 16, 333, DateTimeKind.Utc).AddTicks(1054),
+                            DateCreate = new DateTime(2024, 3, 22, 15, 51, 38, 277, DateTimeKind.Utc).AddTicks(9059),
+                            DateUpdate = new DateTime(2024, 3, 22, 15, 51, 38, 277, DateTimeKind.Utc).AddTicks(9059),
                             IsDelete = false,
                             Name = "StudyGuide"
                         },
                         new
                         {
                             Id = 9,
-                            DateCreate = new DateTime(2024, 3, 21, 16, 10, 16, 333, DateTimeKind.Utc).AddTicks(1056),
-                            DateUpdate = new DateTime(2024, 3, 21, 16, 10, 16, 333, DateTimeKind.Utc).AddTicks(1056),
+                            DateCreate = new DateTime(2024, 3, 22, 15, 51, 38, 277, DateTimeKind.Utc).AddTicks(9061),
+                            DateUpdate = new DateTime(2024, 3, 22, 15, 51, 38, 277, DateTimeKind.Utc).AddTicks(9061),
                             IsDelete = false,
                             Name = "StudyGuideWithStamp"
                         },
                         new
                         {
                             Id = 10,
-                            DateCreate = new DateTime(2024, 3, 21, 16, 10, 16, 333, DateTimeKind.Utc).AddTicks(1058),
-                            DateUpdate = new DateTime(2024, 3, 21, 16, 10, 16, 333, DateTimeKind.Utc).AddTicks(1058),
+                            DateCreate = new DateTime(2024, 3, 22, 15, 51, 38, 277, DateTimeKind.Utc).AddTicks(9063),
+                            DateUpdate = new DateTime(2024, 3, 22, 15, 51, 38, 277, DateTimeKind.Utc).AddTicks(9063),
                             IsDelete = false,
                             Name = "VstuMagazines"
                         },
                         new
                         {
                             Id = 11,
-                            DateCreate = new DateTime(2024, 3, 21, 16, 10, 16, 333, DateTimeKind.Utc).AddTicks(1060),
-                            DateUpdate = new DateTime(2024, 3, 21, 16, 10, 16, 333, DateTimeKind.Utc).AddTicks(1060),
+                            DateCreate = new DateTime(2024, 3, 22, 15, 51, 38, 277, DateTimeKind.Utc).AddTicks(9065),
+                            DateUpdate = new DateTime(2024, 3, 22, 15, 51, 38, 277, DateTimeKind.Utc).AddTicks(9065),
                             IsDelete = false,
                             Name = "VstuNews"
                         },
                         new
                         {
                             Id = 12,
-                            DateCreate = new DateTime(2024, 3, 21, 16, 10, 16, 333, DateTimeKind.Utc).AddTicks(1062),
-                            DateUpdate = new DateTime(2024, 3, 21, 16, 10, 16, 333, DateTimeKind.Utc).AddTicks(1062),
+                            DateCreate = new DateTime(2024, 3, 22, 15, 51, 38, 277, DateTimeKind.Utc).AddTicks(9067),
+                            DateUpdate = new DateTime(2024, 3, 22, 15, 51, 38, 277, DateTimeKind.Utc).AddTicks(9067),
                             IsDelete = false,
                             Name = "EducationalMethodicalComplex"
                         },
                         new
                         {
                             Id = 13,
-                            DateCreate = new DateTime(2024, 3, 21, 16, 10, 16, 333, DateTimeKind.Utc).AddTicks(1064),
-                            DateUpdate = new DateTime(2024, 3, 21, 16, 10, 16, 333, DateTimeKind.Utc).AddTicks(1064),
+                            DateCreate = new DateTime(2024, 3, 22, 15, 51, 38, 277, DateTimeKind.Utc).AddTicks(9069),
+                            DateUpdate = new DateTime(2024, 3, 22, 15, 51, 38, 277, DateTimeKind.Utc).AddTicks(9069),
                             IsDelete = false,
                             Name = "ForeignCollectionArticle"
                         },
                         new
                         {
                             Id = 14,
-                            DateCreate = new DateTime(2024, 3, 21, 16, 10, 16, 333, DateTimeKind.Utc).AddTicks(1066),
-                            DateUpdate = new DateTime(2024, 3, 21, 16, 10, 16, 333, DateTimeKind.Utc).AddTicks(1066),
+                            DateCreate = new DateTime(2024, 3, 22, 15, 51, 38, 277, DateTimeKind.Utc).AddTicks(9071),
+                            DateUpdate = new DateTime(2024, 3, 22, 15, 51, 38, 277, DateTimeKind.Utc).AddTicks(9071),
                             IsDelete = false,
                             Name = "ForeignMagazineArticle"
                         },
                         new
                         {
                             Id = 15,
-                            DateCreate = new DateTime(2024, 3, 21, 16, 10, 16, 333, DateTimeKind.Utc).AddTicks(1068),
-                            DateUpdate = new DateTime(2024, 3, 21, 16, 10, 16, 333, DateTimeKind.Utc).AddTicks(1068),
+                            DateCreate = new DateTime(2024, 3, 22, 15, 51, 38, 277, DateTimeKind.Utc).AddTicks(9073),
+                            DateUpdate = new DateTime(2024, 3, 22, 15, 51, 38, 277, DateTimeKind.Utc).AddTicks(9073),
                             IsDelete = false,
                             Name = "RussianCollectionArticle"
                         },
                         new
                         {
                             Id = 16,
-                            DateCreate = new DateTime(2024, 3, 21, 16, 10, 16, 333, DateTimeKind.Utc).AddTicks(1070),
-                            DateUpdate = new DateTime(2024, 3, 21, 16, 10, 16, 333, DateTimeKind.Utc).AddTicks(1070),
+                            DateCreate = new DateTime(2024, 3, 22, 15, 51, 38, 277, DateTimeKind.Utc).AddTicks(9074),
+                            DateUpdate = new DateTime(2024, 3, 22, 15, 51, 38, 277, DateTimeKind.Utc).AddTicks(9074),
                             IsDelete = false,
                             Name = "RussianMagazineArticle"
                         });
@@ -503,6 +505,8 @@ namespace CitationParser.Data.Migrations
 
                     b.HasKey("IdCities", "IdPublications");
 
+                    b.HasIndex("IdPublications");
+
                     b.ToTable("CityPublication");
                 });
 
@@ -515,6 +519,8 @@ namespace CitationParser.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("IdPublications", "IdUniversities");
+
+                    b.HasIndex("IdUniversities");
 
                     b.ToTable("CompanyPublication");
                 });
@@ -529,6 +535,8 @@ namespace CitationParser.Data.Migrations
 
                     b.HasKey("IdEditors", "IdPublications");
 
+                    b.HasIndex("IdPublications");
+
                     b.ToTable("EditorPublication");
                 });
 
@@ -542,120 +550,24 @@ namespace CitationParser.Data.Migrations
 
                     b.HasKey("IdPublications", "IdScientificCollection");
 
+                    b.HasIndex("IdScientificCollection");
+
                     b.ToTable("PublicationScientificCollection");
                 });
 
-            modelBuilder.Entity("PublicationsToAuthor", b =>
+            modelBuilder.Entity("AuthorPublication", b =>
                 {
-                    b.Property<int>("IdPublications")
-                        .HasColumnType("int")
-                        .HasColumnName("id_Publications");
+                    b.HasOne("CitationParser.Data.Model.Author", null)
+                        .WithMany()
+                        .HasForeignKey("IdAuthors")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<int>("IdAuthors")
-                        .HasColumnType("int")
-                        .HasColumnName("id_Authors");
-
-                    b.HasKey("IdPublications", "IdAuthors")
-                        .HasName("PRIMARY")
-                        .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
-
-                    b.HasIndex(new[] { "IdAuthors" }, "FK_authors_to_publications");
-
-                    b.ToTable("publications_to_authors", (string)null);
-
-                    MySqlEntityTypeBuilderExtensions.HasCharSet(b, "utf8");
-                    MySqlEntityTypeBuilderExtensions.UseCollation(b, "utf8_general_ci");
-                });
-
-            modelBuilder.Entity("PublicationsToCity", b =>
-                {
-                    b.Property<int>("IdPublications")
-                        .HasColumnType("int")
-                        .HasColumnName("id_Publications");
-
-                    b.Property<int>("IdCities")
-                        .HasColumnType("int")
-                        .HasColumnName("id_cities");
-
-                    b.HasKey("IdPublications", "IdCities")
-                        .HasName("PRIMARY")
-                        .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
-
-                    b.HasIndex(new[] { "IdCities" }, "FK_Sities");
-
-                    b.ToTable("publications_to_cities", (string)null);
-
-                    MySqlEntityTypeBuilderExtensions.HasCharSet(b, "utf8");
-                    MySqlEntityTypeBuilderExtensions.UseCollation(b, "utf8_general_ci");
-                });
-
-            modelBuilder.Entity("PublicationsToEditor", b =>
-                {
-                    b.Property<int>("IdPublications")
-                        .HasColumnType("int")
-                        .HasColumnName("id_Publications");
-
-                    b.Property<int>("IdEditors")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdEditor")
-                        .HasColumnType("int")
-                        .HasColumnName("id_Editor");
-
-                    b.HasKey("IdPublications", "IdEditors")
-                        .HasName("PRIMARY")
-                        .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
-
-                    b.HasIndex(new[] { "IdEditor" }, "FK_editor_to_publications");
-
-                    b.ToTable("publications_to_editors", (string)null);
-
-                    MySqlEntityTypeBuilderExtensions.HasCharSet(b, "utf8");
-                    MySqlEntityTypeBuilderExtensions.UseCollation(b, "utf8_general_ci");
-                });
-
-            modelBuilder.Entity("PublicationsToScientificCollection", b =>
-                {
-                    b.Property<int>("IdPublications")
-                        .HasColumnType("int")
-                        .HasColumnName("id_Publications");
-
-                    b.Property<int>("IdScientificCollection")
-                        .HasColumnType("int")
-                        .HasColumnName("id_ScientificCollection");
-
-                    b.HasKey("IdPublications", "IdScientificCollection")
-                        .HasName("PRIMARY")
-                        .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
-
-                    b.HasIndex(new[] { "IdScientificCollection" }, "FK_scientific_collections_to_publications");
-
-                    b.ToTable("publications_to_scientific_collections", (string)null);
-
-                    MySqlEntityTypeBuilderExtensions.HasCharSet(b, "utf8");
-                    MySqlEntityTypeBuilderExtensions.UseCollation(b, "utf8_general_ci");
-                });
-
-            modelBuilder.Entity("PublicationsToUniversity", b =>
-                {
-                    b.Property<int>("IdPublications")
-                        .HasColumnType("int")
-                        .HasColumnName("id_Publications");
-
-                    b.Property<int>("IdUniversities")
-                        .HasColumnType("int")
-                        .HasColumnName("id_Universities");
-
-                    b.HasKey("IdPublications", "IdUniversities")
-                        .HasName("PRIMARY")
-                        .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
-
-                    b.HasIndex(new[] { "IdUniversities" }, "FK_universities_to_publications");
-
-                    b.ToTable("publications_to_universities", (string)null);
-
-                    MySqlEntityTypeBuilderExtensions.HasCharSet(b, "utf8");
-                    MySqlEntityTypeBuilderExtensions.UseCollation(b, "utf8_general_ci");
+                    b.HasOne("CitationParser.Data.Model.Publication", null)
+                        .WithMany()
+                        .HasForeignKey("IdPublications")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("CitationParser.Data.Model.Publication", b =>
@@ -669,79 +581,64 @@ namespace CitationParser.Data.Migrations
                     b.Navigation("Type");
                 });
 
-            modelBuilder.Entity("PublicationsToAuthor", b =>
-                {
-                    b.HasOne("CitationParser.Data.Model.Author", null)
-                        .WithMany()
-                        .HasForeignKey("IdAuthors")
-                        .IsRequired()
-                        .HasConstraintName("FK_authors_to_publications");
-
-                    b.HasOne("CitationParser.Data.Model.Publication", null)
-                        .WithMany()
-                        .HasForeignKey("IdPublications")
-                        .IsRequired()
-                        .HasConstraintName("FK_Publications_to_authors");
-                });
-
-            modelBuilder.Entity("PublicationsToCity", b =>
+            modelBuilder.Entity("CityPublication", b =>
                 {
                     b.HasOne("CitationParser.Data.Model.City", null)
                         .WithMany()
                         .HasForeignKey("IdCities")
-                        .IsRequired()
-                        .HasConstraintName("FK_Sities");
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("CitationParser.Data.Model.Publication", null)
                         .WithMany()
                         .HasForeignKey("IdPublications")
-                        .IsRequired()
-                        .HasConstraintName("FK_Publications");
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("PublicationsToEditor", b =>
-                {
-                    b.HasOne("CitationParser.Data.Model.Editor", null)
-                        .WithMany()
-                        .HasForeignKey("IdEditor")
-                        .IsRequired()
-                        .HasConstraintName("FK_editor_to_publications");
-
-                    b.HasOne("CitationParser.Data.Model.Publication", null)
-                        .WithMany()
-                        .HasForeignKey("IdPublications")
-                        .IsRequired()
-                        .HasConstraintName("FK_publications_to_editors");
-                });
-
-            modelBuilder.Entity("PublicationsToScientificCollection", b =>
+            modelBuilder.Entity("CompanyPublication", b =>
                 {
                     b.HasOne("CitationParser.Data.Model.Publication", null)
                         .WithMany()
                         .HasForeignKey("IdPublications")
-                        .IsRequired()
-                        .HasConstraintName("FK_publications_to_scientific_collections");
-
-                    b.HasOne("CitationParser.Data.Model.ScientificCollection", null)
-                        .WithMany()
-                        .HasForeignKey("IdScientificCollection")
-                        .IsRequired()
-                        .HasConstraintName("FK_scientific_collections_to_publications");
-                });
-
-            modelBuilder.Entity("PublicationsToUniversity", b =>
-                {
-                    b.HasOne("CitationParser.Data.Model.Publication", null)
-                        .WithMany()
-                        .HasForeignKey("IdPublications")
-                        .IsRequired()
-                        .HasConstraintName("FK_publications_to_universities");
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("CitationParser.Data.Model.Company", null)
                         .WithMany()
                         .HasForeignKey("IdUniversities")
-                        .IsRequired()
-                        .HasConstraintName("FK_universities_to_publications");
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("EditorPublication", b =>
+                {
+                    b.HasOne("CitationParser.Data.Model.Editor", null)
+                        .WithMany()
+                        .HasForeignKey("IdEditors")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CitationParser.Data.Model.Publication", null)
+                        .WithMany()
+                        .HasForeignKey("IdPublications")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PublicationScientificCollection", b =>
+                {
+                    b.HasOne("CitationParser.Data.Model.Publication", null)
+                        .WithMany()
+                        .HasForeignKey("IdPublications")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CitationParser.Data.Model.ScientificCollection", null)
+                        .WithMany()
+                        .HasForeignKey("IdScientificCollection")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("CitationParser.Data.Model.TypesOfPublication", b =>
