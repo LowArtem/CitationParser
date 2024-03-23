@@ -40,7 +40,7 @@ public class Publication : BaseEntity
     [Column("URL")] [StringLength(300)] public string? Url { get; set; }
 
     [Column("publishingHouse")]
-    [StringLength(45)]
+    [StringLength(100)]
     public string? PublishingHouse { get; set; }
 
     [Column("articleNumber")]
