@@ -60,7 +60,15 @@ static public class ArticleFromForeignCollection
     {
         List < City > cities = new List<City>();
 
-        var citiesString = citation.Replace('–', '-').Split("//")[1].Split(". -")[1].Split(':');
+        var citiesString = citation.Replace('–', '-').Split("//");
+
+        if (citiesString.Length > 1)
+            citiesString = citiesString[1].Split(". -");
+
+        if (citiesString.Length < 2)
+            return new List<City>();
+        
+        citiesString = citiesString[1].Split(':');
 
         if (citiesString.Length > 1)
         {
@@ -110,8 +118,14 @@ static public class ArticleFromForeignCollection
     
     public static string GetPublishingHouseScientificCollection(string citation)
     {
-        var publishingHouseString = citation.Replace('–', '-').Split("//")[1].Split(". -")[1].Split(':');
+        var publishingHouseString = citation.Replace('–', '-').Split("//");
+        if (publishingHouseString.Length > 1)
+            publishingHouseString = publishingHouseString[1].Split(". -");
 
+        if (publishingHouseString.Length < 2)
+            return null;
+        
+        publishingHouseString = publishingHouseString[1].Split(':');
         publishingHouseString = publishingHouseString[publishingHouseString.Length - 1].Split(',');
 
         if (!int.TryParse(publishingHouseString[0].Trim(), out int n))
