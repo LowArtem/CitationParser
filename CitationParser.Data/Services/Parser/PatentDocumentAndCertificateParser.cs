@@ -26,6 +26,6 @@ public static class PatentDocumentAndCertificateParser
 
     public static string GetYear(string citation)
     {
-        return citation.Split(" - ")[1].Trim().Replace(".", "");
+        return citation.Split(". - ")[1].Trim().Replace(".", "");
     }
 }
