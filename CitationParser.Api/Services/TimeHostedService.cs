@@ -1,4 +1,5 @@
 ﻿using CitationParser.Core.Model.WebSrapper;
+using CitationParser.Data.Context;
 using CitationParser.Data.Services.WebScraper;
 using Hangfire;
 
@@ -27,15 +28,23 @@ public class TimeHostedService : BackgroundService
         using var scope = _scopeFactory.CreateScope();
         var webScrapper = scope.ServiceProvider.GetRequiredService<WebScraperService>();
         var htmlParser = scope.ServiceProvider.GetRequiredService<ParseHtmlService>();
+        var citationParser = scope.ServiceProvider.GetRequiredService<Data.Services.Parser.CitationParser>();
 
-        foreach (var type in Enum.GetValues<PublicationTypeEnum>())
+        using (ApplicationContext db = new ApplicationContext())
         {
-            var html = await webScrapper.GetPublications(type);
-            var publications = htmlParser.GetPublications(html);
+            // db.Database.EnsureDeleted();
+            // db.Database.EnsureCreated();
+            foreach (var type in Enum.GetValues<PublicationTypeEnum>())
+            {
+                var html = await webScrapper.GetPublications(type);
+                var publications = htmlParser.GetPublications(html);
 
-            // TODO: доделать логику парсинга
-            _recurringJobs.AddOrUpdate($"Парсинг публикаций типа {type}", () => htmlParser.GetPublications(html),
-                Cron.Weekly);
+                foreach (var p in publications)
+                {
+                    citationParser.PublicationParse(type, p, db);
+                }
+
+            }
         }
     }
 }
