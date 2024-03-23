@@ -29,7 +29,7 @@ public class StudyGuideParser
 
         }
 
-        return null;
+        return new List<Editor>();
     }
 
     public static List<Company> GetCompany(string citation)
@@ -52,7 +52,7 @@ public class StudyGuideParser
             return universitiesList;
         }
 
-        return null;
+        return new List<Company>();
 
     }
     

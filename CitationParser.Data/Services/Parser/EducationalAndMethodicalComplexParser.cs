@@ -26,7 +26,7 @@ public class EducationalAndMethodicalComplexParser
             return universitiesList;
         }
 
-        return null;
+        return new List<Company>();
 
     }
     

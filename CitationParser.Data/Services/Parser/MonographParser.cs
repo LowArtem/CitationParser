@@ -27,7 +27,7 @@ public class MonographParser
 
         }
 
-        return null;
+        return new List<Editor>();
     }
     
     public static List<Company> GetCompany(string citation)
@@ -50,7 +50,7 @@ public class MonographParser
             return universitiesList;
         }
 
-        return null;
+        return new List<Company>();
 
     }
     

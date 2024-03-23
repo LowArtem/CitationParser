@@ -12,7 +12,7 @@ static public class DepositedManuscriptParser
 
         if (companyString.Contains("http"))
         {
-            return null;
+            return new List<Company>();
         }
 
         if (companyString.IndexOf('/') == 1)

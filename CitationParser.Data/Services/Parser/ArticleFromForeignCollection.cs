@@ -34,7 +34,7 @@ static public class ArticleFromForeignCollection
 
         }
 
-        return null;
+        return new List<Editor>();
     }
     
     public static List<Company> GetCompanyScientificCollection(string citation)

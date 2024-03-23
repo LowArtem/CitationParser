@@ -29,7 +29,7 @@ public class ArticleFromRussianCollectionParser
 
         }
 
-        return null;
+        return new List<Editor>();
     }
     
     public static List<Company> GetCompanyScientificCollection(string citation)
