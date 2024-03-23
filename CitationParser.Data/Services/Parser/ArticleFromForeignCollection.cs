@@ -95,10 +95,17 @@ static public class ArticleFromForeignCollection
 
     public static string GetYearScientificCollection(string citation)
     {
-        var citiesString = citation.Replace('–', '-').Split("//")[1].Split(". -")[1].Split(':');
+        var citationSplit = citation.Replace('–', '-').Split("//");
+        if (citationSplit.Length > 1)
+            citationSplit = citationSplit[1].Split(". -");
 
-        citiesString = citiesString[citiesString.Length - 1].Split(',');
-        return citiesString[citiesString.Length - 1].Trim();
+        if (citationSplit.Length < 2)
+            return null;
+        
+        citationSplit = citationSplit[1].Split(':');
+
+        citationSplit = citationSplit[citationSplit.Length - 1].Split(',');
+        return citationSplit[citationSplit.Length - 1].Trim();
     }
     
     public static string GetPublishingHouseScientificCollection(string citation)
