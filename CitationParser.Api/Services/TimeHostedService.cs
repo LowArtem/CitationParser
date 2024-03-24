@@ -32,8 +32,6 @@ public class TimeHostedService : BackgroundService
 
         using (ApplicationContext db = new ApplicationContext())
         {
-            // db.Database.EnsureDeleted();
-            // db.Database.EnsureCreated();
             foreach (var type in Enum.GetValues<PublicationTypeEnum>())
             {
                 var html = await webScrapper.GetPublications(type);

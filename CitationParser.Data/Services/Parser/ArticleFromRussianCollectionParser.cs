@@ -55,7 +55,15 @@ public class ArticleFromRussianCollectionParser
     {
         List < City > cities = new List<City>();
 
-        var citiesString = citation.Replace('–', '-').Split("//")[1].Split(". -")[1].Split(',');
+        var citiesString = citation.Replace('–', '-').Split("//");
+
+        if (citiesString.Length > 1)
+            citiesString = citiesString[1].Split(". -");
+
+        if (citiesString.Length < 2)
+            return new List<City>();
+        
+        citiesString = citiesString[1].Split(',');
 
         if (citiesString.Length > 1)
         {
@@ -95,7 +103,13 @@ public class ArticleFromRussianCollectionParser
 
     public static string GetYearScientificCollection(string citation)
     {
-        var citiesString = citation.Replace('–', '-').Split("//")[1].Split(". -");
+        var citiesString = citation.Replace('–', '-').Split("//");
+        
+        if (citiesString.Length > 1)
+            citiesString = citiesString[1].Split(". -");
+
+        if (citiesString.Length < 2)
+            return null;
 
         citiesString = citiesString[1].Split(',');
         return citiesString[citiesString.Length - 1].Trim();
