@@ -59,7 +59,7 @@ public class ArticleFromRussianCollectionParser
 
         if (citiesString.Length > 1)
         {
-            citiesString = citiesString[0].Split(';');
+            citiesString = citiesString[0].Split(":")[0].Split(';');
 
             for (int i = 0; i < citiesString.Length; i++)
             {
@@ -71,6 +71,26 @@ public class ArticleFromRussianCollectionParser
         }
 
         return cities;
+    }
+    
+    public static string GetPublishingHouse(string citation)
+    {
+        var publishingHouseString = citation.Replace('–', '-').Split("//");
+        if (publishingHouseString.Length > 1)
+            publishingHouseString = publishingHouseString[1].Split(". -");
+
+        if (publishingHouseString.Length < 2)
+            return null;
+        
+        publishingHouseString = publishingHouseString[1].Split(':');
+        publishingHouseString = publishingHouseString[publishingHouseString.Length - 1].Split(',');
+
+        if (!int.TryParse(publishingHouseString[0].Trim(), out int n))
+        {
+            return publishingHouseString[0].Trim().Replace("[", string.Empty).Replace("]", string.Empty);
+        }
+
+        return null;
     }
 
     public static string GetYearScientificCollection(string citation)

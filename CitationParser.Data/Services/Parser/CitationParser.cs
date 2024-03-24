@@ -328,6 +328,7 @@ public class CitationParser
             Doi = ArticleFromRussianCollectionParser.GetDOIScientificCollection(publication),
             IdEditors = ArticleFromRussianCollectionParser.GetEditorScientificCollection(publication),
             DataStorage = ArticleFromRussianCollectionParser.GetDataStorageScientificCollection(publication),
+            PublishingHouse = ArticleFromRussianCollectionParser.GetPublishingHouse(publication),
             IdScientificCollection = new List<ScientificCollection>()
             {
                 ArticleFromRussianCollectionParser.GetTitleScientificCollection(publication)
