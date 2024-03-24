@@ -107,7 +107,7 @@ public class ArticleFromRussianCollectionParser
 
         for (int i = 0; i < pagesString.Length; i++)
         {
-            if (Regex.IsMatch(pagesString[i].Trim(), @"^(C|С)\.\s?\d+-?\d?"))
+            if (Regex.IsMatch(pagesString[i].Trim(), @"^(C|С)\.\s?\d+-?\d?$"))
             {
                 return pagesString[i].Trim();
             }
