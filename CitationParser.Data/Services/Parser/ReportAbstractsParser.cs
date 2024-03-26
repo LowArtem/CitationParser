@@ -20,6 +20,7 @@ public class ReportAbstractsParser
         {
             var editorString = citation.Split(" // ")[1]
                 .Split(" / ")[1]
+                .Split(". -")[0]
                 .Split(';')[0].Trim();
 
             var answer = new List<Editor>();
@@ -78,9 +79,32 @@ public class ReportAbstractsParser
         citation = citation.Replace("−", "-");
         citation = citation.Replace("-", "-");
 
-        var cities = citation.Split(". - ")[1].Split(", ")[0].Split(";");
+        var cities = citation
+            .Split(". - ")[1]
+            .Split(", ")[0]
+            .Split(":")[0]
+            .Split(";");
         
         return cities.Select(c => new City { Name = c.Trim(' ', '.', ',') }).ToList();
+    }
+    
+    public static string GetPublishingHouse(string citation)
+    {
+        citation = citation.Replace("—", "-");
+        citation = citation.Replace("–", "-");
+        citation = citation.Replace("−", "-");
+        citation = citation.Replace("-", "-");
+
+        var publishingHouse = citation
+            .Split(". - ")[1]
+            .Split(", ")[0];
+
+        if (!publishingHouse.Contains(":"))
+            return null;
+
+        publishingHouse = publishingHouse.Split(':')[1];
+        
+        return publishingHouse.Trim();
     }
     
     public static string? GetYear(string citation)

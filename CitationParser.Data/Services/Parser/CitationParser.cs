@@ -188,7 +188,8 @@ public class CitationParser
             Number = ReportAbstractsParser.GetNumber(publication),
             Language = ReportAbstractsParser.GetLanguage(publication),
             Url = ReportAbstractsParser.GetUrl(publication),
-            TitleOfSource = ReportAbstractsParser.GetTitleOfSource(publication)
+            TitleOfSource = ReportAbstractsParser.GetTitleOfSource(publication),
+            PublishingHouse = ReportAbstractsParser.GetPublishingHouse(publication)
         };
 
         AddPublicationToDb(p, "ReportAbstracts", db);

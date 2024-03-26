@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using CitationParser.Data.Model;
 using CitationParser.Data.Services.Parser;
 
 namespace CitationParser.Test.Data.Services.Parser;
@@ -27,6 +28,23 @@ public class ReportAbstractParserTest
         var expected = new List<string>() { "К. В. Кудрявцева", "Е. М. Паниной" };
 
         Assert.True(expected.SequenceEqual(editorsString));
+    }
+    
+    [Fact]
+    public void GetEditors_WithoutUniversityTest()
+    {
+        var citation = """
+                                      236.  Методический подход к оценке результативности научно-технических программ / А.Б. Петровский, С.В. Проничкин, И.П.Тихонов // Актуальные научные и научно-технические проблемы обеспечения химической безопасности России : прогр. и тез. докл.II рос. конф. c междунар. участием к 80-летию со дня рожд. лауреата Ленинской премии, акад. РАН, генерал-лейтенанта АнатолияДемьяновича Кунцевича (г. Москва, 3-4 июня 2014 г.) / под ред. А.В. Рощина. - Киров : Международный центр научно-исследовательских проектов, 2017. - C. 105.
+                       """;
+
+        var expected = new List<Editor>()
+        {
+            new Editor(){Name = "А.В. Рощина"}
+        };
+
+        var actual = ReportAbstractsParser.GetEditors(citation);
+        
+        Assert.Equal(expected[0].Name, actual[0].Name);
     }
 
     [Fact]
@@ -145,6 +163,23 @@ public class ReportAbstractParserTest
         var expected = new List<string>() { "Екатеринбург", "Ростов-на-Дону", "Севастополь" };
 
         Assert.True(expected.SequenceEqual(citiesString));
+    }
+    
+    [Fact]
+    public void GetCity_WithPublishingHouseTest()
+    {
+        var citation = """
+                                      236.  Методический подход к оценке результативности научно-технических программ / А.Б. Петровский, С.В. Проничкин, И.П.Тихонов // Актуальные научные и научно-технические проблемы обеспечения химической безопасности России : прогр. и тез. докл.II рос. конф. c междунар. участием к 80-летию со дня рожд. лауреата Ленинской премии, акад. РАН, генерал-лейтенанта АнатолияДемьяновича Кунцевича (г. Москва, 3-4 июня 2014 г.) / под ред. А.В. Рощина. - Киров : Международный центр научно-исследовательских проектов, 2017. - C. 105.
+                       """;
+
+        var expected = new List<City>()
+        {
+            new City() {Name = "Киров"}
+        };
+
+        var actual = ReportAbstractsParser.GetCity(citation);
+        
+        Assert.Equal(expected[0].Name, actual[0].Name);
     }
     
     [Fact]
@@ -363,5 +398,19 @@ public class ReportAbstractParserTest
         var lang = ReportAbstractsParser.GetLanguage(citation);
 
         Assert.Null(lang);
+    }
+
+    [Fact]
+    public void GetPublishingHouse_SimpleTest()
+    {
+        var citation = """
+                       236.  Методический подход к оценке результативности научно-технических программ / А.Б. Петровский, С.В. Проничкин, И.П.Тихонов // Актуальные научные и научно-технические проблемы обеспечения химической безопасности России : прогр. и тез. докл.II рос. конф. c междунар. участием к 80-летию со дня рожд. лауреата Ленинской премии, акад. РАН, генерал-лейтенанта АнатолияДемьяновича Кунцевича (г. Москва, 3-4 июня 2014 г.) / под ред. А.В. Рощина. - Киров : Международный центр научно-исследовательских проектов, 2017. - C. 105.
+        """;
+
+        var expected = "Международный центр научно-исследовательских проектов";
+
+        var actual = ReportAbstractsParser.GetPublishingHouse(citation);
+        
+        Assert.Equal(expected, actual);
     }
 }
