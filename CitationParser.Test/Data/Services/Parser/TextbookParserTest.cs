@@ -29,7 +29,7 @@ public class TextbookParserTest
 
         var result = TextbookParser.GetEditor(citation);
         
-        Assert.Null(result);
+        Assert.Empty(result);
     }
     
     [Fact]
@@ -152,7 +152,7 @@ public class TextbookParserTest
     {
         var citation = "Финансы: учебник / Р.Р. Мавлютов; Волгогр. гос. техн. ун-т. - Волгоград, 2019. - 269 с.";
 
-        var expected = "269 с.";
+        var expected = "269";
 
         var result = TextbookParser.GetCountPages(citation);
         

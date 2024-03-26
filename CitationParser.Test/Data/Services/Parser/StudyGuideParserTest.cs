@@ -29,7 +29,7 @@ public class StudyGuideParserTest
 
         var result = StudyGuideParser.GetEditor(citation);
         
-        Assert.Null(result);
+        Assert.Empty(result);
     }
     
     [Fact]
@@ -151,7 +151,7 @@ public class StudyGuideParserTest
     {
         var citation = "Планирование и организация эксперимента. Ч. 1 [Электронный ресурс]: учеб. пособие / А.В. Авилов, Р.А. Белухин; ВПИ (филиал) ВолгГТУ // Учебные пособия : сб. Серия \"Естественнонаучные и технические дисциплины\". Вып. 6. - 1 электрон. опт. диск (CD-ROM), формат pdf. - Волгоград, 2012. - 34 с.";
 
-        var expected = "34 с.";
+        var expected = "34";
 
         var result = StudyGuideParser.GetCountPages(citation);
         

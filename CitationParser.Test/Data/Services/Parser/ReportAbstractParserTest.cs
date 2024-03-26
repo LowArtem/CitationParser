@@ -208,7 +208,7 @@ public class ReportAbstractParserTest
 
         var pages = ReportAbstractsParser.GetPages(citation);
 
-        var expected = "C. 341-342";
+        var expected = "341-342";
 
         Assert.Equal(expected, pages);
     }
@@ -222,7 +222,7 @@ public class ReportAbstractParserTest
 
         var pages = ReportAbstractsParser.GetPages(citation);
 
-        var expected = "C. 467.";
+        var expected = "467";
 
         Assert.Equal(expected, pages);
     }
@@ -236,7 +236,7 @@ public class ReportAbstractParserTest
 
         var pages = ReportAbstractsParser.GetPages(citation);
 
-        var expected = "P. 37-38.";
+        var expected = "37-38";
 
         Assert.Equal(expected, pages);
     }

@@ -121,7 +121,7 @@ public class ArticleFromRussianCollectionParser
 
         for (int i = 0; i < pagesString.Length; i++)
         {
-            if (Regex.IsMatch(pagesString[i].Trim(), @"^(C|С)\.\s?\d+-?\d?$"))
+            if (Regex.IsMatch(pagesString[i].Trim(), @"^[CС]\.\s?\d+-?\d*$"))
             {
                 return pagesString[i].Split(".")[1].Trim();
             }
@@ -153,8 +153,7 @@ public class ArticleFromRussianCollectionParser
         {
             if (Regex.IsMatch(pagesString[i].Trim(), @"^\d+\s(c|с)"))
             {
-                Regex.Replace(pagesString[i], @"[^0-9]", "");
-                return pagesString[i].Trim();
+                return Regex.Replace(pagesString[i], @"[^0-9]", "").Trim();
             }
         }
 

@@ -29,7 +29,7 @@ public class StudyGuideWithStampParserTest
 
         var result = StudyGuideWithStampParser.GetEditor(citation);
         
-        Assert.Null(result);
+        Assert.Empty(result);
     }
     
     [Fact]
@@ -184,7 +184,7 @@ public class StudyGuideWithStampParserTest
     {
         var citation = "Специальные виды литья. Часть 1: учеб. пособ.(гриф) . Допущено федеральным УМО по укрупнённой группе специальностей и направлений 22.00.00 «Технология материалов» в качестве учебного пособия при подготовке бакалавров, обучающихся по направлению 22.03.02 «Металлургия» / В.А. Гулевский, Н.А. Кидалов, Н.В. Маркина; ВолгГТУ. - Волгоград, 2019. - 80 с";
 
-        var expected = "80 с";
+        var expected = "80";
 
         var result = StudyGuideWithStampParser.GetCountPages(citation);
         

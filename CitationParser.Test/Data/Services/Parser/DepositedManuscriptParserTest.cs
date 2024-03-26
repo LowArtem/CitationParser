@@ -98,7 +98,7 @@ public class DepositedManuscriptParserTest
     {
         var citation = "Ударное взаимодействие поршневого кольца и стенок канавки поршня: Депонированная рукопись/ В.М. Славуцкий, Х.А. Балхавдаров, А.П. Семерня; ВолгПИ. - Волгоград, 1988. - 6 c. - Деп. в Депонированная рукопись 1988-11-29, № 1090.";
 
-        var expected = "6 c";
+        var expected = "6";
         
         var result = DepositedManuscriptParser.GetPages(citation);
         

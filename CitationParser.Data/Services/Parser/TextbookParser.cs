@@ -119,8 +119,7 @@ public class TextbookParser
         {
             if (Regex.IsMatch(pagesString[i].Trim(), @"^\d+\s(c|с)"))
             {
-                Regex.Replace(pagesString[i], @"[^0-9]", "");
-                return pagesString[i].Trim();
+                return Regex.Replace(pagesString[i], @"[^0-9]", "").Trim();
             }
         }
 

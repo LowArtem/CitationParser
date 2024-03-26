@@ -41,8 +41,9 @@ public class TimeHostedService : BackgroundService
                 {
                     citationParser.PublicationParse(type, p, db);
                 }
-
             }
+
+            var f = 3;
         }
     }
 }

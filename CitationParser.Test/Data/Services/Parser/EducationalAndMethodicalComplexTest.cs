@@ -194,7 +194,7 @@ public class EducationalAndMethodicalComplexTest
     {
         var citation = "Профессиональная межкультурная коммуникация: английский язык : учебно-методический комплекс (Рек. УМО по образованию в области лингвистики в качестве УМК) / Т.Н. Астафурова ; ФГБОУ ВПО «Волгоградский гос. ун-т», Ин-т дополнительного образования. – 3-е изд., доп. – Волгоград : Изд-во ВолГУ, 2011. – 200 с. – [Усл.-печ. л. 11,6 ; тираж 100]";
 
-        var expected = "200 с";
+        var expected = "200";
 
         var result = EducationalAndMethodicalComplexParser.GetCountPages(citation);
         

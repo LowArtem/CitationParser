@@ -122,7 +122,7 @@ public class ArticleFromRussianCollectionTest
     {
         var citation = "ESG и энергоэффективность в FinTech-отраслях: нужны ли новые подходы? / О.М. Коробейникова, Л.И. Стефанович // Энергетика и цифровизация: теория и практика трансформации : материалы II Междунар. науч.-практ. конф. (г. Волгоград, 25 ноября 2022 г.) / под общ. ред. Р. Ю. Скокова ; Волгоградский ЦНТИ – филиал ФГБУ «Российское энергетическое агентство» Министерства энергетики РФ. - Волгоград, 2023. - C. 84-90";
 
-        var expected = "C. 84-90";
+        var expected = "84-90";
 
         var result = ArticleFromRussianCollectionParser.GetPagesNumbersScientificCollection(citation);
         
@@ -134,7 +134,7 @@ public class ArticleFromRussianCollectionTest
     {
         var citation = "Исследование тенденций развития рынка производителей кондитерской продукции / Э.А. Дербишева // Экономист будущего: меняем мир : сб. ст. Всерос. науч.-практ. конф. молодых ученых с междунар. участием (г. Кемерово, 30 марта 2023 г.) / под общ. ред. Ю. С. Якуниной, Е. Е. Жернова ; Кузбасский гос. технический университет им. Т. Ф. Горбачева. - Кемерово, 2023. - Статья 0208. – 3 с. – URL: https://science.kuzstu.ru/wp-content/Events/Conference/Econom/2023/EF_2023/pages/Articles/0208.pdf";
 
-        var expected = "3 с";
+        var expected = "3";
 
         var result = ArticleFromRussianCollectionParser.GetCountPagesScientificCollection(citation);
         

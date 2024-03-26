@@ -29,7 +29,7 @@ public class MonographParserTest
 
         var result = MonographParser.GetEditor(citation);
         
-        Assert.Null(result);
+        Assert.Empty(result);
     }
     
     [Fact]
@@ -187,7 +187,7 @@ public class MonographParserTest
     {
         var citation = "Повышение надежности и эффективности рельсошлифовальных инструментов на бакелитовой связке. Теория шлифования. Физико-химические основы: монография / В.М. Шумячер, С.А. Крюков, И.Ю. Орлов; ВПИ (филиал) ФГБОУ ВО ВолгГТУ. - Волгоград, 2021. - 161 с";
 
-        var expected = "161 с";
+        var expected = "161";
 
         var result = MonographParser.GetCountPages(citation);
         

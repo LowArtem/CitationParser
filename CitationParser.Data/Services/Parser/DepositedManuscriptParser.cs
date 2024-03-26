@@ -77,8 +77,7 @@ static public class DepositedManuscriptParser
         {
             if (Regex.IsMatch(pages[i], @"^\s?\d+\sc"))
             {
-                Regex.Replace(pages[i], @"[^0-9]", "");
-                return pages[i].Trim();
+                return Regex.Replace(pages[i], @"[^0-9]", "").Trim();
             }
         }
 

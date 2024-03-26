@@ -109,8 +109,8 @@ public class MagazineArticleParserTest
         const string citation4 =
             "Моделирование связанных процессов формирования остаточных напряжений в металлическом сплаве с учетом трансформации структуры при импульсном термосиловом поверхностном упрочнении (Modeling of the coupled processes of residual stress formation in a metallic alloy taking into account structure transformation due to pulse thermo-force surface hardening) / В.П. Багмутов, Д.С. Денисевич, И.Н. Захаров, М.Д. Романенко, В.В. Баринов // Вычислительная механика сплошных сред (Computational Continuum Mechanics). - 2022. - Т. 15, № 4. - C. 449-465. - DOI: 10.7242/1999-6691/2022.15.4.35. – URL: https://journal.permsc.ru/index.php/ccm/article/view/CCMv15n4a7/2008";
         
-        const string expected1 = "P. 378-385";
-        const string expected4 = "C. 449-465";
+        const string expected1 = "378-385";
+        const string expected4 = "449-465";
 
         var result1 = MagazineArticleParser.GetPageNumbers(citation1);
         var result4 = MagazineArticleParser.GetPageNumbers(citation4);
@@ -125,7 +125,7 @@ public class MagazineArticleParserTest
         const string citation =
             "Влияние кристаллической структуры вещества на дифференциальное сечение упругого рассеяния и принципа неразличимости частиц на тормозную способность / В.А. Смоляр, А.В. Еремин, В.В. Еремин, А.С. Бураков // Электромагнитные волны и электронные системы. - 2014. - Т. 19, № 3. - C. 66-72.";
         
-        const string expected = "C. 66-72.";
+        const string expected = "66-72";
 
         var result = MagazineArticleParser.GetPageNumbers(citation);
 
@@ -141,8 +141,8 @@ public class MagazineArticleParserTest
         const string citation3 =
             "Learning problem generator for introductory programming courses / А.А. Прокудин, О.А. Сычев, М. Денисов // Software Impacts. - 2023. - Vol. 17 (September). – Article100519. – 4 p. – DOI: https://doi.org/10.1016/j.simpa.2023.100519. – URL:https://www.sciencedirect.com/science/article/pii/S2665963823000568?via%3Dihub.";
         
-        const string expected2 = "9 p";
-        const string expected3 = "4 p";
+        const string expected2 = "9";
+        const string expected3 = "4";
 
         var result2 = MagazineArticleParser.GetCountOfPages(citation2);
         var result3 = MagazineArticleParser.GetCountOfPages(citation3);
@@ -157,7 +157,7 @@ public class MagazineArticleParserTest
         const string citation =
             "Исследование класса давления запирания регуляторов РЕД / Т.В. Ефремова, М.С. Злыгин // Инженерный вестник Дона. - 2023. - № 1. - 8 с. - URL: http://www.ivdon.ru/ru/magazine/archive/n1y2023/8149.";
         
-        const string expected = "8 с";
+        const string expected = "8";
 
         var result = MagazineArticleParser.GetCountOfPages(citation);
 

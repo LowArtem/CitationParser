@@ -34,7 +34,7 @@ public class ArticleFromForeignCollectionTest
     {
         var citation = " An Expert System for the Priorities Formation in Sustainable Development Fundamental Research / А.В. Зубков, I.B. Mamai, С.В. Проничкин, А.В. Холстов // Software Engineering Application in Systems Design : Proceedings of 6th Computational Methods in Systems and Software (CoMeSySo 2022) Conference (October 2022). Vol. 1 / eds.: Radek Silhavy [et al.]. – Cham (Switzerland) : Springer Nature Switzerland AG, 2023. – P. 831-839. – DOI: https://doi.org/10.1007/978-3-031-21435-6_73. – (Book ser.: Lecture Notes in Networks and Systems (LNNS) ; vol. 596).";
 
-        var expected = "P. 831-839";
+        var expected = "831-839";
 
         var result = ArticleFromForeignCollection.GetPagesNumbersScientificCollection(citation);
         
@@ -46,7 +46,7 @@ public class ArticleFromForeignCollectionTest
     {
         var citation = "Источники по истории российской антивоенной мысли второй половины XIX – начала XX вв.: многообразие форм и смыслов / Н.Ю. Николаев // Актуальные проблемы источниковедения : материалы VII Междунар. науч.-практ. конф. (г. Витебск, 27–29 апреля 2023 г.). В 2 т. Т. 2 / редкол.: А. Н. Дулов, М. Ф. Румянцева (отв. ред.) [и др.] ; Витебский гос. университет им. П. М. Машерова. – Витебск, 2023. – С. 103-105";
 
-        var expected = "С. 103-105";
+        var expected = "103-105";
 
         var result = ArticleFromForeignCollection.GetPagesNumbersScientificCollection(citation);
         
@@ -58,7 +58,7 @@ public class ArticleFromForeignCollectionTest
     {
         var citation = "Interpreting Traces: Studying Misconceptions of Control Flow Statements / Е. Фомичев, Е.Д. Беришева, А.М. Дворянкин, О.А. Сычев // SIGCSE 2023 : Proceedings of the 54th ACM Technical Symposium on Computer Science Education (Toronto, ON, Canada, 15-18 March 2023) / Association for Computing Machinery (ACM). – [USA], 2023. – Vol. 2. – P. 1361. - DOI: https://doi.org/10.1145/3545947.3576305";
 
-        var expected = "P. 1361";
+        var expected = "1361";
 
         var result = ArticleFromForeignCollection.GetPagesNumbersScientificCollection(citation);
         
@@ -70,7 +70,7 @@ public class ArticleFromForeignCollectionTest
     {
         var citation = "Development of creating computer programs method for multivariate optimization of functional meat product recipes / А.С. Мирошник, М.И. Сложенкина, И.Ф. Горлов, Д.А. Мосолова, A.L. Ishevskyi // IOP Conference Series: Earth and Environmental Science. Vol. 548 : III International Scientific Conference: AGRITECH-III-2020: Agribusiness, Environmental Engineering and Biotechnologies (Krasnoyarsk, Russia, 18-20 June 2020). Conference «Innovative Development of Agrarian-and-Food Technologies» (Volgograd, Russia) / Krasnoyarsk Regional Union of Scientific and Engineering Associations, Krasnoyarsk Science and Technology City Hall, Volgograd State Technical University, Volga region research Institute of manufacture and processing of meat-and-milk production [et al.]. – [IOP Publishing], 2020. – 6 p. – URL : https://iopscience.iop.org/article/10.1088/1755-1315/548/8/082081/pdf";
 
-        var expected = "6 p";
+        var expected = "6";
 
         var result = ArticleFromForeignCollection.GetCountPagesScientificCollection(citation);
         
@@ -131,7 +131,7 @@ public class ArticleFromForeignCollectionTest
         var citation = "Analysis of Existing Diagnostic Methods for the Linear Insulator Risk-Based Maintenance / О.О. Ахмедова, Д. Титов, К.В. Волхов // 2023 International Conference on Industrial Engineering, Applications and Manufacturing (ICIEAM) (Sochi, Russian Federation,15-19 May 2023) : Proceedings / Moscow Polytechnic University, Kazan State Power Engineering University. – [Publisher: IEEE (Institute of Electrical and Electronics Engineers)], 2023. – P. 52-57. – DOI: 10.1109/ICIEAM57311.2023.10139251. – URL: https://ieeexplore.ieee.org/document/10139251";
 
         List<Company> universities = new List<Company>();
-        universities.Add(new Company(){Name = "Moscow Polytechnic Company"});
+        universities.Add(new Company(){Name = "Moscow Polytechnic University"});
         universities.Add(new Company(){Name = "Kazan State Power Engineering University"});
 
         var result = ArticleFromForeignCollection.GetCompanyScientificCollection(citation);

@@ -172,8 +172,8 @@ public static class MagazineArticleParser
         {
             if (Regex.IsMatch(str.Trim(), @"^\d+\s?[сcpр]\.?"))
             {
-                Regex.Replace(str, @"[^0-9]", "");
-                return str.Trim();
+                return Regex.Replace(str, @"[^0-9]", "").Trim();
+
             }
         }
         
