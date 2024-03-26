@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 using CitationParser.Data.Model;
+using MoreLinq;
 using MoreLinq.Extensions;
 
 namespace CitationParser.Data.Services.Parser;
@@ -8,31 +9,6 @@ namespace CitationParser.Data.Services.Parser;
 [SuppressMessage("ReSharper", "CommentTypo")]
 public static class MagazineArticleParser
 {
-    /*
-     * Content of Secondary Education in the Russian Empire in the second half of the 19th century
-     * (the Example of Ust-Medveditsky Women's Secondary School of the Don Cossack Host)
-     * (Содержание гимназического образования в Российской империи второй половины XIX века
-     * (на примере Усть-Медведицкой женской гимназии области Войска Донского)) / А.А. Соловьев,
-     * А.В. Захаров, Н.Л. Виноградова, Л.С. Соловьева // Bylye Gody (Былые годы) : электрон.
-     * журнал. - 2022. - Vol. 17, issue 1. – P. 378-385. –
-     * DOI: 10.13187/bg.2022.1.378. – URL: https://bg.cherkasgu.press/journals_n/1646150680.pdf
-     *
-     *
-     * 
-     * Peculiar properties of the electron beam dynamics simulation by particle-particle methods
-     * taking into account delay effects / С.А. Аликов, А.Г. Шеин // ITM Web of
-     * Conferences. - 2019. - Vol. 30 : 29th International Crimean Conference «Microwave & Telecommunication
-     * Technology» (CriMiCo’2019) (Sevastopol, Russia, September 8-14, 2019) / ed. by P.
-     * Yermolov. – 9 p. – DOI: https://doi.org/10.1051/itmconf/20193009005.
-     *
-     *
-     * 
-     * Learning problem generator for introductory programming courses / А.А. Прокудин, О.А. Сычев,
-     * М. Денисов // Software Impacts. - 2023. - Vol. 17 (September). – Article
-     * 100519. – 4 p. – DOI: https://doi.org/10.1016/j.simpa.2023.100519. – URL:
-     * https://www.sciencedirect.com/science/article/pii/S2665963823000568?via%3Dihub.
-     */
-
     public static string GetTitleOfSource(string citation)
     {
         citation = citation.Replace("—", "-");
@@ -176,7 +152,7 @@ public static class MagazineArticleParser
         foreach (var str in splitCitation)
         {
             if (Regex.IsMatch(str.Trim(), @"^[СPРC]\.\s?\d+"))
-                return str.Trim();
+                return str.Split(".")[1].Trim();
         }
         
         return null;
@@ -195,7 +171,10 @@ public static class MagazineArticleParser
         foreach (var str in splitCitation)
         {
             if (Regex.IsMatch(str.Trim(), @"^\d+\s?[сcpр]\.?"))
+            {
+                Regex.Replace(str, @"[^0-9]", "");
                 return str.Trim();
+            }
         }
         
         return null;

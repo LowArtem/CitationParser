@@ -119,6 +119,7 @@ public class MonographParser
         {
             if (Regex.IsMatch(pagesString[i].Trim(), @"^\d+\s(c|с)"))
             {
+                Regex.Replace(pagesString[i], @"[^0-9]", "");
                 return pagesString[i].Trim();
             }
         }
@@ -133,9 +134,7 @@ public class MonographParser
         for (int i = 0; i < complexNumberString.Length; i++)
         {
             if (complexNumberString[i].Contains("изд.") || complexNumberString[i].Contains("Изд."))
-            {
                 return complexNumberString[i].Trim();
-            }
         }
 
         return null;
@@ -148,9 +147,7 @@ public class MonographParser
         for (int i = 0; i < dataStorageString.Length; i++)
         {
             if (dataStorageString[i].Contains("диск"))
-            {
                 return dataStorageString[i].Trim();
-            }
         }
 
         return null;

@@ -96,9 +96,7 @@ public class OtherPublicationsParser
         for (int i = 0; i < pagesString.Length; i++)
         {
             if (Regex.IsMatch(pagesString[i].Split(';')[0].Trim(), @"^(P|С)\.\s?\d+-?\d?"))
-            {
-                return pagesString[i].Split(';')[0].Trim();
-            }
+                return pagesString[i].Split(';')[0].Split(".")[1].Trim();
         }
 
         return null;
@@ -112,6 +110,7 @@ public class OtherPublicationsParser
         {
             if (Regex.IsMatch(pagesString[i].Trim(), @"^\d+\s(p|с)"))
             {
+                Regex.Replace(pagesString[i], @"[^0-9]", "");
                 return pagesString[i].Trim();
             }
         }

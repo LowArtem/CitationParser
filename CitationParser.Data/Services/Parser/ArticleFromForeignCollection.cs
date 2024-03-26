@@ -144,7 +144,7 @@ static public class ArticleFromForeignCollection
         {
             if (Regex.IsMatch(pagesString[i].Trim(), @"^(P|С)\.\s?\d+-?\d?"))
             {
-                return pagesString[i].Trim();
+                return pagesString[i].Split(".")[1].Trim();
             }
         }
 
@@ -157,8 +157,9 @@ static public class ArticleFromForeignCollection
 
         for (int i = 0; i < pagesString.Length; i++)
         {
-            if (Regex.IsMatch(pagesString[i].Trim(), @"^\d+\s(p|с)"))
+            if (Regex.IsMatch(pagesString[i].Trim(), @"^\d+\s[pс]"))
             {
+                Regex.Replace(pagesString[i], @"[^0-9]", "");
                 return pagesString[i].Trim();
             }
         }
