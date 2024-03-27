@@ -6,6 +6,8 @@ namespace CitationParser.Services.Parser;
 
 public class StudyGuideParser
 {
+    /*1.  Растровая иллюстративная графика. В 3 ч. Ч. 2 : Инструменты цвета. Работа с файлами и фотографиями.
+Рисование в GIMP: учеб. пособие  / Е.Д. Беришева, И.В. Степанченко; КТИ (филиал) ВолгГТУ. - Волгоград, 2023. - 52 с. */
     public static List<Editor> GetEditor(string citation)
     {
         var editorString = citation.Replace('–', '-').Split(". -")[0].Split('/');

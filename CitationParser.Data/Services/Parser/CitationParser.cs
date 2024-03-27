@@ -197,17 +197,20 @@ public class CitationParser
     
     private void StudyGuideParse(string publication, ApplicationContext db)
     {
+        var scientificCollection = StudyGuideParser.GetScientificCollection(publication);
+        
         Publication p = new Publication()
         {
             Title = CitationParseFunctions.GetName(publication),
-            IdAuthors = CitationParseFunctions.GetAuthors(publication),
+            IdAuthors = CitationParseFunctions.GetAuthors(publication, true),
             IdUniversities = StudyGuideParser.GetCompany(publication),
             Year = StudyGuideParser.GetYear(publication),
             CountOfPages = StudyGuideParser.GetCountPages(publication),
             IdEditors = StudyGuideParser.GetEditor(publication),
             IdCities = StudyGuideParser.GetCities(publication),
             InformationAboutPublication = StudyGuideParser.GetInformationAboutPublication(publication),
-            IdScientificCollection = new List<ScientificCollection>(){StudyGuideParser.GetScientificCollection(publication)},
+            IdScientificCollection = scientificCollection != null ? new List<ScientificCollection>(){scientificCollection}
+                :new List<ScientificCollection>(),
             DataStorage = StudyGuideParser.GetDataStorage(publication),
             Url = StudyGuideParser.GetURL(publication)
         };
@@ -399,6 +402,5 @@ public class CitationParser
             db.Universities.AddRange(p.IdUniversities);
             db.ScientificCollections.AddRange(p.IdScientificCollection);
             db.Publications.Add(p);
-            db.SaveChanges();
     }
 }
