@@ -1,5 +1,7 @@
 ﻿using CitationParser.Core.Model.WebSrapper;
 using CitationParser.Data.Context;
+using CitationParser.Data.Model;
+using CitationParser.Data.Services.InteractionWithDb;
 using CitationParser.Data.Services.WebScraper;
 using Hangfire;
 
@@ -39,7 +41,8 @@ public class TimeHostedService : BackgroundService
 
                 foreach (var p in publications)
                 {
-                    citationParser.PublicationParse(type, p, db);
+                    Publication citation = citationParser.PublicationParse(type, p);
+                    InteractionWithDb.AddPublicationToDb(citation, type.ToString(), db);
                 }
 
                 Console.WriteLine(type.ToString() + " completed");
