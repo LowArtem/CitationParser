@@ -108,7 +108,7 @@ public class CitationParser
         Publication p = new Publication()
         {
             Title = CitationParseFunctions.GetName(publication),
-            IdAuthors = CitationParseFunctions.GetAuthors(publication),
+            IdAuthors = CitationParseFunctions.GetAuthors(publication, true),
             IdUniversities = MonographParser.GetCompany(publication),
             Year = MonographParser.GetYear(publication),
             CountOfPages = MonographParser.GetCountPages(publication),
@@ -117,7 +117,7 @@ public class CitationParser
             IdCities = MonographParser.GetCities(publication),
             IdEditors = MonographParser.GetEditor(publication)
         };
-
+        
         AddPublicationToDb(p, "Monograph", db);
     }
     
@@ -223,7 +223,7 @@ public class CitationParser
         Publication p = new Publication()
         {
             Title = CitationParseFunctions.GetName(publication),
-            IdAuthors = CitationParseFunctions.GetAuthors(publication),
+            IdAuthors = CitationParseFunctions.GetAuthors(publication, true),
             IdUniversities = StudyGuideWithStampParser.GetCompany(publication),
             Year = StudyGuideWithStampParser.GetYear(publication),
             CountOfPages = StudyGuideWithStampParser.GetCountPages(publication),
@@ -232,7 +232,7 @@ public class CitationParser
             InformationAboutPublication = StudyGuideWithStampParser.GetInformationAboutPublication(publication),
             DataStorage = StudyGuideWithStampParser.GetDataStorage(publication)
         };
-
+        
         AddPublicationToDb(p, "StudyGuideWithStamp", db);
     }
     
@@ -402,5 +402,6 @@ public class CitationParser
             db.Universities.AddRange(p.IdUniversities);
             db.ScientificCollections.AddRange(p.IdScientificCollection);
             db.Publications.Add(p);
+            db.SaveChanges();
     }
 }
