@@ -29,6 +29,5 @@ public class InteractionWithDb
         db.Universities.AddRange(publication.IdUniversities);
         db.ScientificCollections.AddRange(publication.IdScientificCollection);
         db.Publications.Add(publication);
-        db.SaveChanges();
     }
 }

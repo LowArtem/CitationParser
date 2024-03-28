@@ -47,6 +47,7 @@ public class TimeHostedService : BackgroundService
 
                 Console.WriteLine(type.ToString() + " completed");
             }
+            await db.SaveChangesAsync();
         }
     }
 }
