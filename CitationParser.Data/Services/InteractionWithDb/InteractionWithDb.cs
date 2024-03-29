@@ -1,5 +1,7 @@
-﻿using CitationParser.Data.Context;
+﻿using CitationParser.Core.Model.WebSrapper;
+using CitationParser.Data.Context;
 using CitationParser.Data.Model;
+using Microsoft.IdentityModel.Tokens;
 
 namespace CitationParser.Data.Services.InteractionWithDb;
 
@@ -29,5 +31,22 @@ public class InteractionWithDb
         db.Universities.AddRange(publication.IdUniversities);
         db.ScientificCollections.AddRange(publication.IdScientificCollection);
         db.Publications.Add(publication);
+    }
+
+    /// <summary>
+    /// проверить есть ли запись в бд
+    /// </summary>
+    /// <param name="publication">публикация</param>
+    /// <param name="type">тип публикации</param>
+    /// <param name="db">контекст базы данных</param>
+    /// <returns></returns>
+    public static bool CheckTherePublicationInDB(Publication publication, PublicationTypeEnum type, ApplicationContext db)
+    {
+        if (db.Publications.Where(p => p.Title == publication.Title).IsNullOrEmpty())
+        {
+            return false;
+        }
+
+        return true;
     }
 }

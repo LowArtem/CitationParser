@@ -39,15 +39,20 @@ public class TimeHostedService : BackgroundService
                 var html = await webScrapper.GetPublications(type);
                 var publications = htmlParser.GetPublications(html);
 
-                foreach (var p in publications)
+                for (int i = 0; i < publications.Count; i++)
                 {
-                    Publication citation = citationParser.PublicationParse(type, p);
-                    InteractionWithDb.AddPublicationToDb(citation, type.ToString(), db);
+                    Publication citation = citationParser.PublicationParse(type, publications[i]);
+                    
+                    if (!InteractionWithDb.CheckTherePublicationInDB(citation, type, db))
+                        InteractionWithDb.AddPublicationToDb(citation, type.ToString(), db);
+                    else
+                        i = publications.Count;
                 }
 
                 Console.WriteLine(type.ToString() + " completed");
             }
             await db.SaveChangesAsync();
+            Console.WriteLine(DateTime.Now.ToString());
         }
     }
 }
