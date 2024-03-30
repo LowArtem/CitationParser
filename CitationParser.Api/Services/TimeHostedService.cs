@@ -27,6 +27,16 @@ public class TimeHostedService : BackgroundService
     /// <inheritdoc />
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
+        
+        _recurringJobs.AddOrUpdate("парсинг новых публикаций",
+            () => ParsePublicationsAndWriteToDb(), "0 1 * * *");
+    }
+
+    /// <summary>
+    /// распарсить и записать в бд цитаты всех типов
+    /// </summary>
+    public async Task ParsePublicationsAndWriteToDb()
+    {
         using var scope = _scopeFactory.CreateScope();
         var webScrapper = scope.ServiceProvider.GetRequiredService<WebScraperService>();
         var htmlParser = scope.ServiceProvider.GetRequiredService<ParseHtmlService>();
