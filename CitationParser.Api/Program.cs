@@ -57,6 +57,4 @@ app.UseBaseServices(app.Environment, app.Services.GetRequiredService<IApiVersion
 
 app.UseSerilogRequestLogging();
 
-app.MapGet("/", (ApplicationContext db) => db.Authors.ToList());
-
 app.Run();

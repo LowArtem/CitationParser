@@ -27,9 +27,8 @@ public class TimeHostedService : BackgroundService
     /// <inheritdoc />
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        
         _recurringJobs.AddOrUpdate("парсинг новых публикаций",
-            () => ParsePublicationsAndWriteToDb(), "0 1 * * *");
+            () => ParsePublicationsAndWriteToDb(), "*/3 * * * *");
     }
 
     /// <summary>
@@ -53,7 +52,7 @@ public class TimeHostedService : BackgroundService
                 {
                     Publication citation = citationParser.PublicationParse(type, publications[i]);
                     
-                    if (!InteractionWithDb.CheckTherePublicationInDB(citation, type, db))
+                    if (!InteractionWithDb.CheckTherePublicationInDB(citation, db))
                         InteractionWithDb.AddPublicationToDb(citation, type.ToString(), db);
                     else
                         i = publications.Count;
@@ -61,7 +60,6 @@ public class TimeHostedService : BackgroundService
 
                 Console.WriteLine(type.ToString() + " completed");
             }
-            await db.SaveChangesAsync();
             Console.WriteLine(DateTime.Now.ToString());
         }
     }
