@@ -23,7 +23,7 @@ public class ParseHtmlService
         if (!publicationString.Contains("<p>")) // если в списке нет статей, возвращаем пустой лист
             return new List<string>();
 
-        publicationString = new Regex(@"<p>.*<b>.*</b>") // выпиливаем: все открывающие теги p с номерами, 
+        publicationString = new Regex(@"<p>\s?\d+\.\s?(<b>.*</b>)?") // выпиливаем: все открывающие теги p с номерами, 
             .Replace(publicationString, "") // все теги b с содержимым (в них просто дублируется автор),
             .TrimEnd('<', '/', 'p', '>'); // последний закрывающий тег p
 
