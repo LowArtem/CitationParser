@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using CitationParser.Core.Model._Base;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace CitationParser.Data.Model;
 
@@ -112,4 +113,80 @@ public class Publication : BaseEntity
     [ForeignKey("IdPublications")]
     [InverseProperty("IdPublications")]
     public virtual ICollection<ScientificCollection> IdScientificCollection { get; set; } = new List<ScientificCollection>();
+
+    public override bool Equals(Object obj)
+    {
+        if (obj == null || !(obj is Publication))
+            return false;
+
+        if (this.IdAuthors.Count() != ((Publication)obj).IdAuthors.Count())
+            return false;
+        
+        foreach (var author in ((Publication)obj).IdAuthors)
+        {
+            if (this.IdAuthors.Where(a => a.Name == author.Name).IsNullOrEmpty())
+                return false;
+        }
+        
+        if (this.IdScientificCollection.Count() != ((Publication)obj).IdScientificCollection.Count())
+            return false;
+        
+        foreach (var collection in ((Publication)obj).IdScientificCollection)
+        {
+            if (this.IdScientificCollection.Where(sc => sc.Title == collection.Title).IsNullOrEmpty())
+                return false;
+        }
+        
+        if (this.IdCities.Count() != ((Publication)obj).IdCities.Count())
+            return false;
+        
+        foreach (var city in ((Publication)obj).IdCities)
+        {
+            if (this.IdCities.Where(c => c.Name == city.Name).IsNullOrEmpty())
+                return false;
+        }
+        
+        if (this.IdEditors.Count() != ((Publication)obj).IdEditors.Count())
+            return false;
+        
+        foreach (var editor in ((Publication)obj).IdEditors)
+        {
+            if (this.IdEditors.Where(e => e.Name == editor.Name).IsNullOrEmpty())
+                return false;
+        }
+        
+        if (this.IdUniversities.Count() != ((Publication)obj).IdUniversities.Count())
+            return false;
+        
+        foreach (var university in ((Publication)obj).IdUniversities)
+        {
+            if (this.IdUniversities.Where(u => u.Name == university.Name).IsNullOrEmpty())
+                return false;
+        }
+        
+        return this.Title == ((Publication)obj).Title &&
+               this.Year == ((Publication)obj).Year &&
+               this.Date == ((Publication)obj).Date &&
+               this.Number == ((Publication)obj).Number &&
+               this.TitleOfSource == ((Publication)obj).TitleOfSource &&
+               this.CountOfPages == ((Publication)obj).CountOfPages &&
+               this.PageNumbers == ((Publication)obj).PageNumbers &&
+               this.Doi == ((Publication)obj).Doi &&
+               this.Information == ((Publication)obj).Information &&
+               this.Url == ((Publication)obj).Url &&
+               this.PublishingHouse == ((Publication)obj).PublishingHouse &&
+               this.ArticleNumber == ((Publication)obj).ArticleNumber &&
+               this.ParallelTitle == ((Publication)obj).ParallelTitle &&
+               this.ParallelSourceTitle == ((Publication)obj).ParallelSourceTitle &&
+               this.Country == ((Publication)obj).Country &&
+               this.DataStorage == ((Publication)obj).DataStorage &&
+               this.RegistrationNumber == ((Publication)obj).RegistrationNumber &&
+               this.DateOfRegistration == ((Publication)obj).DateOfRegistration &&
+               this.PlaceOfRegistration == ((Publication)obj).PlaceOfRegistration &&
+               this.VolumeNumber == ((Publication)obj).VolumeNumber &&
+               this.NumberOfVolumes == ((Publication)obj).NumberOfVolumes &&
+               this.InformationAboutPublication == ((Publication)obj).InformationAboutPublication &&
+               this.DateIntroduction == ((Publication)obj).DateIntroduction &&
+               this.Language == ((Publication)obj).Language;
+    }
 }
