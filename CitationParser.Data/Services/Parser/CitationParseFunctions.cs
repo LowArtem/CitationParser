@@ -1,4 +1,5 @@
 using CitationParser.Data.Model;
+using MoreLinq;
 
 namespace CitationParser.Data.Services.Parser;
 
@@ -17,11 +18,12 @@ public static class CitationParseFunctions
 
     public static List<Author> GetAuthors(string citation, bool isComma = false)
     {
+        string authorCitation = citation.Replace('–', '-');
         var authors = new List<string>();
 
         authors = isComma
-            ? citation.Split("/ ")[1].Trim().Split(";")[0].Split(", ").ToList()
-            : citation.Split("/ ")[1].Trim().Split(" // ")[0].Split(", ").ToList();
+            ? authorCitation.Split("/ ")[1].Trim().Split(". -")[0].Split(";")[0].Split(", ").ToList()
+            : authorCitation.Split("/ ")[1].Trim().Split(". -")[0].Split(" // ")[0].Split(", ").ToList();
 
         return authors.Select(a => new Author(a.Replace("/", "").Trim())).ToList();
     }
