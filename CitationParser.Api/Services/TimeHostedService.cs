@@ -28,7 +28,7 @@ public class TimeHostedService : BackgroundService
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         _recurringJobs.AddOrUpdate("парсинг новых публикаций",
-            () => ParsePublicationsAndWriteToDb(), "*/3 * * * *");
+            () => ParsePublicationsAndWriteToDb(), "0 1 * * *");
     }
 
     /// <summary>
@@ -52,7 +52,7 @@ public class TimeHostedService : BackgroundService
                 {
                     Publication citation = citationParser.PublicationParse(type, publications[i]);
                     
-                    if (!InteractionWithDb.CheckTherePublicationInDB(citation, db))
+                    if (!InteractionWithDb.CheckTherePublicationInDb(citation, db))
                         InteractionWithDb.AddPublicationToDb(citation, type.ToString(), db);
                     else
                         i = publications.Count;

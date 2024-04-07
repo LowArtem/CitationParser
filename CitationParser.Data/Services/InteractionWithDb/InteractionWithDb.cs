@@ -26,7 +26,7 @@ public class InteractionWithDb
             
         publication.Type = type[0];
         
-        publication = AddAuthorsToPublication(publication, db);
+        AddAuthorsToPublication(publication, db);
         AddCitiesToPublication(publication, db);
         AddEditorsToPublication(publication, db);
         AddUniversitiesToPublication(publication, db);
@@ -65,11 +65,6 @@ public class InteractionWithDb
         return publication;
     }
     
-    /// <summary>
-    /// добавить редакторов в бд
-    /// </summary>
-    /// <param name="editors">редакторы</param>
-    /// <param name="db">контекст бд</param>
     private static Publication AddEditorsToPublication(Publication publication, ApplicationContext db)
     {
         ICollection<Editor> editors = new List<Editor>();
@@ -85,11 +80,6 @@ public class InteractionWithDb
         return publication;
     }
     
-    /// <summary>
-    /// добавить университеты в бд
-    /// </summary>
-    /// <param name="universities">университеты</param>
-    /// <param name="db">контекст бд</param>
     private static Publication AddUniversitiesToPublication(Publication publication, ApplicationContext db)
     {
         ICollection<Company> universities = new List<Company>();
@@ -105,11 +95,6 @@ public class InteractionWithDb
         return publication;
     }
     
-    /// <summary>
-    /// добавить научный сборник в бд
-    /// </summary>
-    /// <param name="collections">научные сборники</param>
-    /// <param name="db">контекст бд</param>
     private static Publication AddScientificCollectionToPublication(Publication publication, ApplicationContext db)
     {
         ICollection<ScientificCollection> collections = new List<ScientificCollection>();
@@ -131,9 +116,21 @@ public class InteractionWithDb
     /// <param name="publication">публикация</param>
     /// <param name="db">контекст базы данных</param>
     /// <returns>true - публикация есть в бд, false - публикации нет в бд</returns>
-    public static bool CheckTherePublicationInDB(Publication publication, ApplicationContext db)
+    public static bool CheckTherePublicationInDb(Publication publication, ApplicationContext db)
     {
-        return !db.Publications.Where(p => p.Title == publication.Title).IsNullOrEmpty();
+        var publications = db.Publications.Include(p => p.IdScientificCollection)
+            .Include(p => p.IdAuthors)
+            .Include(p => p.IdCities)
+            .Include(p => p.IdEditors)
+            .Include(p => p.IdUniversities)
+            .Where(p => p.Title == publication.Title);
+        foreach (var d in publications)
+        {
+            if (publication.Equals(d))
+                return true;
+        }
+
+        return false;
     }
     
     /// <summary>
