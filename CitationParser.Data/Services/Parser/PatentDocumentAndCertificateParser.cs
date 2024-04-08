@@ -12,7 +12,8 @@ public static class PatentDocumentAndCertificateParser
             .Split(";")[1]
             .Split("-");
 
-        if (!companyNames[0].Contains("Правообладатель:"))
+        if (!companyNames[0].Contains("Правообладатель:") &&
+            !companyNames[0].Contains("правообладатель:"))
         {
             companyNames = companyNames[0].TrimEnd('.').Split(", ");
 
@@ -20,6 +21,21 @@ public static class PatentDocumentAndCertificateParser
         }
 
         return new List<Company>();
+    }
+    
+    public static string GetRightHolder(string citation)
+    {
+        var rightHolder = citation
+            .Split(";")[1]
+            .Split("-");
+
+        if (rightHolder[0].Contains("Правообладатель:") || 
+            rightHolder[0].Contains("правообладатель:"))
+        {
+            return rightHolder[0].TrimEnd('.').Split(":")[1].Trim(' ', '.');
+        }
+
+        return null;
     }
 
     public static string GetYear(string citation)
