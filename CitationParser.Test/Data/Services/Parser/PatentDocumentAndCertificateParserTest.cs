@@ -31,6 +31,17 @@ public class PatentDocumentAndCertificateParserTest
         Assert.Equal(expected1.Select(e => e.Name), result1.Select(r => r.Name));
         Assert.Equal(expected2.Select(e => e.Name), result2.Select(r => r.Name));
     }
+    
+    [Fact]
+    public void GetUniversities_WithCopyrightHolderTest()
+    {
+        const string citation1 =
+            "Свид. о гос. регистрации программы для ЭВМ № 2018619882 от 14 сентября 2018 г. Российская Федерация. Расчёт устойчивости стержневых систем по методу конечных элементов в форме классического смешанного метода / А.В. Игнатьев; Правообладатель: Игнатьев Александр Владимирович. - 2018";
+        
+        var result1 = PatentDocumentAndCertificateParser.GetCompanies(citation1);
+
+        Assert.Empty(result1);
+    }
 
     [Fact]
     public void GetYear_SimpleTest()

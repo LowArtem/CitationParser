@@ -10,11 +10,16 @@ public static class PatentDocumentAndCertificateParser
     {
         var companyNames = citation
             .Split(";")[1]
-            .Split("-")[0]
-            .TrimEnd('.')
-            .Split(", ");
+            .Split("-");
 
-        return companyNames.Select(n => new Company { Name = n.Trim().TrimEnd('.') }).ToList();
+        if (!companyNames[0].Contains("Правообладатель:"))
+        {
+            companyNames = companyNames[0].TrimEnd('.').Split(", ");
+
+            return companyNames.Select(n => new Company { Name = n.Trim().TrimEnd('.') }).ToList();
+        }
+
+        return new List<Company>();
     }
 
     public static string GetYear(string citation)
