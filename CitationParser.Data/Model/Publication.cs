@@ -87,6 +87,10 @@ public class Publication : BaseEntity
     [Column("language")]
     [StringLength(45)]
     public string? Language { get; set; }
+    
+    [Column("rightHolder")]
+    [StringLength(100)]
+    public string? RightHolder { get; set; }
 
     [Column("type_id")] public int TypeId { get; set; }
 
