@@ -270,9 +270,15 @@ public static class MagazineArticleParser
         citation = citation.Replace("−", "-");
         citation = citation.Replace("-", "-");
 
-        var cities = citation.Split(". - ")[1].Split(", ")[0].Split(":")[0].Split(";");
-        
-        return cities.Select(c => new City { Name = c.Trim(' ', '.', ',') }).ToList();
+        var cities = citation.Split(". - ")[1].Split(", ")[0].Split(":");
+
+        if (!Regex.IsMatch(cities[0], @"^\s*\d+\s*$"))
+        {
+            cities = cities[0].Split(";");
+            return cities.Select(c => new City { Name = c.Trim(' ', '.', ',') }).ToList();
+        }
+
+        return new List<City>();
     }
     
     public static string? GetPublishingHouse(string citation)

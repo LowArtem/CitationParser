@@ -93,7 +93,8 @@ static public class ArticleFromForeignCollection
                 }
             }
         }
-        else if (!citiesString[0].Split(',')[0].Trim().Contains(' '))
+        else if (!citiesString[0].Split(',')[0].Trim().Contains(' ') &&
+                 !Regex.IsMatch(citiesString[0], @"^\s*\d+\s*$"))
         {
             cities.Add(new City() {Name = citiesString[0].Split(',')[0].Trim().Replace("[", string.Empty).Replace("]", string.Empty)});
         }

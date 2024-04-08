@@ -179,6 +179,23 @@ public class ArticleFromForeignCollectionTest
     }
     
     [Fact]
+    public void GetCities_NullWithoutPublishingTest()
+    {
+        var citation = "Ontology-based method of electronic learning resources retrieval and integration / М.Б. Кульцова, А.В. Аникин, И.Г. Жукова // IISA 2015 – 6th International Conference on Information, Intelligence, Systems and Applications (Corfu, Greece, 6 July 2015 – 8 July 2015) : Conference Proceeding / Ionian University, Institute of Electrical and Electronics Engineers (IEEE) [Piscataway, USA]. – 2015. – Art. no. 7388112.";
+
+        List<City> cities = new List<City>();
+
+        var result = ArticleFromForeignCollection.GetCitiesScientificCollection(citation);
+
+        Assert.Equal(cities.Count, result.Count);
+        for (int i = 0; i < cities.Count; i++)
+        {
+            Assert.Equal(cities[i].Name, result[i].Name);
+            Assert.Equal(cities[i].Country, result[i].Country);
+        }
+    }
+    
+    [Fact]
     public void GetCities_CountryOnlyTest()
     {
         var citation = "Источники по истории российской антивоенной мысли второй половины XIX – начала XX вв.: многообразие форм и смыслов / Н.Ю. Николаев // Актуальные проблемы источниковедения : материалы VII Междунар. науч.-практ. конф. (г. Витебск, 27–29 апреля 2023 г.). В 2 т. Т. 2 / редкол.: А. Н. Дулов, М. Ф. Румянцева (отв. ред.) [и др.] ; Витебский гос. университет им. П. М. Машерова. – Витебск, 2023. – С. 103-105";
