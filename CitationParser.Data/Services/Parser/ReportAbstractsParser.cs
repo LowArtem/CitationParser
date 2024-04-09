@@ -59,10 +59,11 @@ public class ReportAbstractsParser
             citation = citation.Replace("–", "-");
             citation = citation.Replace("−", "-");
             citation = citation.Replace("-", "-");
-
-            var companies = GetEditors(citation).Count != 0
-                ? citation.Split(" ; ")[1].Split(" - ")[0].Split(", ")
-                : citation.Split(" // ")[1].Split("/")[1].Split(". -")[0].Split(", ");
+            
+            var companies = citation.Split("//")[1].Split(". -")[0].Split("/")[1].Split(";");
+            if (companies[companies.Length - 1].Contains("ред"))
+                return new List<Company>();
+            companies = companies[companies.Length -1].Split(", ");
 
             return companies.Select(c => new Company { Name = c.Trim(' ', '.', ',') }).ToList();
         }

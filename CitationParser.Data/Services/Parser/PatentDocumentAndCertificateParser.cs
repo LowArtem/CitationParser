@@ -10,10 +10,11 @@ public static class PatentDocumentAndCertificateParser
     {
         var companyNames = citation
             .Split(";")[1]
-            .Split("-");
+            .Split(". -");
 
         if (!companyNames[0].Contains("Правообладатель:") &&
-            !companyNames[0].Contains("правообладатель:"))
+            !companyNames[0].Contains("правообладатель:") &&
+            !companyNames[0].Contains("правообладатели"))
         {
             companyNames = companyNames[0].TrimEnd('.').Split(", ");
 
@@ -27,12 +28,16 @@ public static class PatentDocumentAndCertificateParser
     {
         var rightHolder = citation
             .Split(";")[1]
-            .Split("-");
+            .Split(". -");
 
         if (rightHolder[0].Contains("Правообладатель:") || 
             rightHolder[0].Contains("правообладатель:"))
         {
             return rightHolder[0].TrimEnd('.').Split(":")[1].Trim(' ', '.');
+        }
+        else if (rightHolder[0].Contains("правообладатели"))
+        {
+            return rightHolder[0].Replace("правообладатели", "").Trim(' ', '.');
         }
 
         return null;

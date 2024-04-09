@@ -36,6 +36,9 @@ public class ArticleFromRussianCollectionParser
     {
         var companyString = citation.Replace('–', '-').Split("//")[1].Split(". -")[0].Split('/');
 
+        if (companyString.Length < 2 && !companyString[companyString.Length - 1].Contains(';'))
+            return new List<Company>();
+
         companyString = companyString[companyString.Length - 1].Split(';');
         
         companyString = companyString[companyString.Length - 1].Split(',');

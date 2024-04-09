@@ -34,6 +34,9 @@ public class TextbookParser
     public static List<Company> GetCompany(string citation)
     {
         var companyString = citation.Replace('–', '-').Split(". -")[0].Split('/');
+
+        if (!companyString[^1].Contains(';'))
+            return new List<Company>();
         
         companyString = companyString[1].Split(';');
 

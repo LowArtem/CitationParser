@@ -38,6 +38,9 @@ public class StudyGuideParser
     {
         var companyString = citation.Replace('–', '-').Split(". -")[0].Split('/');
         
+        if (companyString.Length < 3 && !companyString[^1].Contains(';'))
+            return new List<Company>();
+        
         companyString = companyString[1].Split(';');
 
         if (!companyString[companyString.Length - 1].Contains("ред."))

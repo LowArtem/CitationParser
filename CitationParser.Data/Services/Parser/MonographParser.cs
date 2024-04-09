@@ -34,6 +34,9 @@ public class MonographParser
     {
         var companyString = citation.Replace('–', '-').Split(". -")[0].Split('/');
 
+        if (!companyString[^1].Contains(';'))
+            return new List<Company>();
+        
         companyString = companyString[companyString.Length - 1].Split(';');
 
         if (!companyString[companyString.Length - 1].Contains("ред."))

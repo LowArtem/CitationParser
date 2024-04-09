@@ -21,7 +21,8 @@ static public class ArticleFromForeignCollection
         var editorString = citation.Replace('–', '-').Split("//")[1].Split(". -")[0].Split('/');
         editorString = editorString[editorString.Length - 1].Split(';');
         
-        if (editorString[0].Substring(0, 3) == " ed")
+        if (editorString[0].Substring(0, 3) == " ed" ||
+            editorString[0].Substring(0, 3) == " Ed")
         {
             var editors = Regex.Matches(editorString[0], @"[A-ZЁА-Я]{1}\.(\s[A-ZЁА-Я]{1}\.)?\s\w+,?");
 
@@ -41,9 +42,16 @@ static public class ArticleFromForeignCollection
     {
         var companyString = citation.Replace('–', '-').Split("//")[1].Split(". -")[0].Split('/');
 
-        companyString = companyString[companyString.Length - 1].Split(';');
+        if (companyString.Length < 2 && !companyString[companyString.Length - 1].Contains(';'))
+            return new List<Company>();
         
-        companyString = companyString[companyString.Length - 1].Split(',');
+        companyString = companyString[companyString.Length - 1].Split(';');
+
+        if (companyString[companyString.Length - 1].Substring(0, 3) == " ed" ||
+            companyString[companyString.Length - 1].Substring(0, 3) == " Ed")
+            return new List<Company>();
+        
+        companyString = companyString[companyString.Length - 1].Split('(')[0].Split(',');
         
         List<Company> universitiesList = new List<Company>();
 

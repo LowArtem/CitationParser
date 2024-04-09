@@ -144,6 +144,16 @@ public class ArticleFromForeignCollectionTest
     }
     
     [Fact]
+    public void GetUniversities_NullTest()
+    {
+        var citation = "Competitive funding for research in developing countries: Institutional context / С.В. Проничкин, В.Л. Розалиев, I.B. Mamai // AIP Conference Proceedings. Vol. 2467 : 2nd International Conference on Advances in Materials, Systems and Technologies (CAMSTech 2021) (Krasnoyarsk, Russia, 29-31 July 2021) : proceedings / eds.: I. Kovalev [et al.]. – AIP Publishing, 2022. – Article 040016. – DOI: 10.1063/5.0092501. – URL: https://aip.scitation.org/doi/pdf/10.1063/5.0092501.";
+
+        var result = ArticleFromForeignCollection.GetCompanyScientificCollection(citation);
+
+        Assert.Empty(result);
+    }
+    
+    [Fact]
     public void GetCities_SimpleTest()
     {
         var citation = "Marginal Effects Models of Scientific and Technological Fields’ Integration in Heterogeneous Systems / В.Л. Розалиев, С.В. Проничкин, А.Р. Донская, О.К. Касымов, Аг.С. Кузнецова // Data Science and Algorithms in Systems : Proceedings of 6th Computational Methods in Systems and Software (CoMeSySo 2022) Conference (October 2022). Vol. 2 / eds.: Radek Silhavy [et al.]. – Cham (Switzerland) : Springer Nature Switzerland AG, 2023. – P. 926-932. – DOI: https://doi.org/10.1007/978-3-031-21438-7_79. – (Book ser.: Lecture Notes in Networks and Systems (LNNS) ; vol. 597)";
