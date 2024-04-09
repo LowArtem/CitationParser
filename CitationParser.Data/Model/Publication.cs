@@ -191,6 +191,7 @@ public class Publication : BaseEntity
                this.NumberOfVolumes == ((Publication)obj).NumberOfVolumes &&
                this.InformationAboutPublication == ((Publication)obj).InformationAboutPublication &&
                this.DateIntroduction == ((Publication)obj).DateIntroduction &&
-               this.Language == ((Publication)obj).Language;
+               this.Language == ((Publication)obj).Language &&
+               this.RightHolder == ((Publication)obj).RightHolder;
     }
 }

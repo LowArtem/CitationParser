@@ -83,7 +83,8 @@ public class CitationParser
             Title = CitationParseFunctions.GetName(publication),
             IdAuthors = CitationParseFunctions.GetAuthors(publication, true),
             IdUniversities = PatentDocumentAndCertificateParser.GetCompanies(publication),
-            Year = PatentDocumentAndCertificateParser.GetYear(publication)
+            Year = PatentDocumentAndCertificateParser.GetYear(publication),
+            RightHolder = PatentDocumentAndCertificateParser.GetRightHolder(publication)
         };
 
         return p;
