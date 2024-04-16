@@ -4,6 +4,7 @@ using CitationParser.Api.Swagger;
 using CitationParser.Core.Configurations;
 using CitationParser.Core.Repositories;
 using CitationParser.Data.Context;
+using CitationParser.Data.Model;
 using CitationParser.Data.Repositories;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.EntityFrameworkCore;
@@ -215,5 +216,6 @@ public static class ServiceCollectionExtensions
     {
         // Repositories
         services.AddTransient(typeof(IEfCoreRepository<>), typeof(ApplicationRepository<>));
+        services.AddTransient(typeof(IEfCoreRepository<Publication>), typeof(PublicationRepository));
     }
 }

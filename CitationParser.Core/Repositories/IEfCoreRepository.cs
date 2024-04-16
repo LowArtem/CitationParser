@@ -96,10 +96,16 @@ public interface IEfCoreRepository<TEntity>
     IQueryable<TEntity> GetListQueryWithDeleted();
 
     /// <summary>
-    /// Получить список
+    /// получить список соответствующий фильтру и порядку
     /// </summary>
-    /// <returns>список всех объектов</returns>
-    List<TEntity> GetList();
+    /// <param name="filter"> фильтр, для списка</param>
+    /// <param name="orderBy"> столбец для упорядочивания</param>
+    /// <param name="includeProperties"> свойства, которые надо включить в запрос</param>
+    /// <returns></returns>
+    IEnumerable<TEntity> Get(
+        Expression<Func<TEntity, bool>> filter = null,
+        Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
+        string includeProperties = "");
 
     /// <summary>
     /// Получить список с удалёнными объектами

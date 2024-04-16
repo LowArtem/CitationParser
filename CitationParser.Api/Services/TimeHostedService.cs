@@ -1,7 +1,8 @@
 ﻿using CitationParser.Core.Model.WebSrapper;
+using CitationParser.Core.Repositories;
 using CitationParser.Data.Context;
 using CitationParser.Data.Model;
-using CitationParser.Data.Services.InteractionWithDb;
+using CitationParser.Data.Repositories;
 using CitationParser.Data.Services.WebScraper;
 using Hangfire;
 
@@ -41,26 +42,27 @@ public class TimeHostedService : BackgroundService
         var htmlParser = scope.ServiceProvider.GetRequiredService<ParseHtmlService>();
         var citationParser = scope.ServiceProvider.GetRequiredService<Data.Services.Parser.CitationParser>();
 
-        using (ApplicationContext db = new ApplicationContext())
+        var repository = ((PublicationRepository)scope.ServiceProvider.GetRequiredService<IEfCoreRepository<Publication>>());
+        
+        foreach (var type in Enum.GetValues<PublicationTypeEnum>())
         {
-            foreach (var type in Enum.GetValues<PublicationTypeEnum>())
+            var html = await webScrapper.GetPublications(type);
+            var publications = htmlParser.GetPublications(html);
+
+            for (int i = 0; i < publications.Count; i++)
             {
-                var html = await webScrapper.GetPublications(type);
-                var publications = htmlParser.GetPublications(html);
-
-                for (int i = 0; i < publications.Count; i++)
-                {
-                    Publication citation = citationParser.PublicationParse(type, publications[i]);
-                    
-                    if (!InteractionWithDb.CheckTherePublicationInDb(citation, db))
-                        InteractionWithDb.AddPublicationToDb(citation, type.ToString(), db);
-                    else
-                        i = publications.Count;
-                }
-
-                Console.WriteLine(type.ToString() + " completed");
+                Publication citation = citationParser.PublicationParse(type, publications[i]);
+                
+                if (!repository.CheckTherePublicationInDb(citation))
+                    repository.Add(citation, type.ToString());
+                else
+                    i = publications.Count;
             }
-            Console.WriteLine(DateTime.Now.ToString());
+
+            Console.WriteLine(type.ToString() + " completed");
         }
+
+        Console.WriteLine(DateTime.Now.ToString());
+        
     }
 }
