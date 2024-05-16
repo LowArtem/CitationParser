@@ -30,8 +30,8 @@ public partial class ApplicationContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseMySql("server=localhost;database=vstu_library;uid=root;pwd=root",
-            ServerVersion.Parse("8.0.28-mysql"));
+        optionsBuilder.UseMySql("server=mysql;database=vstu_library;uid=user;pwd=user",
+            ServerVersion.Parse("8.0.32-mysql"));
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

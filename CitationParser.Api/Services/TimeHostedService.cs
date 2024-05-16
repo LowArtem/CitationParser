@@ -28,6 +28,7 @@ public class TimeHostedService : BackgroundService
     /// <inheritdoc />
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
+        await ParsePublicationsAndWriteToDb();
         _recurringJobs.AddOrUpdate("парсинг новых публикаций",
             () => ParsePublicationsAndWriteToDb(), "0 1 * * *");
     }

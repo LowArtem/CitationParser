@@ -4,22 +4,17 @@ services:
     container_name: mysql_container
     image: mysql/mysql-server:8.0
     environment:
-      MYSQL_DATABASE: five_heads_db
-      MYSQL_ROOT_USER: root
+      MYSQL_DATABASE: vstu_library
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: user
       MYSQL_PASSWORD: user
     volumes:
-      - .:/var/lib/mysql
-    ports:
-      - "3308:3306"
+      - data:/var/lib/mysql
     healthcheck:
       test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
       timeout: 20s
       retries: 10
     restart: unless-stopped
-    networks:
-      - app
 
   backend:
     container_name: web_container
@@ -34,8 +29,6 @@ services:
       - "5000:5000"
     working_dir: /app
     restart: unless-stopped
-    networks:
-      - app
     depends_on:
       - mysql
 
@@ -45,9 +38,6 @@ services:
     ports:
       - "5341:80"
     restart: unless-stopped
-    networks:
-      - app
 
-networks:
-  app:
-    driver: bridge
+volumes:
+  data:

@@ -61,7 +61,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddDbContext<ApplicationContext>(options =>
         {
-            options.UseMySql(connectionString, new MySqlServerVersion("8.0.28"),
+            options.UseMySql(connectionString, new MySqlServerVersion("8.0.32"),
                 b => { b.MigrationsAssembly("CitationParser.Data"); });
         });
     }
