@@ -17,7 +17,7 @@ public abstract class BaseCrudController<T, TAdd, TResponse> : ControllerBase
     /// <summary>
     /// Репозиторий
     /// </summary>
-    private readonly IEfCoreRepository<T> _repository;
+    protected readonly IEfCoreRepository<T> _repository;
 
     protected readonly ILogger<BaseCrudController<T, TAdd, TResponse>> _logger;
     protected readonly IMapper _mapper;
