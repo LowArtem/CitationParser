@@ -12,7 +12,12 @@ public static class VstuJournalParser
 
     public static string GetPublicationYear(string citation)
     {
-        return citation.Split(" // ")[1].Split(" - ")[1].Split('.')[0].Trim();
+        var result = citation.Split(" // ")[1].Split(" - ")[1].Split('.')[0].Split(','); // Волгоград, 2015
+
+        if (result.Length > 1)
+            return result[1].Trim();
+
+        return result[0].Trim();
     }
 
     public static string GetNumber(string citation)

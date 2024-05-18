@@ -29,14 +29,19 @@ public class VstuJournalParserTest
 
         const string citation2 = "Исследование влияния окружающей среды на параметры линии при определении места повреждения линии электропередачи локационным методом / Н.С. Артюшенко, Д.Н. Авдеюк // Энерго- и ресурсосбережение: промышленность и транспорт. - 2017. - № 2 (19). - C. 18-21.";
 
+        const string citation3 = "Разработка процесса построения и модели виртуального тура с учётом предпочтений пользователя / К.Г. Маркосян, Дюк Филип Чике Окороджи, А.М. Дворянкин // Известия ВолгГТУ. Сер. Актуальные проблемы управления, вычислительной техники и информатики в технических системах. - Волгоград, 2018. - № 13 (223) Декабрь. - C. 83-87.";
+        
         const string expected1 = "2020";
         const string expected2 = "2017";
+        const string expected3 = "2018";
         
         var result1 = VstuJournalParser.GetPublicationYear(citation1);
         var result2 = VstuJournalParser.GetPublicationYear(citation2);
+        var result3 = VstuJournalParser.GetPublicationYear(citation3);
         
         Assert.Equal(expected1, result1);
         Assert.Equal(expected2, result2);
+        Assert.Equal(expected3, result3);
     }
 
     [Fact]
